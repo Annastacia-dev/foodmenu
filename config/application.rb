@@ -23,5 +23,13 @@ module Foodmenu
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    # Sidekiq
+    Sidekiq.configure_client do |config|
+      config.redis = { url: ENV['REDISCLOUD_URL'] }
+    end
+
+    Sidekiq.configure_server do |config|
+      config.redis = { url: ENV['REDISCLOUD_URL'] }
+    end
   end
 end
