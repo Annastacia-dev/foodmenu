@@ -1,0 +1,14 @@
+<% if object.errors.any? %>
+  <div class="flex px-4 py-3 mt-10 mb-10 border-l-4 border-red-500 justify-center items-center gap-3 relative bg-white text-red-500">
+      <ul class = "list-disc">
+        <% object.errors.full_messages.each do |msg| %>
+          <li class="text-left"><%= msg %></li>
+        <% end %>
+      </ul>
+      <button class="absolute top-4 right-4 text-2xl"
+        onclick="this.parentElement.style.display='none'; return false;"
+      >
+        &times;
+      </button>
+    </div>
+<% end %>

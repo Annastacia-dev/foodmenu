@@ -12,8 +12,9 @@
      With multiple themes to choose from, you can customize your menu to fit your restaurant's brand.
     </p>
     <div class="mt-8">
-      <button href="/restaurants" class="bg-primary text-offwhite px-4 py-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110
-      ">Get Started -> </button>
+      <button class="bg-primary text-offwhite px-4 py-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110
+      ">
+      <%= link_to "Get Started ->", new_restaurant_path, class: "text-offwhite" %>
     </div>
   </div>
 
@@ -23,7 +24,7 @@
       <input type="text" class="sm:w-full w-3/4 sm:ml-0 ml-10 h-10 bg-transparent border-white rounded-full placeholder:text-white px-4 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent text-offwhite
       " placeholder="Search">
      </div>
-    <div class="absolute sm:-left-40 left-3 sm:top-28 top-20 bg-primary text-offwhite rounded-lg shadow-xl flex flex-col sm:h-80 h-60 w-60 justify-center items-center px-6 sm:z-10 font-protest"
+    <div class="absolute sm:-left-40 left-3 sm:top-28 top-20 bg-primary text-offwhite rounded-lg shadow-xl flex flex-col sm:h-80 h-60 w-60 justify-center items-center px-6 sm:z-10 font-primary"
     >
         <%= image_tag "https://i.pinimg.com/236x/5c/45/64/5c4564e10cea85aa2c89bc10b268418a.jpg", alt: "Food Menu", class: "sm:w-40 w-20 sm:h-40 h-20 rounded object-cover" %>
         <p class="mt-4 font-medium text-xl">

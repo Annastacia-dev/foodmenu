@@ -1,21 +1,15 @@
-<nav class="w-full bg-seasalt shadow-lg">
+<nav class="w-full bg-white shadow-lg">
   <div class="container mx-auto">
     <div class="flex justify-between items-center py-4 px-2">
       <%= link_to root_path, class: 'flex items-center justify-center gap-2' do %>
         <%= image_tag "menu.png", alt: "Food Menu", class: "sm:h-8 h-4 sm:w-8 w-4" %>
       <% end %>
       <%= link_to root_path do %>
-        <h1 class="sm:text-xl text-base text-primary font-protest">food•menu</h1>
+        <h1 class="sm:text-xl text-base text-primary font-primary">food•menu</h1>
       <% end %>
-      <ul class="hidden md:flex gap-3 p-2 font-normal text-sm uppercase">
+      <ul class="flex gap-3 p-2 font-normal sm:text-sm text-xs uppercase">
         <li class="hover:underline">
           <a href="/restaurants">restaurants</a>
-        </li>
-        <li>
-          <%="•" %>
-        </li>
-        <li class="hover:underline">
-          <a href="/about">About</a>
         </li>
       </ul>
     </div>
