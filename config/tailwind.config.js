@@ -13,6 +13,7 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
         playfair: ['Playfair Display', 'serif'],
         protest: ['Protest Riot', 'sans-serif'],
+        amatic: ['Amatic SC', 'sans-serif']
       },
       colors: {
         'secondary': '#9C4641',
