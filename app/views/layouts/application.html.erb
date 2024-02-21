@@ -9,10 +9,16 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://kit.fontawesome.com/bfa19ffe9b.js" crossorigin="anonymous"></script>
   </head>
 
   <body class='bg-offwhite'>
-   <%= render 'shared/navbar' %>
+    <% if user_signed_in? %>
+      <%= render 'shared/sidebar' %>
+    <% else %>
+      <%= render 'shared/navbar' %>
+    <% end %>
+
     <main class="relative">
       <% unless flash.empty? %>
         <div id="flash" class="text-white sm:pl-20 absolute top-0 sm:right-0 z-50 sm:w-[50%] w-full">

@@ -56,6 +56,9 @@ class User < ApplicationRecord
   # --- callbacks ---
   before_save :downcase_email
 
+  # --- enums ---
+  enum role: { admin: 'admin', user: 'user' }
+
   # --- validations ---
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :first_name, presence: true

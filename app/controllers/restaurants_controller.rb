@@ -83,7 +83,7 @@ class RestaurantsController < ApplicationController
 
     if admin.save
       flash[:notice] = "We confirmed your restaurant. You can now sign in with your email and the password 'changeme', and change it before you start using the system."
-      redirect_to new_user_restaurant_session_path(:restaurant_id => restaurant.id)
+      redirect_to new_user_restaurant_session_path(:restaurant_id => restaurant.slug)
     else
       flash[:alert] = 'Error confirming your account. Please try again.'
       redirect_to confirm_restaurant_path(@restaurant)

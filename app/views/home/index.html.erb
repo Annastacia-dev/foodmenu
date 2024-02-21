@@ -1,5 +1,5 @@
-<div>
-  <%= render 'header' %>
-  <%= render 'benefits' %>
-  <%= render 'footer' %>
-</div>
+<% if user_signed_in? %>
+  <%= render 'user' %>
+<% else %>
+  <%= render 'landing_page' %>
+<% end %>
