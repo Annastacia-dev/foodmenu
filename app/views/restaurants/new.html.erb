@@ -3,18 +3,18 @@
 <%= form_with(model: @restaurant, class: "sm:w-7/12 mx-auto shadow-lg bg-seasalt px-10 py-5") do |form| %>
   <%= render 'shared/error_messages', object: @restaurant %>
   <div class="my-5 flex flex-col justify-start items-start gap-5">
-    <div class='grid sm:grid-cols-2 grid-cols-1 gap-4'>
+    <div class='grid sm:grid-cols-2 grid-cols-1 gap-6'>
       <div>
         <%= form.label :name, 'Name', class: "block font-medium text-gray-700 text-sm" %>
-        <%= form.text_field :name, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        <%= form.text_field :name, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true, placeholder: "e.g. Java House" %>
       </div>
       <div>
         <%= form.label :email, 'Email', class: "block font-medium text-gray-700 text-sm" %>
-        <%= form.email_field :email, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        <%= form.email_field :email, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true, placeholder: "e.g. info@javahouse.com" %>
       </div>
       <div>
         <%= form.label :phone, 'Phone', class: "block font-medium text-gray-700 text-sm" %>
-        <%= form.text_field :phone, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        <%= form.text_field :phone, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true, placeholder: "e.g 254712345678", value: "2547" %>
       </div>
       <div>
         <%= form.label :logo, 'Logo', class: "block font-medium text-gray-700 text-sm" %>

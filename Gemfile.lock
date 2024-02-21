@@ -1863,7 +1863,8 @@ DEPENDENCIES
   jbuilder
   paper_trail (~> 15.0)
   pg (~> 1.1)
-  postmark-rails (~> 0.12.0)
+  postmark
+  postmark-rails
   puma (>= 5.0)
   rails (~> 7.1.3)
   redis (>= 4.0.1)

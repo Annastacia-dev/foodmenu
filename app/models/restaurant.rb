@@ -27,12 +27,11 @@ class Restaurant < ApplicationRecord
 
   # --- callbacks ---
   before_save :downcase_email
-  before_create :send_confirmation_email
 
   # --- validations ---
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :name, presence: true
-  validates :phone, presence: true
+  validates :phone, presence: true, uniqueness: true, format: { with: /\A\+?[0-9]{10,15}\z/ }
   validate :logo_file_type
 
   # --- enums ---
@@ -54,13 +53,5 @@ class Restaurant < ApplicationRecord
     unless logo.content_type.in?(%w[image/jpeg image/png])
       errors.add(:logo, 'must be a JPEG or PNG file')
     end
-  end
-
-  def send_confirmation_email
-    # Send confirmation email
-  end
-
-  def create_admin_user
-    # Create admin user
   end
 end

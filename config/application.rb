@@ -31,5 +31,23 @@ module Foodmenu
     Sidekiq.configure_server do |config|
       config.redis = { url: ENV['REDISCLOUD_URL'] }
     end
+
+    # mailing
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.postmark_settings = { api_token: Rails.application.credentials.postmark[:api_token] }
+
+    config.action_mailer.smtp_settings = {
+      user_name: Rails.application.credentials.mail[:user_name],
+      password: Rails.application.credentials.mail[:password],
+      domain: Rails.application.credentials.mail[:domain],
+      address: Rails.application.credentials.mail[:address],
+      port: Rails.application.credentials.mail[:port],
+      authentication: Rails.application.credentials.mail[:authentication],
+      enable_starttls: Rails.application.credentials.mail[:enable_starttls],
+      openssl_verify_mode: Rails.application.credentials.mail[:openssl_verify_mode],
+      open_timeout: 5,
+      read_timeout: 5
+    }
+
   end
 end

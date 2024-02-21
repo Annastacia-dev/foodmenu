@@ -1,0 +1,41 @@
+<div
+style="margin: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px; background-color: #f5f5f5; width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;"
+>
+  <div
+  style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);"
+  >
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <%= image_tag('https://foodmenuke.s3.eu-central-1.amazonaws.com/menu.png', alt: 'food•menu', style: 'width: 30px;') %>
+      <h1 style="font-family: 'Protest Riot', sans-serif; font-weight: 400; font-size: 16px;color: #9A0610 ">food•menu</h1>
+    </div>
+    <p
+    style="line-height: 2;"
+    >
+      Hi <%= @restaurant.name %>,
+    </p>
+    <p
+    style="line-height: 2;"
+    >
+      Thank you for signing up with us.
+      <br />
+      Please confirm your email address to activate your account.
+    </p>
+    <p
+    style="line-height: 2;"
+    >
+      If you did not create an account, no further action is required.
+    </p>
+    <p
+    style="line-height: 2;"
+    >
+      <%= link_to 'Confirm email', confirm_email_restaurant_url(@restaurant), style: 'background-color: #9A0610; color: white; padding: 10px 30px; border-radius: 5px; text-decoration: none;' %>
+    </p>
+    <p
+    style="line-height: 2;"
+    >
+      Thanks, The
+      <span style="color: #9A0610; font-weight: 400; font-size: 16px; font-family: 'Protest Riot', serif;">food•menu</span>
+      team
+    </p>
+  </div>
+</div>

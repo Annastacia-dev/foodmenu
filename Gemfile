@@ -12,7 +12,8 @@ gem "importmap-rails"
 gem "jbuilder"
 gem 'paper_trail', '~> 15.0'
 gem "pg", "~> 1.1"
-gem 'postmark-rails', '~> 0.12.0'
+gem 'postmark'
+gem 'postmark-rails'
 gem "puma", ">= 5.0"
 gem "rails", "~> 7.1.3"
 gem "redis", ">= 4.0.1"
