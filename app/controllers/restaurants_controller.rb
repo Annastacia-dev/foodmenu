@@ -47,7 +47,7 @@ class RestaurantsController < ApplicationController
 
   def confirm_email
     @restaurant.update(confirmed: true, confirmed_at: Time.zone.now, status: :active)
-    redirect_to new_user_restaurant_registration_path(restaurant_id: @restaurant.slug)
+    redirect_to new_user_registration_path(restaurant: @restaurant.slug)
   end
 
   def index

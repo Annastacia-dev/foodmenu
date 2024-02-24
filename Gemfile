@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.2.2"
 
+gem 'acts_as_tree', '~> 2.9.1'
 gem 'aws-sdk', require: false
 gem "bootsnap", require: false
 gem 'bullet', '~> 7.1', '>= 7.1.4'

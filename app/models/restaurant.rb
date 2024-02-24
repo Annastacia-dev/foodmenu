@@ -3,13 +3,14 @@
 # Table name: restaurants
 #
 #  id              :uuid             not null, primary key
+#  confirmed       :boolean          default(FALSE)
 #  confirmed_at    :datetime
 #  email           :string           not null
 #  name            :string           not null
 #  phone           :string           not null
-#  restaurant_type :integer          default("single")
+#  restaurant_type :integer          default("single_restaurant(one restaurant, one location)")
 #  slug            :string           not null
-#  status          :integer          default(0)
+#  status          :integer          default("active")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

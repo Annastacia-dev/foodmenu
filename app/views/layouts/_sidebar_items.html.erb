@@ -3,34 +3,37 @@
   <li data-active-page-target="sidebarItem" data-path="/" class="sidebar-item py-2 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500">
     <%= link_to root_path, class: "px-4 flex gap-2 items-center" do %>
       <i class="fa-solid fa-chart-simple"></i>
-      <span>Dashboard</span>
+      <span>dashboard</span>
     <% end %>
   </li>
 
-  <li data-controller="dropdown" class='relative'>
-
-    <button data-action="click->dropdown#toggle" class="hover:text-gray-300 flex items-center gap-1 px-4 py-2 w-full hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500">
-      <span>Actions</span>
-      <i class="fa-solid fa-caret-down"></i>
-    </button>
-
-    <ul data-dropdown-target="menu" class="hidden text-white rounded-md mt-3 flex flex-col gap-3">
-
-      <li class='py-2 px-4 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500 sidebar-item' data-active-page-target="sidebar-item" data-path="actions">
-        <a href="#">Action 1</a>
-      </li>
-
-      <li class='py-2 px-4 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500 sidebar-item' data-active-page-target="sidebar-item" data-path="actions"><a href="#">Action 2</a></li>
-
-      <li class='py-2 px-4 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500 sidebar-item' data-active-page-target="sidebar-item" data-path="actions"><a href="#">Action 3</a></li>
-    </ul>
-
+  <li data-active-page-target="sidebarItem" data-path="menus" class="sidebar-item py-2 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500">
+    <%= link_to restaurant_menus_path(@restaurant), class: "px-4 flex items-center gap-2" do %>
+      <i class="fa-solid fa-utensils"></i>
+      <span>menus</span>
+    <% end %>
   </li>
+
+  <li data-active-page-target="sidebarItem" data-path="templates" class="sidebar-item py-2 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500">
+    <%= link_to templates_path, class: "px-4 flex items-center gap-2" do %>
+      <i class="fa-solid fa-palette"></i>
+      <span>all templates</span>
+    <% end %>
+  </li>
+
+
 
   <li data-active-page-target="sidebarItem" data-path="settings" class="sidebar-item py-2 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500">
     <%= link_to settings_restaurant_path(@restaurant), class: "px-4 flex items-center gap-2" do %>
       <i class="fa-solid fa-gear"></i>
-      <span>Settings</span>
+      <span>settings</span>
+    <% end %>
+  </li>
+
+  <li class="sidebar-item py-2 hover:bg-red-50 hover:text-red-600 hover:border-l-4 hover:border-red-500 absolute bottom-10 w-full">
+    <%= button_to destroy_user_session_path, method: :delete, class: "px-4 flex items-center gap-2" do %>
+      <i class="fa-solid fa-door-open"></i>
+      <span class='capitalize'>logout</span>
     <% end %>
   </li>
 </ul>

@@ -6,8 +6,8 @@ module StatusableModelConcern
 
   included do
     enum status: {
-      inactive: 0,
-      active: 1,
+      active: 0,
+      inactive: 1,
     }, _suffix: true
   end
 

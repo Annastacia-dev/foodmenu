@@ -3,9 +3,6 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
-#  confirmation_sent_at   :datetime
-#  confirmation_token     :string
-#  confirmed_at           :datetime
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
@@ -22,8 +19,7 @@
 #  role                   :string
 #  sign_in_count          :integer          default(0), not null
 #  slug                   :string
-#  status                 :integer          default(0)
-#  unconfirmed_email      :string
+#  status                 :integer          default("active")
 #  unlock_token           :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -34,6 +30,7 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_restaurant_id         (restaurant_id)
+#  index_users_on_unlock_token          (unlock_token) UNIQUE
 #
 # Foreign Keys
 #
@@ -58,9 +55,9 @@ class User < ApplicationRecord
 
   # --- enums ---
   enum role: {
-    'admin': 0,
-    'manager': 1,
-    'staff': 2
+    'admin': 'admin',
+    'manager': 'manager',
+    'staff': 'staff'
   }
 
   enum status: {
@@ -74,6 +71,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :role, presence: true
   validates :status, presence: true
+  validate :one_admin_per_restaurant
 
   # --- methods ---
   def name
@@ -84,5 +82,11 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email = email.downcase if email.present?
+  end
+
+  def one_admin_per_restaurant
+    if role == 'admin' && restaurant.users.where(role: 'admin').count > 0
+      errors.add(:role, 'cannot have more than one admin')
+    end
   end
 end

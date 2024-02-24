@@ -75,6 +75,8 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    acts_as_tree (2.9.1)
+      activerecord (>= 3.0.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     annotate (3.2.0)
@@ -1848,6 +1850,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  acts_as_tree (~> 2.9.1)
   annotate
   aws-sdk
   bootsnap
