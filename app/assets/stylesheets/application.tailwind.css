@@ -14,6 +14,9 @@
   .sidebar-item.active {
     @apply border-l-4 border-gray-100 bg-gray-700;
   }
+  [data-tab].active {
+    @apply border text-gray-900 font-bold rounded-t-lg border-b-0;
+  }
 }
 
 
