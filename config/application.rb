@@ -34,11 +34,13 @@ module Foodmenu
 
     # mailing
     config.action_mailer.delivery_method = :smtp
-    config.action_mailer.postmark_settings = { api_token: Rails.application.credentials.postmark[:api_token] }
+
+    username = Rails.env.production? ? Rails.application.credentials.mail[:prod_username] : Rails.application.credentials.mail[:sandbox_username]
+    password = Rails.env.production? ? Rails.application.credentials.mail[:prod_password] : Rails.application.credentials.mail[:sandbox_password]
 
     config.action_mailer.smtp_settings = {
-      user_name: Rails.application.credentials.mail[:user_name],
-      password: Rails.application.credentials.mail[:password],
+      user_name: username,
+      password: password,
       domain: Rails.application.credentials.mail[:domain],
       address: Rails.application.credentials.mail[:address],
       port: Rails.application.credentials.mail[:port],

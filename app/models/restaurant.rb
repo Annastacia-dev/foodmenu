@@ -31,7 +31,7 @@ class Restaurant < ApplicationRecord
   # --- validations ---
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :name, presence: true
-  validates :phone, presence: true, uniqueness: true, format: { with: /\A\+?[0-9]{10,15}\z/ }
+  validates :phone, presence: true, uniqueness: { message: 'has already been taken' }, format: { with: /\A\+?[0-9]{10,15}\z/, message: 'must be a valid phone number' }
   validate :logo_file_type
 
   # --- enums ---

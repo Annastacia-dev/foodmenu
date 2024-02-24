@@ -5,25 +5,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= favicon_link_tag 'favicon.ico' %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <script src="https://kit.fontawesome.com/bfa19ffe9b.js" crossorigin="anonymous"></script>
   </head>
 
-  <body class='bg-offwhite'>
-    <% if user_signed_in? %>
-      <%= render 'shared/sidebar' %>
-    <% else %>
-      <%= render 'shared/navbar' %>
-    <% end %>
-
-    <main class="relative">
+  <body class="bg-gray-50">
+    <%= user_signed_in? ? render('layouts/sidebar') : render('layouts/navbar') %>
+    <main class="<%= user_signed_in? ? 'relative lg:pl-56 pt-4 ' : 'pt-16' %>">
       <% unless flash.empty? %>
-        <div id="flash" class="text-white sm:pl-20 absolute top-0 sm:right-0 z-50 sm:w-[50%] w-full">
+        <div id="flash" class="text-white sm:pl-20 absolute top-0 right-0 z-50 w-[50%]">
           <% flash.keys.each do |k| %>
-            <div class="sm:px-20 px-8 py-9 flex justify-center items-center gap-4 border-l-8
+            <div class="sm:px-20 px-8 py-9 flex justify-center items-center gap-4 border-l-8 text-sm
             <% if k == 'alert' %>
               border-red-500 bg-red-50 text-red-500
             <% elsif k == 'notice' %>
@@ -48,7 +43,6 @@
           <% end %>
         </div>
       <% end %>
-
       <%= yield %>
     </main>
   </body>

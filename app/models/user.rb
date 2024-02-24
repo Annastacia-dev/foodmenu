@@ -43,10 +43,10 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :lockable, :trackable
   has_paper_trail
 
-  include StatusableModelConcern
   include SluggableModelConcern
   friendly_slug_scope to_slug: :name
 
@@ -57,7 +57,16 @@ class User < ApplicationRecord
   before_save :downcase_email
 
   # --- enums ---
-  enum role: { admin: 'admin', user: 'user' }
+  enum role: {
+    'admin': 0,
+    'manager': 1,
+    'staff': 2
+  }
+
+  enum status: {
+    'active': 0,
+    'inactive': 1
+  }
 
   # --- validations ---
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -65,11 +74,6 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :role, presence: true
   validates :status, presence: true
-
-  # --- devise ---
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-          :confirmable, :lockable, :trackable
 
   # --- methods ---
   def name

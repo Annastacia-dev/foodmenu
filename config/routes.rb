@@ -6,8 +6,12 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   root to: "home#index"
   resources :restaurants do
-    devise_for :users, controllers: { sessions: 'users/sessions' }
+    devise_for :users, controllers: {
+      registrations: 'users/registrations',
+      sessions: 'users/sessions'
+    }
     member { get :confirm_email }
     member { get :confirm}
+    member { get :settings}
   end
 end
