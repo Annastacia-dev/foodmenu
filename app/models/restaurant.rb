@@ -25,6 +25,7 @@ class Restaurant < ApplicationRecord
   # --- associations ---
   has_many :users, dependent: :destroy
   has_one_attached :logo
+  has_many :menus, dependent: :destroy
 
   # --- callbacks ---
   before_save :downcase_email

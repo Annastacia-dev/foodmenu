@@ -1,0 +1,19 @@
+<nav class="text-sm" aria-label="Breadcrumb">
+  <ol class="list-none p-0 inline-flex px-5">
+      <li class="flex items-center">
+          <%= link_to root_path, class: "text-gray-800 flex justify-center items-center gap-2 hover:underline" do %>
+            <span>Home</span>
+          <% end %>
+          <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
+      </li>
+      <li class="flex items-center">
+          <%= link_to restaurant_menus_path(@restaurant), class: "text-gray-800 flex justify-center items-center gap-2 hover:underline" do %>
+            <span>Menus</span>
+          <% end %>
+          <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
+      </li>
+      <li class="flex items-center">
+          <span class="text-gray-500">New Menu</span>
+      </li>
+  </ol>
+</nav>
