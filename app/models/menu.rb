@@ -32,4 +32,42 @@ class Menu < ApplicationRecord
   has_many :menu_categories, dependent: :destroy
   has_many :menu_items, through: :menu_categories
 
+  attr_writer :current_step
+
+  # --enums--
+  enum tax_behavior: { inclusive: 0, exclusive: 1 }
+
+  # --methods--
+  def current_step
+    @current_step || steps.first
+  end
+
+  def steps
+    %w[menu_info menu_categories menu_items]
+  end
+
+  def first_step?
+    current_step == steps.first
+  end
+
+  def last_step?
+    current_step == steps.last
+  end
+
+  def previous_step
+    return if first_step?
+
+    steps[steps.index(current_step) - 1]
+  end
+
+  def next_step
+    return if last_step?
+
+    steps[steps.index(current_step) + 1]
+  end
+
+  def menu_name
+    name ||  sub_restaurant&.name || restaurant&.name
+  end
+
 end

@@ -138,15 +138,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
     t.index ["restaurant_id"], name: "index_sub_restaurants_on_restaurant_id"
   end
 
-  create_table "templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "primary_color"
-    t.string "secondary_color"
-    t.float "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

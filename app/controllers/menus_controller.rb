@@ -21,20 +21,31 @@ class MenusController < ApplicationController
   end
 
   def new
-    @menu = @restaurant.menus.new
+    session[:menu_params] ||= {}
+    @menu = Menu.new
+    @menu.current_step = session[:menu_step]
   end
 
   def create
-    @menu = @restaurant.menus.new(menu_params)
+    session[:menu_params].deep_merge!(menu_params) if menu_params
+    @menu = Menu.new(session[:menu_params])
+    @menu.current_step = session[:menu_step]
+    if params[:back_button]
+      @menu.previous_step
+    else
+      @menu.next_step if @menu.valid?
+    end
+    session[:menu_step] = @menu.current_step
 
-    respond_to do |format|
-      if @menu.save
-        format.html { redirect_to [@restaurant, @menu], notice: 'Menu was successfully created.' }
-        format.json { render :show, status: :created, location: [@restaurant, @menu] }
+    if @menu.save
+      if @menu.last_step?
+        session[:menu_step] = session[:menu_params] = nil
+        redirect_to [@restaurant, @menu], notice: 'Menu was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @menu.errors, status: :unprocessable_entity }
+        redirect_to new_restaurant_menu_path(@restaurant)
       end
+    else
+      redirect_to new_restaurant_menu_path(@restaurant)
     end
   end
 

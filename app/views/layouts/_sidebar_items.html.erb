@@ -1,4 +1,4 @@
-<ul class='mt-5 flex flex-col gap-3'>
+<ul class='mt-5 flex flex-col gap-3 text-xs'>
 
   <li data-active-page-target="sidebarItem" data-path="/" class="sidebar-item py-2 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500">
     <%= link_to root_path, class: "px-4 flex gap-2 items-center" do %>
@@ -21,6 +21,7 @@
       <% if @restaurant.menus.present? %>
         <li class='py-2 px-4 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500 sidebar-item' data-active-page-target="sidebar-item" data-path="menus">
           <%= link_to restaurant_menus_path(@restaurant), class: "px-4 flex items-center gap-2" do %>
+            <i class="fa-solid fa-eye"></i>
             View all menus
           <% end %>
         </li>
@@ -28,6 +29,7 @@
 
       <li class='py-2 px-4 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500 sidebar-item' data-active-page-target="sidebar-item" data-path="new">
         <%= link_to new_restaurant_menu_path(@restaurant), class: "px-4 flex items-center gap-2" do %>
+          <i class="fa-solid fa-plus"></i>
           Add new menu
         <% end %>
       </li>
@@ -35,10 +37,10 @@
 
   </li>
 
-  <li data-active-page-target="sidebarItem" data-path="templates" class="sidebar-item py-2 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500">
+  <li data-active-page-target="sidebarItem" data-path="themes" class="sidebar-item py-2 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500">
     <%= link_to templates_path, class: "px-4 flex items-center gap-2" do %>
       <i class="fa-solid fa-palette"></i>
-      <span>all templates</span>
+      <span>themes</span>
     <% end %>
   </li>
 
