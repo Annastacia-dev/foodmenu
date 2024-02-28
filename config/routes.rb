@@ -1,11 +1,27 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  require 'sidekiq/cron/web'
+  mount Sidekiq::Web => '/sidekiq'
+
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+  }
+
+
   get 'home/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
   root to: "home#index"
+  resources :restaurants do
+    member { get :confirm_email }
+    member { get :confirm}
+    member { get :settings}
+
+    resources :menus do
+      resources :menu_categories do
+        resources :menu_items
+      end
+    end
+  end
+
+  resources :templates, only: [:index, :show]
 end

@@ -1,0 +1,15 @@
+<footer class="flex sm:flex-row flex-col justify-around items-center p-8 text-sm gap-4">
+  <div class="flex flex-col justify-cenetr items-center gap-2">
+    <%=image_tag 'menu.png', alt: 'logo', class: 'w-10 h-10'%>
+    <p class="ml-2 text-primary font-primary text-xl">food•menu</p>
+  </div>
+  <div class="flex flex-col gap-4 text-center">
+    <a href="/about" class="hover:text-primary capitalize underline">Terms & conditions</a>
+    <a href="/privacy" class="hover:text-primary capitalize underline">Privacy policy</a>
+  </div>
+</footer>
+<hr class="border border-primary">
+<footer class="flex justify-center items-center p-4 text-sm">
+  <p>© <%= Time.now.year %>  All rights reserved</p>
+</footer>
+

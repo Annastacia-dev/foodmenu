@@ -1,0 +1,18 @@
+<div data-controller="active-page" class='bg-gray-900 w-1/6 fixed min-h-screen text-white top-0 left-0 py-1 text-sm capitalize lg:block hidden'>
+  <div class="mb-4 flex flex-col gap-4 mt-2">
+
+    <div class="py-2 px-4 flex items-center gap-2">
+      <%= image_tag(@restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-8 h-8 object-cover") %>
+      <span class="text-sm font-semibold uppercase"><%= @restaurant.name %></span>
+    </div>
+
+    <%= render 'layouts/sidebar_items' %>
+  </div>
+</div>
+
+<div class='lg:hidden block px-6 pt-4'>
+  <i class="fa-solid fa-bars cursor-pointer" onclick="document.getElementById('mobile-sidebar').classList.remove('hidden')"
+  ></i>
+</div>
+
+<%= render 'layouts/mobile_sidebar' %>

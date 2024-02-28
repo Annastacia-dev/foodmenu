@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: sub_restaurants
+#
+#  id            :uuid             not null, primary key
+#  description   :text
+#  email         :string
+#  name          :string           not null
+#  phone_number  :string
+#  slug          :string           not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  restaurant_id :uuid             not null
+#
+# Indexes
+#
+#  index_sub_restaurants_on_restaurant_id  (restaurant_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (restaurant_id => restaurants.id)
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+# column: value

@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: menu_categories
+#
+#  id          :uuid             not null, primary key
+#  description :string
+#  name        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  menu_id     :uuid             not null
+#
+# Indexes
+#
+#  index_menu_categories_on_menu_id  (menu_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (menu_id => menus.id)
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+# column: value

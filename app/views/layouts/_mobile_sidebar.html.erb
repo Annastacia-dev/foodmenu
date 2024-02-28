@@ -1,0 +1,12 @@
+<div class="flex flex-col  fixed inset-0 right-3/4 bg-gray-800 text-white font-normal text-sm z-10 hidden" id='mobile-sidebar'>
+  <div class="flex justify-between items-center gap-20 py-6 px-4">
+    <div class="flex items-center gap-2">
+      <%= image_tag(@restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-8 h-8 object-cover") %>
+      <span class="text-sm font-semibold uppercase"><%= @restaurant.name %></span>
+    </div>
+    <i class="fa-solid fa-times" onclick="document.getElementById('mobile-sidebar').classList.add('hidden')"></i>
+  </div>
+
+  <%= render 'layouts/sidebar_items' %>
+
+</div>
