@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_03_142223) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -80,7 +80,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
     t.uuid "menu_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.uuid "parent_id"
     t.index ["menu_id"], name: "index_menu_categories_on_menu_id"
+    t.index ["slug"], name: "index_menu_categories_on_slug", unique: true
   end
 
   create_table "menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -98,7 +101,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "alcoholic", default: false
+    t.string "slug"
+    t.text "calories_info"
     t.index ["menu_category_id"], name: "index_menu_items_on_menu_category_id"
+    t.index ["slug"], name: "index_menu_items_on_slug", unique: true
   end
 
   create_table "menus", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -109,7 +115,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
     t.uuid "sub_restaurant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.boolean "show_calories", default: false
     t.index ["restaurant_id"], name: "index_menus_on_restaurant_id"
+    t.index ["slug"], name: "index_menus_on_slug", unique: true
     t.index ["sub_restaurant_id"], name: "index_menus_on_sub_restaurant_id"
   end
 

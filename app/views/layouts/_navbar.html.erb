@@ -9,7 +9,11 @@
       <% end %>
       <ul class="flex gap-3 p-2 font-normal sm:text-sm text-xs uppercase">
         <li class="hover:underline">
-          <a href="/restaurants">restaurants</a>
+          <%= link_to 'restaurants', restaurants_path %>
+        </li>
+        <span>|</span>
+        <li class="hover:underline">
+          <%= link_to 'sign in', new_user_session_path %>
         </li>
       </ul>
     </div>

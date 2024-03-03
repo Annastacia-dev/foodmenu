@@ -1,6 +1,7 @@
 class MenusController < ApplicationController
 
   before_action :set_restaurant
+  before_action :set_sub_restaurant
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -18,34 +19,24 @@ class MenusController < ApplicationController
   end
 
   def show
+    @menu_categories = @menu.menu_categories.order(:name).paginate(page: params[:page], per_page: 10 )
   end
 
   def new
-    session[:menu_params] ||= {}
-    @menu = Menu.new
-    @menu.current_step = session[:menu_step]
+    @menu = @sub_restaurant ? @sub_restaurant.menus.new : @restaurant.menus.new
   end
 
   def create
-    session[:menu_params].deep_merge!(menu_params) if menu_params
-    @menu = Menu.new(session[:menu_params])
-    @menu.current_step = session[:menu_step]
-    if params[:back_button]
-      @menu.previous_step
-    else
-      @menu.next_step if @menu.valid?
-    end
-    session[:menu_step] = @menu.current_step
+    @menu = @sub_restaurant ? @sub_restaurant.menus.new(menu_params) : @restaurant.menus.new(menu_params)
 
-    if @menu.save
-      if @menu.last_step?
-        session[:menu_step] = session[:menu_params] = nil
-        redirect_to [@restaurant, @menu], notice: 'Menu was successfully created.'
+    respond_to do |format|
+      if @menu.save
+        format.html { redirect_to restaurant_menus_path(@restaurant), notice: 'Menu was successfully created.' }
+        format.json { render :show, status: :created, location: [@restaurant, @menu] }
       else
-        redirect_to new_restaurant_menu_path(@restaurant)
+        format.html { render :new }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
       end
-    else
-      redirect_to new_restaurant_menu_path(@restaurant)
     end
   end
 
@@ -78,7 +69,15 @@ class MenusController < ApplicationController
       @restaurant = Restaurant.friendly.find(params[:restaurant_id])
     end
 
+    def set_sub_restaurant
+      @sub_restaurant = @restaurant.sub_restaurants.friendly.find(params[:sub_restaurant_id]) if params[:sub_restaurant_id]
+    end
+
     def set_menu
-      @menu = @restaurant.menus.find(params[:id])
+      @menu = @restaurant.menus.friendly.find(params[:id])
+    end
+
+    def menu_params
+      params.require(:menu).permit(:name, :description, :restaurant_id)
     end
 end

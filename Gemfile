@@ -13,6 +13,7 @@ gem "importmap-rails"
 gem "jbuilder"
 gem 'paper_trail', '~> 15.0'
 gem "pg", "~> 1.1"
+gem "pg_search"
 gem 'postmark'
 gem 'postmark-rails'
 gem "puma", ">= 5.0"
@@ -25,6 +26,7 @@ gem "stimulus-rails"
 gem "tailwindcss-rails", "~> 2.3"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "will_paginate"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]

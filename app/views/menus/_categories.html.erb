@@ -1,18 +1,13 @@
-<nav class="text-sm px-8 py-2" aria-label="Breadcrumb">
-  <ol class="list-none p-0 inline-flex px-5">
-      <li class="flex items-center">
-          <%= link_to root_path, class: "text-gray-800 flex justify-center items-center gap-2 hover:underline" do %>
-            <span>Home</span>
-          <% end %>
-          <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
-      </li>
-      <li class="flex items-center">
-          <span class="text-gray-500">Menus</span>
-      </li>
-  </ol>
-</nav>
+<div class='px-10 flex justify-end w-11/12'>
+ <%= link_to new_restaurant_menu_menu_category_path(@restaurant, @menu), class: "bg-gray-800 text-white text-sm p-2 rounded hover:bg-gray-900" do %>
+    <i class="fas fa-plus"></i>
+    <span class="ml-2">Add Category</span>
+  <% end %>
+</div>
 
-<% unless @menus.empty? %>
+
+
+<% unless @menu_categories.empty? %>
   <div class='p-10 overflow-x-auto'>
     <table class="w-11/12 border-separate border-spacing-x-0 border-spacing-y-2 text-xs">
       <thead class='bg-gray-800'>
@@ -29,26 +24,26 @@
         </tr>
       </thead>
       <tbody class='bg-white divide-y divide-gray-200'>
-        <% @menus.each_with_index do |menu, index| %>
+        <% @menu_categories.each_with_index do |category, index| %>
           <tr>
             <td class="px-6 py-4 whitespace-nowrap">
               <%= index + 1 %>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <%= link_to menu.menu_name, restaurant_menu_path(@restaurant, menu), class: "font-semibold hover:underline hover:text-blue-400" %>
+              <%= link_to category.name, restaurant_menu_menu_category_path(@restaurant, @menu, category), class: "font-semibold hover:underline hover:text-blue-400" %>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="flex items center gap-10">
-                <%= link_to new_restaurant_menu_menu_category_path(@restaurant, menu), class: "hover:bg-gray-900 hover:text-white p-1" do %>
+                <%= link_to new_restaurant_menu_menu_category_menu_item_path(@restaurant, @menu, category), class: "hover:bg-gray-900 hover:text-white p-1" do %>
                   <i class="fas fa-plus"></i>
-                  <span class="ml-2">Add Category</span>
+                  <span class="ml-2">Add Item</span>
                 <% end %>
-                <%= link_to edit_restaurant_menu_path(@restaurant, menu), class: "text-blue-500 hover:bg-blue-500 hover:text-white p-1" do %>
+                <%= link_to edit_restaurant_menu_menu_category_path(@restaurant, @menu, category), class: "text-blue-500 hover:bg-blue-500 hover:text-white p-1" do %>
                   <i class="fas fa-pencil-alt"></i>
                   <span class="ml-2">Edit</span>
                 <% end %>
-                <%= button_to restaurant_menu_path(@restaurant, menu), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:bg-red-500 hover:text-white p-1" do %>
-                  <i class="fas fa-trash-alt"></i>
+                <%= button_to restaurant_menu_menu_category_path(@restaurant, @menu, category), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:bg-red-500 hover:text-white p-1" do %>
+                  <i class="fas fa-trash"></i>
                   <span class="ml-2">Delete</span>
                 <% end %>
               </div>
@@ -60,6 +55,10 @@
   </div>
 <% else %>
   <div class='flex flex-col items-center justify-center h-96'>
-    <h4 class='text-2xl font-bold mb-5'>You have no menus yet</h4>
+    <h4 class='text-2xl font-bold mb-5'>You have no menu_categories yet</h4>
   </div>
 <% end %>
+
+<div class='px-1 flex justify-end w-11/12'>
+  <%= will_paginate @menu_categories%>
+</div>

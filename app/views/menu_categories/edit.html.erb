@@ -1,0 +1,36 @@
+<nav class="text-sm px-8 py-2" aria-label="Breadcrumb">
+  <ol class="list-none p-0 inline-flex px-5">
+      <li class="flex items-center">
+          <%= link_to root_path, class: "text-gray-800 flex justify-center items-center gap-2 hover:underline" do %>
+            <span>Home</span>
+          <% end %>
+          <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
+      </li>
+      <li class="flex items-center">
+          <%= link_to restaurant_menus_path(@restaurant), class: "text-gray-800 flex justify-center items-center gap-2 hover:underline" do %>
+            <span>Menus</span>
+          <% end %>
+          <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
+      </li>
+      <li class="flex items-center">
+         <%= link_to restaurant_menu_path(@restaurant, @menu), class: "text-gray-800 flex justify-center items-center gap-2 hover:underline" do %>
+          <span><%= @menu.menu_name %></span>
+        <% end %>
+        <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
+      </li>
+      <li class="flex items center">
+          <%= link_to restaurant_menu_menu_category_path(@restaurant, @menu, @menu_category), class: "text-gray-800 flex justify-center items-center gap-2 hover:underline" do %>
+            <span><%= @menu_category.name %></span>
+          <% end %>
+          <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
+      </li>
+      <li class="flex items center">
+          <span class="text-gray-500">Edit</span>
+      </li>
+  </ol>
+</nav>
+
+<div class='p-10'>
+  <h4 class='font-semibold mb-5 uppercase underline'>edit category</h4>
+  <%= render 'form', menu_category: @menu_category %>
+</div>

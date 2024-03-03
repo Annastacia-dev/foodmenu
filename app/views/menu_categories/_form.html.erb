@@ -1,0 +1,18 @@
+<%= form_with(model: [@restaurant, @sub_restaurant, @menu, @menu_category], class: "flex flex-col gap-5 w-3/4 text-sm text-sm") do |form| %>
+  <%= render 'shared/error_messages', object: @menu_category %>
+  <div>
+    <%= form.label :name, class: "block font-medium text-gray-700" do %>
+      Name
+      <i class="fa-regular fa-circle-question cursor-pointer" title="Name of menu category"></i>
+    <% end %>
+    <%= form.text_field :name, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", placeholder: "e.g. Breakfast" %>
+  </div>
+  <div>
+    <%= form.label :description, class: "block font-medium text-gray-700" do %>
+      Description
+      <i class="fa-regular fa-circle-question cursor-pointer" title="Description of menu category"></i>
+    <% end %>
+    <%= form.text_area :description, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs", placeholder: "e.g. Mouth-watering breakfast options to start your day right.", rows: 10 %>
+  </div>
+  <%= form.submit "Submit", class: "bg-gray-800 text-white font-bold py-2 px-4 rounded cursor-pointer" %>
+<% end %>

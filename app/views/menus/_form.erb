@@ -1,5 +1,6 @@
-<%= form_with(model: [@restaurant, menu], class: "flex flex-col gap-5 w-3/4 text-sm
+<%= form_with(model: [@restaurant, @sub_restaurant, @menu], class: "flex flex-col gap-5 w-3/4 text-sm
 text-sm") do |form| %>
+  <%= render 'shared/error_messages', object: @menu %>
   <div>
     <%= form.label :name, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
       Name
@@ -14,7 +15,7 @@ text-sm") do |form| %>
       <i class="fa-regular fa-circle-question cursor-pointer" title="Description of menu"
       ></i>
     <% end %>
-    <%= form.text_area :description, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs", required: true, placeholder: "e.g. Explore our diverse and delicious menu crafted with passion and attention to quality ingredients.", rows: 10 %>
+    <%= form.text_area :description, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs", placeholder: "e.g. Explore our diverse and delicious menu crafted with passion and attention to quality ingredients.", rows: 10 %>
   </div>
-  <%= form.submit "Next", class: "bg-gray-800 text-white font-bold py-2 px-4 rounded cursor-pointer" %>
+  <%= form.submit "Submit", class: "bg-gray-800 text-white font-bold py-2 px-4 rounded cursor-pointer" %>
 <% end %>

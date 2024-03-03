@@ -4,6 +4,7 @@
 #
 #  id                 :uuid             not null, primary key
 #  alcoholic          :boolean          default(FALSE)
+#  calories_info      :text
 #  description        :string
 #  gluten_free        :boolean          default(FALSE)
 #  halal              :boolean          default(FALSE)
@@ -13,6 +14,7 @@
 #  lactose_intolerant :boolean          default(FALSE)
 #  name               :string
 #  price              :float
+#  slug               :string
 #  vegan              :boolean          default(FALSE)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -21,6 +23,7 @@
 # Indexes
 #
 #  index_menu_items_on_menu_category_id  (menu_category_id)
+#  index_menu_items_on_slug              (slug) UNIQUE
 #
 # Foreign Keys
 #
@@ -30,6 +33,8 @@ class MenuItem < ApplicationRecord
   has_paper_trail
 
   # --concerns--
+  include SluggableModelConcern
+  friendly_slug_scope to_slug: :name
 
   # --associations--
   belongs_to :menu_category

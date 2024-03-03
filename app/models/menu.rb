@@ -5,7 +5,9 @@
 #  id                :uuid             not null, primary key
 #  description       :string
 #  name              :string
-#  tax_behavior      :integer          default(0)
+#  show_calories     :boolean          default(FALSE)
+#  slug              :string
+#  tax_behavior      :integer          default("inclusive")
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  restaurant_id     :uuid             not null
@@ -14,6 +16,7 @@
 # Indexes
 #
 #  index_menus_on_restaurant_id      (restaurant_id)
+#  index_menus_on_slug               (slug) UNIQUE
 #  index_menus_on_sub_restaurant_id  (sub_restaurant_id)
 #
 # Foreign Keys
@@ -25,6 +28,8 @@ class Menu < ApplicationRecord
   has_paper_trail
 
   # --concerns--
+  include SluggableModelConcern
+  friendly_slug_scope to_slug: :menu_name
 
   # --associations--
   belongs_to :restaurant
@@ -32,39 +37,11 @@ class Menu < ApplicationRecord
   has_many :menu_categories, dependent: :destroy
   has_many :menu_items, through: :menu_categories
 
-  attr_writer :current_step
-
   # --enums--
   enum tax_behavior: { inclusive: 0, exclusive: 1 }
 
-  # --methods--
-  def current_step
-    @current_step || steps.first
-  end
-
-  def steps
-    %w[menu_info menu_categories menu_items]
-  end
-
-  def first_step?
-    current_step == steps.first
-  end
-
-  def last_step?
-    current_step == steps.last
-  end
-
-  def previous_step
-    return if first_step?
-
-    steps[steps.index(current_step) - 1]
-  end
-
-  def next_step
-    return if last_step?
-
-    steps[steps.index(current_step) + 1]
-  end
+  # --validations--
+  validates :name, uniqueness: { scope: %i[restaurant_id sub_restaurant_id] }, if: -> { name.present? }
 
   def menu_name
     name ||  sub_restaurant&.name || restaurant&.name
