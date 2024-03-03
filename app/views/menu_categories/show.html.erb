@@ -1,0 +1,40 @@
+<nav class="text-sm px-8 py-2 capitalize" aria-label="Breadcrumb">
+  <ol class="list-none p-0 inline-flex px-5">
+      <li class="flex items-center">
+          <%= link_to 'Home', root_path, class: "text-gray-800 flex justify-center items-center gap-2 hover:underline" %>
+          <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
+      </li>
+      <li class="flex items-center">
+        <%= link_to 'Menus', restaurant_menus_path(@restaurant), class: "text-gray-800 flex justify-center items-center gap-2 hover:underline" %>
+        <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
+      </li>
+      <li class="flex items-center">
+        <%= link_to @menu.name, class: "text-gray-800 flex justify-center items-center gap-2 hover:underline" do %>
+          <span><%= @menu.name %></span>
+        <% end %>
+        <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
+      </li>
+      <li class="flex items-center">
+        <%= link_to 'Categories', restaurant_menu_path(@restaurant, @menu, tab: 'categories'), class: "flex justify-center items-center gap-2 hover:underline" %>
+        <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
+      </li>
+      <li class="flex items center">
+        <%= link_to @menu_category.name, class: "text-gray flex justify-center items-center gap-2" do %>
+          <span><%= @menu_category.name %></span>
+        <% end %>
+      </li>
+  </ol>
+</nav>
+
+<div data-controller='tabs' class="p-10 text-gray-900 capitalize">
+  <ul data-tabs-target="tabs" class="flex  text-sm">
+    <li data-action="click->tabs#activate" data-tabs-target="tab" data-tabs-action="click->tabs#activate" class="p-4 cursor-pointer border-b" data-tab="items">items</li>
+    <li data-action="click->tabs#activate" data-tabs-target="tab" data-tabs-action="click->tabs#activate" class="p-4 cursor-pointer border-b" data-tab="subcategories">subcategories</li>
+  </ul>
+
+  <div data-tabs-target="panels" class="p-4" data-tab="items">
+  </div>
+  <div data-tabs-target="panels" class="p-4" data-tab="subcategories">
+    <%= render 'subcategories' %>
+  </div>
+</div>

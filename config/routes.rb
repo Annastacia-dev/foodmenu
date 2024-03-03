@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
     resources :menus do
       resources :menu_categories do
+        member { post :add_subcategory }
+        member {patch :update_subcategory}
+        member {delete :delete_subcategory}
         resources :menu_items
       end
     end

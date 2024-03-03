@@ -19,7 +19,11 @@ class MenusController < ApplicationController
   end
 
   def show
-    @menu_categories = @menu.menu_categories.order(:name).paginate(page: params[:page], per_page: 10 )
+    if params[:search]
+      @menu_categories = @menu.menu_categories.where("name ILIKE ?", "%#{params[:search]}%").order(:name).paginate(page: params[:page], per_page: 10 )
+    else
+      @menu_categories = @menu.menu_categories.order(:name).paginate(page: params[:page], per_page: 10 )
+    end
   end
 
   def new

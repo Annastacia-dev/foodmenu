@@ -3,7 +3,7 @@ class MenuCategoriesController < ApplicationController
   before_action :set_restaurant
   before_action :set_sub_restaurant
   before_action :set_menu
-  before_action :set_menu_category, only: %i[show edit update destroy]
+  before_action :set_menu_category, only: %i[show edit update destroy add_subcategory]
 
   def index
     @menu_categories = @menu.menu_categories
@@ -21,6 +21,11 @@ class MenuCategoriesController < ApplicationController
   end
 
   def show
+    if params[:search]
+     @subcategories = @menu_category.children.where("name ILIKE ?", "%#{params[:search]}%").order(:name).paginate(page: params[:page], per_page: 10 )
+    else
+      @subcategories = @menu_category.children.order(:name).paginate(page: params[:page], per_page: 10 )
+    end
   end
 
   def new
@@ -63,6 +68,20 @@ class MenuCategoriesController < ApplicationController
     end
   end
 
+  def add_subcategory
+    @sub_category = @menu_category.children.new(children_params)
+
+    respond_to do |format|
+      if @sub_category.save
+        format.html { redirect_to restaurant_menu_menu_category_path(@restaurant, @menu, @menu_category, tab: 'subcategories'), notice: 'Subcategory was successfully created.' }
+        format.json { render :show, status: :created, location: [@restaurant, @menu, @menu_category, @sub_category] }
+      else
+        format.html { render :show }
+        format.json { render json: @sub_category.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_restaurant
@@ -83,5 +102,9 @@ class MenuCategoriesController < ApplicationController
 
   def menu_category_params
     params.require(:menu_category).permit(:name, :description)
+  end
+
+  def children_params
+    params.require(:menu_category).permit(:name)
   end
 end
