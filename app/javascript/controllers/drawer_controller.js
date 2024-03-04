@@ -2,16 +2,24 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="drawer"
 export default class extends Controller {
-  static targets = ["drawer", "overlay"];
+  static targets = ["drawer"];
 
   connect() {
-    console.log("Drawer controller connected");
-    console.log(this.drawerTarget)
-    this.close();
+    const urlParams = new URLSearchParams(window.location.search);
+    // Loop through each drawer element
+    this.drawerTargets.forEach((drawer) => {
+      const drawerId = drawer.dataset.id
+      const drawerOpenParam = urlParams.get(drawerId);
+
+      if (drawerOpenParam && drawerOpenParam.toLowerCase() === 'true') {
+        this.open(drawer);
+      } else {
+        this.close(drawer);
+      }
+    });
   }
 
   toggle() {
-    console.log("Toggling drawer")
     if (this.drawerTarget.classList.contains("hidden")) {
       this.open();
     } else {
@@ -21,11 +29,9 @@ export default class extends Controller {
 
   open() {
     this.drawerTarget.classList.remove("hidden");
-    // this.overlayTarget.classList.remove("pointer-events-none");
   }
 
   close() {
     this.drawerTarget.classList.add("hidden");
-    // this.overlayTarget.classList.add("pointer-events-none");
   }
 }

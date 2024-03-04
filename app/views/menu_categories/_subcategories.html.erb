@@ -63,6 +63,4 @@
   </div>
 <% end %>
 
-<div class='px-1 flex justify-end w-11/12'>
-  <%= will_paginate @subcategories%>
-</div>
+<%= render 'components/pagination', records: @subcategories %>

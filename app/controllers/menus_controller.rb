@@ -5,7 +5,7 @@ class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
 
   def index
-    @menus = @restaurant.menus
+    @menus = @restaurant.menus.order(:name).paginate(page: params[:page], per_page: 10)
 
     respond_to do |format|
       if @menus.present?
@@ -24,6 +24,8 @@ class MenusController < ApplicationController
     else
       @menu_categories = @menu.menu_categories.order(:name).paginate(page: params[:page], per_page: 10 )
     end
+
+    session[:menu_item_params] ||= {}
   end
 
   def new
@@ -35,7 +37,8 @@ class MenusController < ApplicationController
 
     respond_to do |format|
       if @menu.save
-        format.html { redirect_to restaurant_menus_path(@restaurant), notice: 'Menu was successfully created.' }
+        redirect_path = request.referrer ? request.referrer : restaurant_menus_path(@restaurant)
+        format.html { redirect_to redirect_path, notice: 'Menu was successfully created.' }
         format.json { render :show, status: :created, location: [@restaurant, @menu] }
       else
         format.html { render :new }
@@ -50,7 +53,8 @@ class MenusController < ApplicationController
   def update
     respond_to do |format|
       if @menu.update(menu_params)
-        format.html { redirect_to [@restaurant, @menu], notice: 'Menu was successfully updated.' }
+        redirect_path = request.referrer ? request.referrer : restaurant_menus_path(@restaurant)
+        format.html { redirect_to redirect_path, notice: 'Menu was successfully updated.' }
         format.json { render :show, status: :ok, location: [@restaurant, @menu] }
       else
         format.html { render :edit }
@@ -62,7 +66,7 @@ class MenusController < ApplicationController
   def destroy
     @menu.destroy
     respond_to do |format|
-      format.html { redirect_to restaurant_menus_url(@restaurant), notice: 'Menu was successfully destroyed.' }
+      format.html { redirect_to restaurant_menus_url(@restaurant), notice: 'Menu was successfully deleted.' }
       format.json { head :no_content }
     end
   end

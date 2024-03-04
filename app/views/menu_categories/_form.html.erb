@@ -1,5 +1,5 @@
-<%= form_with(model: [@restaurant, @sub_restaurant, @menu, @menu_category], class: "flex flex-col gap-5 w-3/4 text-sm text-sm") do |form| %>
-  <%= render 'shared/error_messages', object: @menu_category %>
+<%= form_with(model: [@restaurant, @sub_restaurant, menu, menu_category], class: "flex flex-col gap-5 w-3/4 text-sm text-sm") do |form| %>
+  <%= render 'shared/error_messages', object: menu_category %>
   <div>
     <%= form.label :name, class: "block font-medium text-gray-700" do %>
       Name

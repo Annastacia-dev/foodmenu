@@ -3,6 +3,14 @@
   { text: 'Menus', path: restaurant_menus_path(@restaurant)}
 ] %>
 
+<div class='px-10 w-11/12 flex justify-end items-center mb-5'>
+  <%= render 'components/drawer', button_text: 'Add Menu', title: "Add Menu",  button_class: 'bg-gray-900 text-white px-4 py-2 text-sm rounded', button_icon: 'fas fa-plus', id:'new_menu_drawer' do %>
+   <div class='mt-10'>
+    <%= render 'form', menu: @restaurant.menus.new %>
+   </div>
+  <% end %>
+</div>
+
 <% unless @menus.empty? %>
   <div class='p-10 overflow-x-auto'>
     <table class="w-11/12 border-separate border-spacing-x-0 border-spacing-y-2 text-xs">
@@ -19,32 +27,33 @@
           </th>
         </tr>
       </thead>
-      <tbody class='bg-white divide-y divide-gray-200'>
+      <tbody class='bg-white divide-y divide-gray-200 relative'>
         <% @menus.each_with_index do |menu, index| %>
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <%= index + 1 %>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <%= link_to menu.menu_name, restaurant_menu_path(@restaurant, menu), class: "font-semibold hover:underline hover:text-blue-400" %>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex items center gap-10">
-                <%= link_to new_restaurant_menu_menu_category_path(@restaurant, menu), class: "hover:bg-gray-900 hover:text-white p-1" do %>
-                  <i class="fas fa-plus"></i>
-                  <span class="ml-2">Add Category</span>
-                <% end %>
-                <%= link_to edit_restaurant_menu_path(@restaurant, menu), class: "text-blue-500 hover:bg-blue-500 hover:text-white p-1" do %>
-                  <i class="fas fa-pencil-alt"></i>
-                  <span class="ml-2">Edit</span>
-                <% end %>
-                <%= button_to restaurant_menu_path(@restaurant, menu), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:bg-red-500 hover:text-white p-1" do %>
-                  <i class="fas fa-trash-alt"></i>
-                  <span class="ml-2">Delete</span>
-                <% end %>
-              </div>
-            </td>
-          </tr>
+          <% if menu.id %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= index + 1 %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap capitalize">
+                <%= link_to menu&.menu_name, restaurant_menu_path(@restaurant, menu), class: "font-semibold hover:underline hover:text-blue-400" %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items center gap-10">
+                  <%= render 'components/drawer', button_text: 'Add Category', title: "Add Category to #{menu.name}", button_class: 'hover:bg-gray-900 hover:text-white p-1', button_icon: 'fas fa-plus', id:'new_category_drawer' do %>
+                   <div class='mt-10'>
+                    <%= render 'menu_categories/form', menu: menu, menu_category: menu.menu_categories.new %>
+                   </div>
+                  <% end %>
+                  <%= render 'components/drawer', button_text: "Edit", title: "Edit #{menu.name}", button_class: 'text-blue-500 hover:bg-blue-500 hover:text-white p-1', button_icon: 'fas fa-pencil-alt', id:'edit_menu_drawer' do %>
+                   <div class='mt-10'>
+                    <%= render 'menus/form', menu: menu %>
+                   </div>
+                  <% end %>
+                  <%= render 'components/popconfirm', button_text: 'Delete', title: "Delete #{menu.name}", button_class: 'text-red-500 hover:bg-red-500 hover:text-white p-1', button_icon: 'fas fa-trash-alt', message: "Are you sure you want to delete #{menu.name}?<br />This action is permanent and cannot be undone.", path: restaurant_menu_path(@restaurant, menu), method: :delete, icon: 'fa-solid fa-circle-question', confirm_button_class: 'bg-red-500 text-white py-2 px-4 mr-2 rounded' %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -54,3 +63,5 @@
     <h4 class='text-2xl font-bold mb-5'>You have no menus yet</h4>
   </div>
 <% end %>
+
+<%= render 'components/pagination', records: @menus %>

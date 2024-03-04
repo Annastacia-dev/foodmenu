@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_03_175853) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_132621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -95,7 +95,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_03_175853) do
     t.boolean "vegan", default: false
     t.boolean "gluten_free", default: false
     t.boolean "has_nuts", default: false
-    t.boolean "lactose_intolerant", default: false
+    t.boolean "lactose_free", default: false
     t.boolean "halal", default: false
     t.uuid "menu_category_id", null: false
     t.datetime "created_at", null: false
@@ -133,6 +133,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_03_175853) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "confirmed_at"
+    t.string "currency", default: "KES"
   end
 
   create_table "sub_restaurants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

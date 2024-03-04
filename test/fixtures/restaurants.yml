@@ -5,6 +5,7 @@
 #  id              :uuid             not null, primary key
 #  confirmed       :boolean          default(FALSE)
 #  confirmed_at    :datetime
+#  currency        :string           default("KES")
 #  email           :string           not null
 #  name            :string           not null
 #  phone           :string           not null

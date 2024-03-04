@@ -2,6 +2,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_params, if: :devise_controller?
   before_action :set_paper_trail_whodunnit
+  
 
   private
 
