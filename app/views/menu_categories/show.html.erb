@@ -18,6 +18,14 @@
         <%= link_to 'Categories', restaurant_menu_path(@restaurant, @menu, tab: 'categories'), class: "flex justify-center items-center gap-2 hover:underline" %>
         <i class="fas fa-chevron-right text-gray-800 mx-2"></i>
       </li>
+      <% if @menu_category.parent.present? %>
+       <li class="flex items-center">
+        <%= link_to @menu_category.parent.name, class: "text-gray flex justify-center items-center gap-2" do %>
+          <span><%= @menu_category.parent.name %></span>
+        <% end %>
+        <i class="fas fa-chevron-right text-gray mx-2"></i>
+      </li>
+      <% end %>
       <li class="flex items center">
         <%= link_to @menu_category.name, class: "text-gray flex justify-center items-center gap-2" do %>
           <span><%= @menu_category.name %></span>

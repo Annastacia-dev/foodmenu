@@ -1,25 +1,10 @@
-<div data-controller="drawer">
-  <button data-action="click->drawer#toggle" class="bg-gray-900 text-white px-4 py-2 text-sm rounded">
-    <i class="fas fa-plus"></i>
-    Add Subcategory
-  </button>
-
-  <div class="flex flex-col  fixed inset-0 left-1/2 bg-white border border-gray-800 font-normal text-sm z-10 hidden capitalize p-5" data-drawer-target="drawer">
-    <div class='flex gap-10 items-center'>
-      <button data-action="click->drawer#close" class="text-gray-800 text-2xl">
-        &times;
-      </button>
-      <h2 class="text-gray-800 font-semibold uppercase">Add Subcategory</h2>
-    </div>
-    <hr class="border border-gray-100">
-    <%= form_with url: add_subcategory_restaurant_menu_menu_category_path(@restaurant, @menu, @menu_category), class: 'flex flex-col gap-4 mt-10 w-3/4', method: :post do |f| %>
-      <%= f.label :name do %>
-        <span>Name</span>
-        <span class='text-red-500'>*</span>
-      <% end %>
-      <%= f.text_field :name, class: "p-2 border border-gray-300 rounded text-sm", placeholder: 'Subcategory Name' %>
-      <%= f.submit "Add Subcategory", class: "bg-gray-800 text-white text-sm px-4 py-2 rounded hover:bg-gray-900 cursor-pointer" %>
+<%= render 'components/drawer', button_text: 'Add Subcategory', title: "Add Subcategory to #{@menu_category.name}" do %>
+  <%= form_with url: add_subcategory_restaurant_menu_menu_category_path(@restaurant, @menu, @menu_category), class: 'flex flex-col gap-4 mt-10 w-3/4', method: :post do |f| %>
+    <%= f.label :name do %>
+      <span>Name</span>
+      <span class='text-red-500'>*</span>
     <% end %>
-  </div>
-
-</div>
+    <%= f.text_field :name, class: "p-2 border border-gray-300 rounded text-sm", placeholder: 'Subcategory Name' %>
+    <%= f.submit "Add Subcategory", class: "bg-gray-800 text-white text-sm px-4 py-2 rounded hover:bg-gray-900 cursor-pointer" %>
+  <% end %>
+<% end %>

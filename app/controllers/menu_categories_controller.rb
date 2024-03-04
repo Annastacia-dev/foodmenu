@@ -97,7 +97,8 @@ class MenuCategoriesController < ApplicationController
   end
 
   def set_menu_category
-    @menu_category = @menu.menu_categories.friendly.find(params[:id])
+    id = params[:id].downcase
+    @menu_category = MenuCategory.friendly.find(id)
   end
 
   def menu_category_params
