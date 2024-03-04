@@ -5,12 +5,10 @@
 #  id               :uuid             not null, primary key
 #  alcoholic        :boolean          default(FALSE)
 #  calories_info    :text
+#  contains_nuts    :boolean          default(FALSE)
 #  description      :string
 #  gluten_free      :boolean          default(FALSE)
 #  halal            :boolean          default(FALSE)
-#  has_nuts         :boolean          default(FALSE)
-#  ingredients      :jsonb
-#  item_type        :integer          default(NULL)
 #  lactose_free     :boolean          default(FALSE)
 #  name             :string
 #  price            :float

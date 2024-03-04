@@ -5,12 +5,10 @@
 #  id               :uuid             not null, primary key
 #  alcoholic        :boolean          default(FALSE)
 #  calories_info    :text
+#  contains_nuts    :boolean          default(FALSE)
 #  description      :string
 #  gluten_free      :boolean          default(FALSE)
 #  halal            :boolean          default(FALSE)
-#  has_nuts         :boolean          default(FALSE)
-#  ingredients      :jsonb
-#  item_type        :integer          default(NULL)
 #  lactose_free     :boolean          default(FALSE)
 #  name             :string
 #  price            :float
@@ -38,9 +36,8 @@ class MenuItem < ApplicationRecord
 
   # --associations--
   belongs_to :menu_category
-
-  # ---enums---
-  enum item_type: { food: 1, drink: 2 }
+  has_many_attached :images
+  has_many_attached :videos
 
   # --validations--
   validates :name, presence: true

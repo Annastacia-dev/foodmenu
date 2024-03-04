@@ -1,17 +1,76 @@
-<%= form_with(model: [@restaurant, @sub_restaurant, menu, menu_category, menu_item], class: "flex flex-col gap-5 w-3/4 text-sm
-text-sm") do |form| %>
-  <%= render 'shared/error_messages', object: menu_item %>
-  <div class='flex flex-col gap-1'>
-    <%= form.label :name, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
-      Name
-    <% end %>
-    <%= form.text_field :name, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", placeholder: "e.g ceaser salad" %>
+<%= form_with(model: [@restaurant, @sub_restaurant, menu, menu_category, menu_item]) do |form| %>
+  <div class='grid sm:grid-cols-2 grid-cols-1 flex-col gap-5 w-11/12 text-sm
+  text-sm'>
+    <div class='flex flex-col gap-1'>
+      <%= form.label :images, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+        Images
+        <span class="text-xs text-gray-500"> (multiple)</span>
+        <span class="text-xs text-red-500">*</span>
+      <% end %>
+      <%= form.file_field :images, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", multiple: true, required: true %>
+    </div>
+    <div class='flex flex-col gap-1'>
+      <%= form.label :videos, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+        Videos
+      <% end %>
+      <%= form.file_field :videos, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", multiple: true %>
+    </div>
+    <div class='flex flex-col gap-1'>
+      <%= form.label :name, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+        Name
+        <span class="text-xs text-red-500">*</span>
+      <% end %>
+      <%= form.text_field :name, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: true, placeholder: "e.g ceaser salad" %>
+    </div>
+    <div class='flex flex-col gap-1'>
+      <%= form.label :price, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+        Price
+        <span class="text-xs text-red-500">*</span>
+      <% end %>
+      <%= form.number_field :price, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: true, min: 1, step: 1, placeholder: "e.g 100" %>
+    </div>
+    <div class='flex flex-col gap-1'>
+      <%= form.label :calories_info, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+        Calories Info
+      <% end %>
+      <%= form.text_field :calories_info, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: true, placeholder: "e.g. 1400 cal per serving" %>
+    </div>
+    <div class='flex flex-col gap-1 col-span-2'>
+      <%= form.label :description, class: "block font-medium text-gray-700" do %>
+        Description
+      <% end %>
+      <%= form.text_area :description, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs",required: true, placeholder: "e.g. Lettuce, tomatoes, ham (beef), sweet corn, yellow cheese, tuna, and boiled egg", rows: 5 %>
+    </div>
   </div>
-  <div class='flex flex-col gap-1'>
-    <%= form.label :description, class: "block font-medium text-gray-700" do %>
-      Description
-    <% end %>
-    <%= form.text_area :description, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs", placeholder: "e.g. Lettuce, tomatoes, ham (beef), sweet corn, yellow cheese, tuna, and boiled egg", rows: 10 %>
+  <h5 class="text-gray-800 font-semibold uppercase mt-4">Check all that apply</h5>
+  <div class='flex mt-2 mb-4 gap-3 items-center'>
+    <div class='flex flex-col items-center gap-1'>
+      <%= form.label :vegan, class: "block font-medium text-gray-700" %>
+      <%= form.check_box :vegan, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-10 w-10" %>
+    </div>
+    <div class='flex flex-col items-center gap-1'>
+      <%= form.label :alcoholic, class: "block font-medium text-gray-700" %>
+      <%= form.check_box :alcoholic, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-10 w-10" %>
+    </div>
+    <div class='flex flex-col items-center gap-1'>
+      <%= form.label :gluten_free, class: "block font-medium text-gray-700" %>
+      <%= form.check_box :gluten_free, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-10 w-10" %>
+    </div>
+    <div class='flex flex-col items-center gap-1'>
+      <%= form.label :lactose_free, class: "block font-medium text-gray-700" %>
+      <%= form.check_box :lactose_free, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-10 w-10" %>
+    </div>
+    <div class='flex flex-col items-center gap-1'>
+      <%= form.label :contains_nuts, class: "block font-medium text-gray-700" %>
+      <%= form.check_box :contains_nuts, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-10 w-10" %>
+    </div>
+    <div class='flex flex-col items-center gap-1'>
+      <%= form.label :halal, class: "block font-medium text-gray-700" %>
+      <%= form.check_box :halal, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-10 w-10" %>
+    </div>
   </div>
+
+
+
   <%= form.submit "Submit", class: "bg-gray-800 text-white font-bold py-2 px-4 rounded cursor-pointer" %>
 <% end %>

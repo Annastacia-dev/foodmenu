@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_132621) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_175027) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -88,13 +88,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_132621) do
 
   create_table "menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.jsonb "ingredients", default: []
     t.string "description"
     t.float "price"
-    t.integer "item_type", default: 0
     t.boolean "vegan", default: false
     t.boolean "gluten_free", default: false
-    t.boolean "has_nuts", default: false
+    t.boolean "contains_nuts", default: false
     t.boolean "lactose_free", default: false
     t.boolean "halal", default: false
     t.uuid "menu_category_id", null: false
