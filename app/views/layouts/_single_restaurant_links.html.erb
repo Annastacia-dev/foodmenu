@@ -1,29 +1,4 @@
-<li data-controller="dropdown" class='relative'>
-
-  <button data-action="click->dropdown#toggle" class="flex items-center gap-1 px-4 py-2 w-full hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500">
-    <p class='flex items-center gap-2 capitalize'>
-      <i class="fa-solid fa-utensils"></i>
-      <span class=>menus</span>
-    </p>
-    <i class="fa-solid fa-caret-down"></i>
-  </button>
-
-  <ul data-dropdown-target="menu" class="hidden text-white rounded-md mt-3 flex flex-col gap-3">
-    <% if @restaurant.menus.present? %>
-      <li class='py-2 px-4 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500 sidebar-item' data-active-page-target="sidebar-item" data-path="menus">
-        <%= link_to restaurant_menus_path(@restaurant), class: "px-4 flex items-center gap-2" do %>
-          <i class="fa-solid fa-eye"></i>
-          View all menus
-        <% end %>
-      </li>
-    <% end %>
-
-    <li class='py-2 px-4 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500 sidebar-item' data-active-page-target="sidebar-item" data-path="new">
-      <%= link_to new_restaurant_menu_path(@restaurant), class: "px-4 flex items-center gap-2" do %>
-        <i class="fa-solid fa-plus"></i>
-        Add new menu
-      <% end %>
-    </li>
-  </ul>
-
-</li>
+<%= render 'components/dropdown', menu_title: 'menus', icon_class: 'fa-solid fa-utensils', menu_items: [
+  { path: restaurant_menus_path(@restaurant), icon_class: 'fa-solid fa-utensils', menu_text: 'View menus' },
+  { path: new_restaurant_menu_path(@restaurant), icon_class: 'fa-solid fa-plus', menu_text: 'Add new menu' }
+] %>
