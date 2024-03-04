@@ -43,6 +43,18 @@ class Restaurant < ApplicationRecord
     'group_restaurant(multiple restaurants, multiple locations)': 2
   }
 
+  def single?
+    restaurant_type == 'single_restaurant(one restaurant, one location)'
+  end
+
+  def chain?
+    restaurant_type == 'chain_restaurant(one restaurant, multiple locations)'
+  end
+
+  def group?
+    restaurant_type == 'group_restaurant(multiple restaurants, multiple locations)'
+  end
+
   private
 
   def downcase_email
