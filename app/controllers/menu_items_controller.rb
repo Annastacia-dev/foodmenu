@@ -1,5 +1,6 @@
 class MenuItemsController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_restaurant
   before_action :set_sub_restaurant
   before_action :set_menu
@@ -32,12 +33,12 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       if @menu_item.save
-        redirect_path = request.referrer ? request.referrer : restaurant_menu_menu_category_menu_items_path(@restaurant, @menu, @menu_category)
+        redirect_path = restaurant_menu_path(@restaurant, @menu, tab: 'items')
         format.html { redirect_to redirect_path, notice: 'Menu item was successfully created.' }
         format.json { render :show, status: :created, location: [@restaurant, @menu, @menu_category, @menu_item] }
       else
-        errors = @menu_item.errors.full_messages.join(', ')
-        redirect_path = restaurant_menu_path(@restaurant, @menu, tab: 'categories', "new_item_#{@menu_category.slug}_drawer": 'true')
+        errors= @menu_item.errors.full_messages.join(', ')
+        format.html { render :new }
         format.html { redirect_to redirect_path, alert: errors }
       end
     end
@@ -49,7 +50,7 @@ class MenuItemsController < ApplicationController
   def update
     respond_to do |format|
       if @menu_item.update(menu_item_params)
-        redirect_path = request.referrer ? request.referrer : restaurant_menu_menu_category_menu_items_path(@restaurant, @menu, @menu_category)
+        redirect_path = restaurant_menu_path(@restaurant, @menu, @menu_category, tab: 'items')
         format.html { redirect_to redirect_path, notice: 'Menu item was successfully updated.' }
         format.json { render :show, status: :ok, location: [@restaurant, @menu, @menu_category, @menu_item] }
       else
@@ -91,9 +92,7 @@ class MenuItemsController < ApplicationController
 
   def menu_item_params
     params.require(:menu_item).permit(
-      :name, :description, :price, :vegan, :gluten_free, :has_nuts,
-      :lactose_free, :halal, :alcoholic, :item_type,
-      :calories_info, ingredients: []
+      :name, :description, :price, :vegan, :gluten_free, :contains_nuts, :lactose_free, :halal, :alcoholic, :calories_info, :images, :videos
     )
   end
 

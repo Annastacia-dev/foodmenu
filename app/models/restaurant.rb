@@ -14,6 +14,15 @@
 #  status          :integer          default("active")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  layout_id       :uuid
+#
+# Indexes
+#
+#  index_restaurants_on_layout_id  (layout_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (layout_id => layouts.id)
 #
 
 class Restaurant < ApplicationRecord
@@ -27,6 +36,8 @@ class Restaurant < ApplicationRecord
   has_many :users, dependent: :destroy
   has_one_attached :logo
   has_many :menus, dependent: :destroy
+  has_many :sub_restaurants, dependent: :destroy
+  
 
   # --- callbacks ---
   before_save :downcase_email

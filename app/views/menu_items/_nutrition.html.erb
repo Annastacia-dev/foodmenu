@@ -1,0 +1,35 @@
+<div>
+  <h5 class="text-gray-800 font-semibold uppercase mt-4">Check all that apply</h5>
+
+  <div class='grid grid-cols-1 gap-4 py-6'>
+    <div class='flex items-center gap-2'>
+      <%= form.check_box :vegan, class: "shadow border border-gray-200 outline-none text-xs h-5 w-5" %>
+      <%= form.label :vegan, class: "block font-medium text-gray-700" %>
+    </div>
+
+    <div class='flex items-center gap-2'>
+      <%= form.check_box :alcoholic, class: "shadow border border-gray-200 outline-none text-xs h-5 w-5" %>
+      <%= form.label :alcoholic, class: "block font-medium text-gray-700" %>
+    </div>
+
+    <div class='flex items-center gap-1'>
+      <%= form.check_box :gluten_free, class: "shadow border border-gray-200 outline-none text-xs h-5 w-5" %>
+      <%= form.label :gluten_free, class: "block font-medium text-gray-700" %>
+    </div>
+
+    <div class='flex items-center gap-1'>
+      <%= form.check_box :lactose_free, class: "shadow border border-gray-200 outline-none text-xs h-5 w-5" %>
+      <%= form.label :lactose_free, class: "block font-medium text-gray-700" %>
+    </div>
+
+    <div class='flex items-center gap-1'>
+      <%= form.check_box :contains_nuts, class: "shadow border border-gray-200 outline-none text-xs h-5 w-5" %>
+      <%= form.label :contains_nuts, class: "block font-medium text-gray-700" %>
+    </div>
+
+    <div class='flex items-center gap-1'>
+      <%= form.check_box :halal, class: "shadow border border-gray-200 outline-none text-xs h-5 w-5" %>
+      <%= form.label :halal, class: "block font-medium text-gray-700" %>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<div class='sm:px-10 px-2 flex justify-end w-11/12'>
+<div class='sm:px-10 px-2 flex justify-end w-full'>
   <%= render 'components/drawer', button_text: 'Add Category', title: "Add Category to #{@menu.name}", button_class: 'bg-gray-900 text-white px-4 py-2 text-sm rounded', button_icon: 'fas fa-plus', id:'new_category_drawer' do %>
     <div class='mt-10'>
       <%= render 'menu_categories/form', menu: @menu, menu_category: @menu.menu_categories.new %>
@@ -9,8 +9,8 @@
 
 
 <% unless @menu_categories.empty? %>
-  <div class='sm:p-10 p-2 overflow-x-auto'>
-    <table class="w-11/12 border-separate border-spacing-x-0 border-spacing-y-2 text-xs">
+  <div class='sm:p-5 p-2 overflow-x-auto'>
+    <table class="w-full border-separate border-spacing-x-0 border-spacing-y-2 text-xs">
       <thead class='bg-gray-800'>
         <tr>
           <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
@@ -33,14 +33,12 @@
             <td class="px-6 py-4 whitespace-nowrap">
               <%= link_to category.name, restaurant_menu_menu_category_path(@restaurant, @menu, category), class: "font-semibold hover:underline hover:text-blue-400" %>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap ">
-              <div class="flex items center gap-10">
-                <%= render 'components/drawer', button_text: 'Add Item', title: "Add Item to #{category.name}", button_class: 'hover:bg-gray-900 hover:text-white p-1', button_icon: 'fas fa-plus', id: "new_item_#{category.slug}_drawer" do %>
-                  <div class='mt-10'>
-                    <%= render 'menu_items/form', menu: @menu, menu_category: category, menu_item: category.menu_items.new %>
-                  </div>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-10">
+                <%= link_to new_restaurant_menu_menu_category_menu_item_path(@restaurant, @menu, category), class: 'text-gray-800 hover:bg-gray-800 hover:text-white p-1' do %>
+                  <i class="fas fa-plus"></i>
+                  <span>Add Item</span>
                 <% end %>
-
                 <%= render 'components/drawer', button_text: "Edit", title: "Edit #{category.name}", button_class: 'text-blue-500 hover:bg-blue-500 hover:text-white p-1', button_icon: 'fas fa-pencil-alt', id:'edit_category_drawer' do %>
                   <div class='mt-10'>
                     <%= render 'menu_categories/form', menu: @menu, menu_category: category %>

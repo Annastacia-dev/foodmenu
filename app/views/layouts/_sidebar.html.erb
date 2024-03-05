@@ -1,10 +1,17 @@
 <div data-controller="active-page" class='bg-gray-900 w-1/6 fixed min-h-screen text-white top-0 left-0 py-1 text-sm capitalize lg:block hidden'>
   <div class="mb-4 flex flex-col gap-4 mt-2">
 
+  <% if current_user.restaurant_user? %>
     <div class="py-2 px-4 flex items-center gap-2">
       <%= image_tag(@restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-8 h-8 object-cover") %>
       <span class="text-sm font-semibold uppercase"><%= @restaurant.name %></span>
     </div>
+  <% else %>
+    <div class="py-2 px-4 flex items-center gap-2">
+      <%= image_tag('menu.png', alt: "Restaurant Logo", class: "rounded-full w-8 h-8 object-cover") %>
+      <span class="text-sm font-semibold uppercase">food.menu</span>
+    </div>
+  <% end %>
 
     <%= render 'layouts/sidebar_items' %>
   </div>

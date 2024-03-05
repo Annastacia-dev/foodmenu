@@ -1,5 +1,6 @@
 class MenusController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_restaurant
   before_action :set_sub_restaurant
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
@@ -21,8 +22,10 @@ class MenusController < ApplicationController
   def show
     if params[:search]
       @menu_categories = @menu.menu_categories.where("name ILIKE ?", "%#{params[:search]}%").order(:name).paginate(page: params[:page], per_page: 10 )
+      @menu_items = @menu.menu_items.where("name ILIKE ?", "%#{params[:search]}%").order(:name).paginate(page: params[:page], per_page: 10 )
     else
       @menu_categories = @menu.menu_categories.order(:name).paginate(page: params[:page], per_page: 10 )
+      @menu_items = @menu.menu_items.order(:name).paginate(page: params[:page], per_page: 10 )
     end
   end
 

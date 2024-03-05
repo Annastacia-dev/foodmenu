@@ -1,0 +1,44 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Themes', path: layouts_path},
+] %>
+
+
+
+<div class='p-10'>
+  <div class='flex justify-between items-center'>
+    <h1 class='font-semibold uppercase'>Themes(<%= @layouts.count %>) </h1>
+    <%= link_to new_layout_path, class: "btn btn-primary capitalize" do %>
+      <i class="fa-solid fa-plus"></i>
+      <span>Add new theme</span>
+    <% end %>
+  </div>
+  <div class='mt-6 grid md:grid-cols-4'>
+   <% @layouts.each do |layout| %>
+    <div class='flex flex-col items-start p-4 border-b border-gray-200 bg-white rounded shadow gap-10 h-40 w-80'>
+      <div class='flex items-center gap-4'>
+        <%= image_tag(layout.image, alt: "layout", class: "rounded-full w-12 h-12 object-cover") %>
+        <div>
+          <h4 class='font-semibold capitalize'><%= layout.name %></h4>
+        </div>
+      </div>
+      <div class='flex items-center gap-5 text-sm'>
+        <%= link_to layout, class: "text-blue-500 hover:underline", title: "View layout", target: "_blank" do %>
+          <i class="fa-solid fa-globe"></i>
+          <span>View</span>
+        <% end %>
+        <span class='text-gray-500'>|</span>
+        <%= link_to edit_layout_path(layout), class: "text-blue hover:underline", title: "Edit layout" do %>
+          <i class="fa-solid fa-edit"></i>
+          <span>Edit</span>
+        <% end %>
+        <span class='text-gray-500'>|</span>
+        <%= link_to layout, method: :delete, data: { confirm: "Are you sure you want to delete #{layout.name}?" }, class: "text-red-500 hover:underline", title: "Delete layout" do %>
+          <i class="fa-solid fa-trash"></i>
+          <span>Delete</span>
+        <% end %>
+      </div>
+    </div>
+   <% end %>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_175027) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_05_151959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -52,6 +52,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_175027) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "layouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -132,6 +139,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_175027) do
     t.datetime "updated_at", null: false
     t.datetime "confirmed_at"
     t.string "currency", default: "KES"
+    t.uuid "layout_id"
+    t.index ["layout_id"], name: "index_restaurants_on_layout_id"
   end
 
   create_table "sub_restaurants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -143,6 +152,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_175027) do
     t.uuid "restaurant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "layout_id"
+    t.index ["layout_id"], name: "index_sub_restaurants_on_layout_id"
     t.index ["restaurant_id"], name: "index_sub_restaurants_on_restaurant_id"
   end
 
@@ -154,7 +165,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_175027) do
     t.string "role"
     t.string "slug"
     t.integer "status", default: 0
-    t.uuid "restaurant_id", null: false
+    t.uuid "restaurant_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -190,6 +201,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_175027) do
   add_foreign_key "menu_items", "menu_categories"
   add_foreign_key "menus", "restaurants"
   add_foreign_key "menus", "sub_restaurants"
+  add_foreign_key "restaurants", "layouts"
+  add_foreign_key "sub_restaurants", "layouts"
   add_foreign_key "sub_restaurants", "restaurants"
   add_foreign_key "users", "restaurants"
 end

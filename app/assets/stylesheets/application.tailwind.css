@@ -50,6 +50,10 @@
   .pagination .current {
     @apply bg-gray-800 text-white py-2 px-4;
   }
+
+  .btn-primary {
+    @apply bg-gray-800 text-white py-2 px-4 rounded text-sm;
+  }
 }
 
 

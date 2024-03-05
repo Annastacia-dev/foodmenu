@@ -1,0 +1,13 @@
+<%= form_with(model: layout, class: 'px-5') do |form| %>
+
+  <%= render 'shared/error_messages', object: layout %>
+
+  <div class='flex flex-col gap-4'>
+
+  </div>
+
+
+
+
+  <%= form.submit  'Submit', class: "bg-gray-800 text-white font-semibold py-2 px-4 rounded cursor-pointer mt-7 w-3/4 text-center" %>
+<% end %>

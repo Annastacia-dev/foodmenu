@@ -30,6 +30,11 @@
 class MenuItem < ApplicationRecord
   has_paper_trail
 
+  attr_writer :current_step
+
+  # --callbacks--
+  before_save :downcase_name
+
   # --concerns--
   include SluggableModelConcern
   friendly_slug_scope to_slug: :name
@@ -42,4 +47,18 @@ class MenuItem < ApplicationRecord
   # --validations--
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than: 0 }
+  validates :description, presence: true
+
+  # --scopes--
+
+  # --class methods--
+
+  # --instance methods--
+
+  # --private--
+  private
+
+  def downcase_name
+    self.name = name.downcase
+  end
 end

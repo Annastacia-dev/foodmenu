@@ -2,16 +2,20 @@
 
   <%= render 'layouts/shared_links' %>
 
-  <% if @restaurant.single? %>
-   <%= render 'layouts/single_restaurant_links' %>
-  <% end %>
+  <% if current_user.restaurant_user? %>
+    <% if @restaurant.single? %>
+    <%= render 'layouts/single_restaurant_links' %>
+    <% end %>
 
-  <% if @restaurant.chain? %>
-    <%= render 'layouts/chain_restaurant_links' %>
-  <% end %>
+    <% if @restaurant.chain? %>
+      <%= render 'layouts/chain_restaurant_links' %>
+    <% end %>
 
-  <% if @restaurant.group? %>
-    <%= render 'layouts/group_restaurant_links' %>
+    <% if @restaurant.group? %>
+      <%= render 'layouts/group_restaurant_links' %>
+    <% end %>
+  <% elsif current_user.super_admin? %>
+    <%= render 'layouts/super_admin_links' %>
   <% end %>
 
 </ul>

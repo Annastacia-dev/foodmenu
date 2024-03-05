@@ -6,20 +6,15 @@ export default class extends Controller {
   connect() {
     // Try to retrieve the selected tab from sessionStorage
     const storedTab = sessionStorage.getItem("selectedTab");
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
 
-    if (storedTab) {
+    if (tabParam) {
+      this.activateTab(tabParam);
+    } else if (storedTab) {
       this.activateTab(storedTab);
     } else {
-      // If not found in sessionStorage, check for tab parameter in the URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const tabParam = urlParams.get('tab');
-
-      if (tabParam) {
-        this.activateTab(tabParam);
-      } else {
-        // Activate the first tab by default
-        this.activateTab(this.tabTargets[0].dataset.tab);
-      }
+      this.activateTab(this.tabTargets[0].dataset.tab);
     }
   }
 

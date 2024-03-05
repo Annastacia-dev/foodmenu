@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@rails/activestorage": "^7.1.3"
+  }
+}

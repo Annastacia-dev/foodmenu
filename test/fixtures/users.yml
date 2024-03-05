@@ -23,7 +23,7 @@
 #  unlock_token           :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  restaurant_id          :uuid             not null
+#  restaurant_id          :uuid
 #
 # Indexes
 #

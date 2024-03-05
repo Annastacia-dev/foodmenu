@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
 
-
   get 'home/index'
   get "up" => "rails/health#show", as: :rails_health_check
   root to: "home#index"
@@ -25,6 +24,5 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  resources :templates, only: [:index, :show]
+  resources :layouts
 end

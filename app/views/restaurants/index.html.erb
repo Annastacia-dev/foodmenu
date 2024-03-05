@@ -1,0 +1,45 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Restaurants', path: restaurants_path},
+] %>
+
+
+
+<div class='p-10'>
+  <div class='flex justify-between items-center'>
+    <h1 class='font-semibold uppercase'>Restaurants(<%= @restaurants.count %>) </h1>
+    <%= link_to new_restaurant_path, class: "btn btn-primary capitalize" do %>
+      <i class="fa-solid fa-plus"></i>
+      <span>Add new restaurant</span>
+    <% end %>
+  </div>
+  <div class='mt-6 grid md:grid-cols-4'>
+   <% @restaurants.each do |restaurant| %>
+    <div class='flex flex-col items-start p-4 border-b border-gray-200 bg-white rounded shadow gap-10 h-40 w-80'>
+      <div class='flex items-center gap-4'>
+        <%= image_tag(restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-12 h-12 object-cover") %>
+        <div>
+          <h4 class='font-semibold capitalize'><%= restaurant.name %></h4>
+          <span class='text-gray-500'><%= restaurant.email %></span>
+        </div>
+      </div>
+      <div class='flex items-center gap-5 text-sm'>
+        <%= link_to restaurant, class: "text-blue-500 hover:underline", title: "View restaurant", target: "_blank" do %>
+          <i class="fa-solid fa-globe"></i>
+          <span>View</span>
+        <% end %>
+        <span class='text-gray-500'>|</span>
+        <%= link_to edit_restaurant_path(restaurant), class: "text-blue hover:underline", title: "Edit restaurant" do %>
+          <i class="fa-solid fa-edit"></i>
+          <span>Edit</span>
+        <% end %>
+        <span class='text-gray-500'>|</span>
+        <%= link_to restaurant, method: :delete, data: { confirm: "Are you sure you want to delete #{restaurant.name}?" }, class: "text-red-500 hover:underline", title: "Delete restaurant" do %>
+          <i class="fa-solid fa-trash"></i>
+          <span>Delete</span>
+        <% end %>
+      </div>
+    </div>
+   <% end %>
+  </div>
+</div>

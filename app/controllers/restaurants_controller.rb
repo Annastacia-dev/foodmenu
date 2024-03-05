@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
 
+  before_action :authenticate_user!, except: %i[show confirm confirm_email]
   before_action :find_restaurant, only: %i[show edit update destroy confirm confirm_email settings]
 
   def new
