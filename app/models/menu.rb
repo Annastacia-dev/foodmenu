@@ -28,7 +28,7 @@ class Menu < ApplicationRecord
   has_paper_trail
 
   # --concerns--
-  include SluggableModelConcern
+  include Sluggable
   friendly_slug_scope to_slug: :menu_name
 
   # --associations--

@@ -10,6 +10,7 @@
 #  name            :string           not null
 #  phone           :string           not null
 #  restaurant_type :integer          default("single_restaurant(one restaurant, one location)")
+#  sample          :boolean          default(FALSE)
 #  slug            :string           not null
 #  status          :integer          default("active")
 #  created_at      :datetime         not null

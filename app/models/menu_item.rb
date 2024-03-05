@@ -36,7 +36,7 @@ class MenuItem < ApplicationRecord
   before_save :downcase_name
 
   # --concerns--
-  include SluggableModelConcern
+  include Sluggable
   friendly_slug_scope to_slug: :name
 
   # --associations--

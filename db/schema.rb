@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_05_151959) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_05_173747) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -59,6 +59,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_151959) do
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_layouts_on_slug", unique: true
   end
 
   create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -140,6 +142,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_151959) do
     t.datetime "confirmed_at"
     t.string "currency", default: "KES"
     t.uuid "layout_id"
+    t.boolean "sample", default: false
     t.index ["layout_id"], name: "index_restaurants_on_layout_id"
   end
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+     <%= @restaurant.name %>
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag(@restaurant&.logo&.attached? ? url_for(@restaurant.logo) : 'favicon.ico') %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <script src="https://kit.fontawesome.com/bfa19ffe9b.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body class='bg-gray-900'>
+    <main class="">
+      <%= render 'layouts/moderna/navbar' %>
+      <%= yield %>
+    </main>
+  </body>
+</html>

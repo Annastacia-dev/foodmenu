@@ -44,7 +44,7 @@ class User < ApplicationRecord
          :lockable, :trackable
   has_paper_trail
 
-  include SluggableModelConcern
+  include Sluggable
   friendly_slug_scope to_slug: :name
 
   # --- associations ---

@@ -25,7 +25,7 @@ class MenuCategory < ApplicationRecord
   acts_as_tree order: 'name'
 
   # --concerns--
-  include SluggableModelConcern
+  include Sluggable
   friendly_slug_scope to_slug: :name
 
   # --associations--
