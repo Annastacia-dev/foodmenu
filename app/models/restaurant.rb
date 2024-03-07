@@ -34,11 +34,13 @@ class Restaurant < ApplicationRecord
   friendly_slug_scope to_slug: :name
 
   # --- associations ---
+  belongs_to :layout, optional: true
   has_many :users, dependent: :destroy
-  has_one_attached :logo
+  has_one_attached :logo, dependent: :destroy
   has_many :menus, dependent: :destroy
   has_many :sub_restaurants, dependent: :destroy
-  
+  has_many :menu_categories, through: :menus, dependent: :destroy
+  has_many :menu_items, through: :menu_categories, dependent: :destroy
 
   # --- callbacks ---
   before_save :downcase_email
@@ -66,6 +68,10 @@ class Restaurant < ApplicationRecord
 
   def group?
     restaurant_type == 'group_restaurant(multiple restaurants, multiple locations)'
+  end
+
+  def has_an_admin?
+    users.where(role: :admin).exists?
   end
 
   private

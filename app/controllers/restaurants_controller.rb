@@ -8,6 +8,12 @@ class RestaurantsController < ApplicationController
   end
 
   def show
+    @layout = @restaurant.layout
+    if @layout
+      render layout: "#{@layout.name}/index"
+    else
+      render layout: "default/index"
+    end
   end
 
   def create

@@ -3,9 +3,6 @@
     <h5 class="font-semibold">
       <%= greeting %>, <%= current_user.first_name %> (<%= current_user.role.humanize %>)
     </h5>
-    <%= link_to  current_user.restaurant, class: "text-blue-500 underline", title: "View your restaurant", target: "_blank" do %>
-      <i class="fa-solid fa-link underline"></i>
-      <%= current_user.restaurant.name %>
-    <% end %>
+    <%= link_to  'View your restaurant', "/#{current_user.restaurant.slug}", class: "text-blue-500 underline", title: "View your restaurant", target: "_blank" %>
   </div>
 </div>

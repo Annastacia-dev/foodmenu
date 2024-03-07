@@ -23,8 +23,10 @@ class MenuCategoriesController < ApplicationController
 
   def show
     if params[:search]
+      @menu_items = @menu_category.menu_items.where("name ILIKE ?", "%#{params[:search]}%").order(:name).paginate(page: params[:page], per_page: 10 )
      @subcategories = @menu_category.children.where("name ILIKE ?", "%#{params[:search]}%").order(:name).paginate(page: params[:page], per_page: 10 )
     else
+      @menu_items = @menu_category.menu_items.order(:name).paginate(page: params[:page], per_page: 10 )
       @subcategories = @menu_category.children.order(:name).paginate(page: params[:page], per_page: 10 )
     end
   end

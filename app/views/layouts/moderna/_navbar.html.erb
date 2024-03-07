@@ -1,0 +1,59 @@
+
+<nav class="bg-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+         <%= image_tag(@restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-8 h-8 object-cover") %>
+         <span class="text-white font-bold text-lg">
+            <%= @restaurant.name %>
+         </span>
+        </div>
+
+        <ul class="hidden md:flex space-x-4 z-10">
+            <li><a href="#" class="text-white hover:underline">Home</a></li>
+
+            <% @restaurant.menus.each do |menu| %>
+                <li data-controller="dropdown" class='relative'>
+                    <button data-action="click->dropdown#toggle" class="flex items-center gap-1 text-white hover:underline">
+                        <p class='flex items-center gap-2 capitalize'>
+                        <span class><%= menu.menu_name %></span>
+                        </p>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </button>
+
+                    <ul data-dropdown-target="menu" class="hidden text-white rounded-md mt-3 flex flex-col gap-3 absolute bg-gray-900 px-4 py-2 bg-gray-800 border w-60">
+                        <% menu.menu_categories.each_with_index do |category, index| %>
+                        <li class='text-center capitalize'>
+                         <%= link_to category.name, restaurant_menu_menu_category_path(@restaurant, menu, category), class: "hover:underline" %>
+                        </li>
+                        <% if index < menu.menu_categories.length - 1 %>
+                            <li class="border-b border-gray-700"></li>
+                        <% end %>
+                        <% end %>
+                    </ul>
+                </li>
+            <% end %>
+        </ul>
+
+        <ul></ul>
+
+        <div class="md:hidden">
+            <button class="text-white focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); document.getElementById('menu-closed').classList.toggle('hidden'); document.getElementById('menu-open').classList.toggle('hidden')">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="menu-closed">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+                <svg class="h-6 w-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="menu-open">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<div class="bg-gray-800 p-4 hidden" id='mobile-menu'>
+    <ul class="flex flex-col space-y-4">
+        <li><a href="#" class="text-white hover:underline">Home</a></li>
+        <li><a href="#" class="text-white hover:underline">About</a></li>
+        <li><a href="#" class="text-white hover:underline">Services</a></li>
+        <li><a href="#" class="text-white hover:underline">Contact</a></li>
+    </ul>
+</div>

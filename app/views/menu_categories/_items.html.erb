@@ -1,0 +1,52 @@
+<% unless @menu_items.empty? %>
+  <div class='sm:p-5 p-2 overflow-x-auto'>
+    <table class="w-full border-separate border-spacing-x-0 border-spacing-y-2 text-xs">
+      <thead class='bg-gray-800'>
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            #
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            Image
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            Name
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody class='bg-white divide-y divide-gray-200 relative'>
+        <% @menu_items.each_with_index do |item, index| %>
+          <tr class='relative'>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <%= index + 1 %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <%= image_tag item.images.first.url, class: "h-10 w-10 rounded" if item.images.present? %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <%= link_to item.name, restaurant_menu_menu_category_menu_item_path(@restaurant, @menu, item.menu_category, item), class: "font-semibold hover:underline hover:text-blue-400" %>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-10">
+                <%= link_to edit_restaurant_menu_menu_category_menu_item_path(@restaurant, @menu, item.menu_category, item), class: "text-blue-500 hover:bg-blue-500 hover:text-white p-1" do %>
+                  <i class="far fa-edit"></i>
+                  <span>Edit</span>
+                <% end %>
+                <%= render 'components/popconfirm', button_text: 'Delete', title: "Delete #{item.name}", button_class: 'text-red-500 hover:bg-red-500 hover:text-white p-1', button_icon: 'fas fa-trash-alt', message: "Are you sure you want to delete #{item.name}?<br />This action is permanent and cannot be undone.", path: restaurant_menu_menu_category_menu_item_path(@restaurant, @menu, item.menu_category, item), method: :delete, icon: 'fa-solid fa-circle-question', confirm_button_class: 'bg-red-500 text-white py-2 px-4 mr-2 rounded' %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class='flex flex-col items-center justify-center h-96'>
+    <h4 class='text-2xl font-bold mb-5'>You have no menu_items yet</h4>
+  </div>
+<% end %>
+
+<%= render 'components/pagination', records: @menu_items %>
