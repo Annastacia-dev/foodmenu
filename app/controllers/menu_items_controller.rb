@@ -83,7 +83,7 @@ class MenuItemsController < ApplicationController
   end
 
   def set_menu_category
-    @menu_category = @menu.menu_categories.friendly.find(params[:menu_category_id])
+    @menu_category = @menu.menu_categories.friendly.find_by(id: params[:menu_category_id]) || MenuCategory.friendly.find_by(slug: params[:menu_category_id])
   end
 
   def set_menu_item

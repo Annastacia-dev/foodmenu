@@ -3,7 +3,7 @@
   { text: 'Menus', path: restaurant_menus_path(@restaurant)},
   { text: @menu.name, path: restaurant_menu_path(@restaurant, @menu)},
   { text: 'Categories', path: restaurant_menu_path(@restaurant, @menu, tab: 'categories')},
-  (@menu_category.parent.present? ? { text: @menu_category.parent.name, path: restaurant_menu_category_path(@restaurant, @menu, @menu_category.parent)} : nil),
+  (@menu_category.parent.present? ? { text: @menu_category.parent.name, path: restaurant_menu_menu_category_path(@restaurant, @menu, @menu_category.parent)} : nil),
   { text: @menu_category.name, path: restaurant_menu_menu_category_path(@restaurant, @menu, @menu_category) }
 ].compact } %>
 

@@ -1,5 +1,5 @@
 class LayoutsController < ApplicationController
-  before_action :authenticate_super_admin!
+  before_action :authenticate_super_admin!, except: %i[show]
   before_action :set_layout, only: %i[show edit update destroy]
   before_action :set_restaurant, only: %i[show]
 
