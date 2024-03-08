@@ -8,7 +8,8 @@ class LayoutsController < ApplicationController
   end
 
   def show
-    render layout: "layouts/#{@layout.name}/index"
+    @restaurant.update(layout_id: @layout.id)
+    redirect_to restaurant_show_path(@restaurant)
   end
 
   def new

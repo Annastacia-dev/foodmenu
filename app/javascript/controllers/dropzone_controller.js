@@ -9,7 +9,6 @@ export default class extends Controller {
   static targets = ["input"]
 
   connect() {
-    console.log("Dropzone connected")
     this.dropZone = createDropZone(this)
     this.hideFileInput()
     this.bindEvents()

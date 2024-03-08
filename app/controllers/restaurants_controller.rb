@@ -2,6 +2,8 @@ class RestaurantsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[show confirm confirm_email]
   before_action :find_restaurant, only: %i[show edit update destroy confirm confirm_email settings]
+  before_action :set_category, only: %i[show]
+  before_action :set_main_item, only: %i[show]
 
   def new
     @restaurant = Restaurant.new
@@ -75,5 +77,13 @@ class RestaurantsController < ApplicationController
 
   def find_restaurant
     @restaurant = Restaurant.friendly.find(params[:id])
+  end
+
+  def set_category
+    @category = @restaurant.menu_categories.find_by(slug: params[:category]) || @restaurant.menu_categories.order(:name).first
+  end
+
+  def set_main_item
+    @main_item = @category.menu_items.find_by(slug: params[:item]) || @category.menu_items.order(:name).reverse.first
   end
 end

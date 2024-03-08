@@ -17,8 +17,6 @@
   background-color: #f1f1f1;
 }
 
-
-
 @layer components {
   .sidebar-item.active {
     @apply border-l-4 border-gray-100 bg-gray-700;

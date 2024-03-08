@@ -15,7 +15,7 @@
   </div>
   <div class='mt-6 grid md:grid-cols-3 gap-4'>
    <% @layouts.each do |layout| %>
-    <div class='flex flex-col items-center p-4 border-b border-gray-200 bg-white rounded shadow gap-5 hover:scale-105 transition duration-500 cursor-pointer' onclick="window.location.href='<%= layout_path(layout) %>'">
+    <div class='flex flex-col items-center p-4 border-b border-gray-200 bg-white rounded shadow gap-5 hover:scale-105 transition duration-500 cursor-pointer'>
       <div class='flex flex-col items-center gap-4'>
         <%= image_tag(layout.image, alt: "layout", class: "h-64 w-96 object-cover") %>
         <h3 class='font-semibold text-gray-900 uppercase'><%= layout.name %></h3>

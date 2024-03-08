@@ -1,0 +1,21 @@
+<% if category.children.present? %>
+  <% category.children.each do |child| %>
+    <% unless child.menu_items.blank? %>
+      <h5 class="text-xl font-semibold mt-4 capitalize underline pb-20">
+        <%= child.name %>
+      </h5>
+      <div class="grid grid-cols-3 gap-2 text-sm">
+        <% child.menu_items.order(:name).reverse.each do |item| %>
+          <%= link_to restaurant_show_path(category: child, item: item.slug), class: "flex flex-col justify-start items-center relative rounded px-4 py-2 relative gap-2 hover:bg-gray-100/80 #{"glass" if @main_item == item}" do %>
+            <div class='rounded-full p-3 flex justify-center items-center'>
+              <%= image_tag url_for(item.images.first), class: "w-16 h-16 object-cover rounded-full" %>
+            </div>
+            <h2 class="font-semibold capitalize text-center">
+              <%= item.name %>
+            </h2>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

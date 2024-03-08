@@ -4,7 +4,7 @@
         <div class="flex items-center space-x-4">
          <%= image_tag(@restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-8 h-8 object-cover") %>
          <span class="text-white font-bold text-lg">
-            <%= @restaurant.name %>
+            <%=link_to @restaurant.name, restaurant_show_path %>
          </span>
         </div>
 
@@ -22,12 +22,14 @@
 
                     <ul data-dropdown-target="menu" class="hidden text-white rounded-md mt-3 flex flex-col gap-3 absolute bg-gray-900 px-4 py-2 bg-gray-800 border w-60">
                         <% menu.menu_categories.each_with_index do |category, index| %>
-                        <li class='text-center capitalize'>
-                         <%= link_to category.name, restaurant_menu_menu_category_path(@restaurant, menu, category), class: "hover:underline" %>
-                        </li>
-                        <% if index < menu.menu_categories.length - 1 %>
-                            <li class="border-b border-gray-700"></li>
-                        <% end %>
+                            <li class='text-center capitalize'data-action="click->category#show">
+                            <p class="hover:underline">
+                            <%= link_to category.name, restaurant_show_path(category: category.slug) %>
+                            </p>
+                            </li>
+                            <% if index < menu.menu_categories.length - 1 %>
+                                <li class="border-b border-gray-700"></li>
+                            <% end %>
                         <% end %>
                     </ul>
                 </li>
@@ -64,7 +66,7 @@
                 <ul data-dropdown-target="menu" class="hidden text-white rounded-md mt-3 flex flex-col gap-3 absolute bg-gray-900 px-4 py-2 bg-gray-800 border w-60 z-10">
                     <% menu.menu_categories.each_with_index do |category, index| %>
                     <li class='text-center capitalize'>
-                     <%= link_to category.name, restaurant_menu_menu_category_path(@restaurant, menu, category), class: "hover:underline" %>
+                     <%= link_to category.name, restaurant_show_path(category: category.slug) %>
                     </li>
                     <% if index < menu.menu_categories.length - 1 %>
                         <li class="border-b border-gray-700"></li>
@@ -75,3 +77,5 @@
         <% end %>
     </ul>
 </div>
+
+<%= render 'layouts/moderna/header' %>

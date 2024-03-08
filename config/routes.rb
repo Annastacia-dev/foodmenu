@@ -26,5 +26,5 @@ Rails.application.routes.draw do
   end
   resources :layouts
 
-  get '/:id', to: 'restaurants#show'
+  get '/:id', to: 'restaurants#show', as: :restaurant_show
 end

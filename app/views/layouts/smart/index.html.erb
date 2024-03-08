@@ -12,11 +12,17 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <script src="https://kit.fontawesome.com/bfa19ffe9b.js" crossorigin="anonymous"></script>
+    <style>
+    .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
+    </style>
   </head>
 
-  <body class='bg-gray-900 font-quicksand text-white'>
-    <main class="">
-      <%= render 'layouts/moderna/navbar' %>
-    </main>
+  <body class="bg-gray-200 flex justify-center items-center py-10">
+    <div class="glass sm:p-8 sm:w-3/4 min-h-3/4 rounded-md">
+      <%= render 'layouts/smart/navbar' %>
+    </div>
   </body>
 </html>
