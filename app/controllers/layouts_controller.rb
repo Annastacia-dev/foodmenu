@@ -1,7 +1,6 @@
 class LayoutsController < ApplicationController
-  before_action :authenticate_super_admin!, except: %i[show]
+  before_action :authenticate_super_admin!, except: %i[index show]
   before_action :set_layout, only: %i[show edit update destroy]
-  before_action :set_restaurant, only: %i[show]
 
   def index
     @layouts = Layout.all
@@ -57,15 +56,5 @@ class LayoutsController < ApplicationController
 
   def layout_params
     params.require(:layout).permit(:name, :description, :image)
-  end
-
-  def set_restaurant
-    if params[:restaurant_id]
-      @restaurant = Restaurant.friendly.find(params[:restaurant_id])
-    elsif params[:sub_restaurant_id]
-      @restaurant = SubRestaurant.friendly.find(params[:sub_restaurant_id])
-    else
-      @restaurant = Restaurant.find_by(sample: true)
-    end
   end
 end
