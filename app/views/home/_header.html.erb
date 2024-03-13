@@ -1,47 +1,23 @@
-<header class="grid sm:grid-cols-3 grid-cols-1 gap-4 sm:overflow-hidden"
+<header class="flex flex-col sm:gap-28 gap-10  sm:overflow-hidden"
 >
-  <div class="sm:col-span-2 col-span-1 px-10 mt-10">
-    <h1 class="sm:text-6xl text-3xl font-bold  leading-[2rem]"> Simplifying menu management for restaurants</h1>
-    <p class="text-sm mt-6 leading-7 sm:w-8/12">
-     Tired of the hassle of re-printing your menu every time you make a change?
-     Having to tell your customer that the price on the menu is not the current price?
-     Managing your restaurant's menu on multiple platforms?
-    </p>
-    <p class="text-sm mt-6 leading-7 sm:w-8/12">
-     With multiple themes to choose from, you can customize your menu to fit your restaurant's brand.
-    </p>
-    <div class="mt-8">
-      <button class="bg-primary text-offwhite px-4 py-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer
-      ">
-      <%= link_to "Get Started ->", new_restaurant_path, class: "text-offwhite" %>
+  <div class="grid sm:grid-cols-3 grid-cols-1 px-10 py-1">
+    <div class='col-span-1'></div>
+    <div class='col-span-2 flex flex-col gap-4 justify-end sm:w-10/12 relative sm:text-right text-left'>
+      <h1 class="sm:text-5xl text-2xl font-bold tracking-wide"> Simplifying menu management</h1>
+      <p class="sm:text-base text-sm leading-7">
+        Menufy is the solution to all your menu management problems. Easily manage your restaurant's menu from one place.
+      </p>
+      <%= link_to "Get Started ->", new_restaurant_path, class: "text-gray-900 font-semibold underline uppercase" %>
     </div>
   </div>
 
-  <div class="col-span-1 bg-primary sm:px-10 py-2 relative">
-     <div class='relative mt-2'>
-      <i class="fa-solid fa-search absolute top-3 right-3 text-offwhite"></i>
-      <input type="text" class="sm:w-full w-3/4 sm:ml-0 ml-10 h-10 bg-transparent border-white rounded-full placeholder:text-white px-4 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent text-offwhite
-      " placeholder="Search">
-     </div>
-    <div class="absolute sm:-left-40 left-3 sm:top-28 top-20 bg-primary text-offwhite rounded-lg shadow-xl flex flex-col sm:h-80 h-60 w-60 justify-center items-center px-6 sm:z-10 font-primary"
-    >
-        <%= image_tag "https://i.pinimg.com/236x/5c/45/64/5c4564e10cea85aa2c89bc10b268418a.jpg", alt: "Food Menu", class: "sm:w-40 w-20 sm:h-40 h-20 rounded object-cover" %>
-        <p class="mt-4 font-medium text-xl">
-        Chocolate Pancakes
-        </p>
-        <p class="mt-2 text-sm">
-          $8.99
-        </p>
-        <p class="mt-2 text-xs flex gap-1 font-light font-sans">
-         Maple syrup, chocolate chips, whipped cream, and strawberries
-        </p>
-    </div>
+  <div class="flex sm:flex-row flex-col px-10 gap-8 mb-6">
 
-    <div class="absolute sm:left-12 left-20 sm:top-20 top-[19rem] bg-offwhite shadow-xl rounded flex flex-col sm:h-80 h-52 sm:w-96 w-52 justify-center items-center px-6 font-playfair sm:z-0 z-10">
-      <p class="sm:text-2xl text-sm font-bold uppercase mb-2">
+    <a href="/layouts/moderna" class="bg-gray-900 text-white border border-white rounded-md flex flex-col justify-center items-center px-6 py-5 font-playfair backdrop-filter backdrop-blur-10 sm:w-96 relative hover:scale-105">
+      <%= image_tag "https://i.pinimg.com/236x/01/a8/b2/01a8b20022d3ac8d1c0ad960e7b67466.jpg", alt: "Food Menu", class: "sm:w-44 w-20 sm:h-44 h-20 rounded-full object-cover sm:absolute sm:-top-20 hover:animate-spin" %>
+      <p class="sm:text-2xl text-sm font-bold uppercase mb-2 sm:mt-24 mt-4">
         Bogof Mondays
       </p>
-      <%= image_tag "https://i.pinimg.com/236x/01/a8/b2/01a8b20022d3ac8d1c0ad960e7b67466.jpg", alt: "Food Menu", class: "sm:w-40 w-20 sm:h-40 h-20 rounded-full object-cover" %>
       <p class="mt-4 font-medium sm:text-xl">
         Classic Beef Burger
       </p>
@@ -49,29 +25,38 @@
         $12.99
       </p>
       <p class="mt-2 text-xs flex gap-1 text-yellow-500">
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
+        Juicy | Tasty | Delicious
       </p>
-    </div>
-  </div>
+    </a>
 
-  <div class="bg-black sm:-mt-40 mt-[26rem] sm:ml-[58rem] ml-2 shadow-2xl rounded flex sm:h-80 h-60 sm:w-96 w-60 items-center px-6 font-amatic z-10 gap-4 text-white"
-  >
-    <%= image_tag "https://i.pinimg.com/236x/16/6b/1b/166b1b2715c3372239afd74b3206e16a.jpg", alt: "Food Menu", class: "w-40 h-40 rounded object-cover" %>
-    <div class="flex flex-col gap-4">
-      <p class="font-medium text-2xl">
-        Lemon fizz
+    <a href="/layouts/smart" class="bg-gray-300/15 border border-white rounded-md flex  justify-center items-center px-6 py-5 font-playfair backdrop-filter backdrop-blur-10 sm:w-96 scale-110 hover:bg-gray-100/50">
+      <div class="flex flex-col gap-4">
+        <%= image_tag "https://i.pinimg.com/236x/01/a8/b2/01a8b20022d3ac8d1c0ad960e7b67466.jpg", alt: "Food Menu", class: "sm:w-32 w-20 sm:h-32 h-20 rounded-full object-cover" %>
+        <p class="mt-4 font-medium sm:text-md">
+          Classic Beef Burger
+        </p>
+      </div>
+      <div>
+       'hello'
+      </div>
+    </a>
+
+    <a href="/layouts/moderna" class="bg-gray-900 text-white border border-white rounded-md flex flex-col justify-center items-center px-6 py-5 font-playfair backdrop-filter backdrop-blur-10 sm:w-96 relative hover:scale-105">
+    <%= image_tag "https://i.pinimg.com/236x/01/a8/b2/01a8b20022d3ac8d1c0ad960e7b67466.jpg", alt: "Food Menu", class: "sm:w-44 w-20 sm:h-44 h-20 rounded-full object-cover sm:absolute sm:-top-20 hover:animate-spin" %>
+      <p class="sm:text-2xl text-sm font-bold uppercase mb-2 sm:mt-24 mt-4">
+        Bogof Mondays
       </p>
-      <p class="">
-        $5.89
+      <p class="mt-4 font-medium sm:text-xl">
+        Classic Beef Burger
       </p>
-      <p class="text-xs flex gap-1 font-light font-sans">
-        Happy hour special from 3pm-6pm
+      <p class="mt-2 text-sm">
+        $12.99
       </p>
-    </div>
+      <p class="mt-2 text-xs flex gap-1 text-yellow-500">
+        Juicy | Tasty | Delicious
+      </p>
+    </a>
+
   </div>
 
 </header>

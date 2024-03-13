@@ -18,7 +18,7 @@
    <% unless skip_navbar %>
       <%= user_signed_in? ? render('layouts/sidebar') : render('layouts/navbar') %>
     <% end %>
-    <main class="<%= user_signed_in? && !skip_navbar ? 'relative lg:pl-56 pt-4 ' : 'pt-16' %>">
+    <main class="<%= user_signed_in? && !skip_navbar ? 'relative lg:pl-56 pt-4 ' : 'sm:pt-16 pt-4' %>">
       <% unless flash.empty? %>
         <div id="flash" class="text-white sm:pl-20 absolute top-0 right-0 z-50 w-[50%]shadow-lg rounded">
           <% flash.keys.each do |k| %>

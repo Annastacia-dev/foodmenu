@@ -7,8 +7,14 @@ class LayoutsController < ApplicationController
   end
 
   def show
-    @restaurant.update(layout_id: @layout.id)
-    redirect_to restaurant_show_path(@restaurant)
+    if @restaurant
+      @restaurant.update(layout_id: @layout.id)
+      redirect_to restaurant_show_path(@restaurant)
+    else
+      restaurant = Restaurant.find_by(sample: true)
+      restaurant.update(layout_id: @layout.id)
+      redirect_to restaurant_show_path(restaurant)
+    end
   end
 
   def new
