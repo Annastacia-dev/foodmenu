@@ -5,7 +5,11 @@
         </div>
 
         <div class="flex items-center space-x-2">
-         <%= image_tag(@restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-8 h-8 object-cover") %>
+         <% if @restaurant.logo.attached? %>
+            <%= image_tag(@restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-8 h-8 object-cover") %>
+        <% else %>
+            <div class='w-8 h-8 bg-gray-200 rounded-full'></div>
+        <% end %>
          <span class="font-semibold uppercase">
             <%=link_to @restaurant.name, restaurant_show_path %>
          </span>

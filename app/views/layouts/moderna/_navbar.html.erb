@@ -2,7 +2,11 @@
 <nav class="bg-gray-800 p-4">
     <div class="container mx-auto flex justify-between items-center">
         <div class="flex items-center space-x-4">
+         <% if @restaurant.logo.attached? %>
          <%= image_tag(@restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-8 h-8 object-cover") %>
+         <% else %>
+          <div class='w-8 h-8 bg-gray-200 rounded-full'></div>
+         <% end %>
          <span class="text-white font-bold text-lg">
             <%=link_to @restaurant.name, restaurant_show_path %>
          </span>
