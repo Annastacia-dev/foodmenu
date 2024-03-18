@@ -48,7 +48,7 @@ class MenuItem < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :description, presence: true
-  validates :images, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..5.megabytes }
+  validates :images, presence: true
 
   # --scopes--
 
