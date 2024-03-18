@@ -1,6 +1,6 @@
 class MenusController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :set_restaurant
   before_action :set_sub_restaurant
   before_action :set_menu, only: [:show, :edit, :update, :destroy]

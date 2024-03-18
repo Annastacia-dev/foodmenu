@@ -1,11 +1,11 @@
-<nav class="w-full bg-gray-50 relative">
-  <div class="container mx-auto">
+<nav class="w-full bg-gray-50">
+  <div class="container mx-auto border-b">
     <div class="flex justify-between items-center py-4 px-2">
       <%= link_to root_path, class: 'flex items-center justify-center gap-2' do %>
-        <%= image_tag "menu.png", alt: "menufy", class: "sm:h-8 h-4 sm:w-8 w-4" %>
+        <%= image_tag "logo.png", alt: "menufy", class: "sm:h-8 h-4 sm:w-8 w-4" %>
       <% end %>
       <%= link_to root_path do %>
-        <h1 class="sm:text-2xl text-base text-gray-900 font-primary">menufy</h1>
+        <h1 class="sm:text-2xl text-base text-gray-900 font-bold">menufy</h1>
       <% end %>
 
       <ul class="md:flex hidden gap-3 p-2 font-normal sm:text-sm text-xs uppercase">
@@ -35,8 +35,6 @@
 
     </div>
   </div>
-
-  <div class='h-[700px] w-[700px] bg-primary/10 rounded-full absolute -top-60 left-[20%] sm:block hidden'></div>
 </nav>
 
 <%= render 'layouts/mobile_navbar' %>
