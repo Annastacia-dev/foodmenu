@@ -8,7 +8,7 @@
 <div class='p-10'>
   <div class='flex justify-between items-center gap-4'>
     <h1 class='font-semibold uppercase'>Themes(<%= @layouts.count %>) </h1>
-    <% if current_user&.admin? %>
+    <% if current_user&.super_admin? %>
       <%= link_to new_layout_path, class: "btn btn-primary capitalize" do %>
         <i class="fa-solid fa-plus"></i>
         <span>Add new theme</span>
@@ -22,7 +22,7 @@
         <%= image_tag(layout.image, alt: "layout", class: "h-64 w-96 object-cover") %>
         <h3 class='font-semibold text-gray-900 uppercase'><%= layout.name %></h3>
       </div>
-      <% if current_user&.admin? %>
+      <% if current_user&.super_admin? %>
         <div class='flex items-center gap-5 text-sm'>
           <%= link_to layout, class: "text-blue-500 hover:underline", title: "View layout", target: "_blank" do %>
             <i class="fa-solid fa-globe"></i>
