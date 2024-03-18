@@ -84,6 +84,6 @@ class RestaurantsController < ApplicationController
   end
 
   def set_main_item
-    @main_item = @category&.menu_items&.find_by(slug: params[:item]) || @category.menu_items.order(:name).reverse.first || @category.children.flat_map(&:menu_items).find { |item| item.slug == params[:item] }
+    @main_item = @category&.menu_items&.find_by(slug: params[:item]) || @category&.menu_items.order(:name).reverse.first || @category&.children.flat_map(&:menu_items).find { |item| item.slug == params[:item] }
   end
 end
