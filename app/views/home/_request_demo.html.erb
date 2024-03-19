@@ -18,7 +18,7 @@
 
     <div class="flex flex-col gap-8 sm:border-r">
       <% steps.each_with_index do |step, index| %>
-        <div class="flex gap-6 justify-center items-center">
+        <div class="flex gap-6 items-center">
           <div class="w-12 h-12 sm:bg-black rounded-full flex justify-center items-center">
             <p class="sm:text-white text-gray-900 font-semibold">
               <%= index + 1 %>
@@ -52,7 +52,7 @@
         <%= f.label :date, class: "text-gray-900 text-sm" %>
         <%= f.datetime_field :date, class: "border-t-0 border-l-0 border-r-0 border-b-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4" %>
       </div>
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 sm:col-span-2">
         <%= f.label :message, class: "text-gray-900 text-sm" %>
         <%= f.text_area :message, class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4" %>
       </div>
