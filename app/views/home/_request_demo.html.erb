@@ -2,7 +2,7 @@
   "First, we'll schedule a quick call to learn more about your restaurant",
   "We'll discuss your menu and how we can help digitize it.",
   "Next, we'll walk you through the platform ",
-  "Finally, you select the best plan for your business and we'll get you started."
+  "Finally,  select the best plan for your business to get you started."
 ] %>
 
 
@@ -16,15 +16,15 @@
 
   <div class="grid sm:grid-cols-2 grid-cols-1 gap-8 mt-12">
 
-    <div class="flex flex-col gap-8 border-r">
+    <div class="flex flex-col gap-8 sm:border-r">
       <% steps.each_with_index do |step, index| %>
-        <div class="flex gap-6 items-center">
-          <div class="w-12 h-12 bg-black rounded-full flex justify-center items-center">
-            <p class="text-white font-semibold">
+        <div class="flex gap-6 justify-center items-center">
+          <div class="w-12 h-12 sm:bg-black rounded-full flex justify-center items-center">
+            <p class="sm:text-white text-gray-900 font-semibold">
               <%= index + 1 %>
             </p>
           </div>
-          <p class="text-gray-900 font-semibold">
+          <p class="text-gray-900 font-semibold sm:text-base text-sm">
             <%= step %>
           </p>
         </div>
@@ -57,7 +57,7 @@
         <%= f.text_area :message, class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4" %>
       </div>
       <div class="flex flex-col gap-4">
-        <%= f.submit "Request Demo", class: "bg-gray-900 text-white font-semibold p-2 rounded hover:scale-105 transition duration-500" %>
+        <%= f.submit "Request Demo", class: "bg-black text-white font-semibold p-2 rounded hover:scale-105 transition duration-500" %>
       </div>
     <% end %>
   </div>
