@@ -1,0 +1,105 @@
+<% categories = [
+  {
+    title: 'Burgers',
+    image: 'https://img.icons8.com/3d-fluency/64/hamburger.png',
+    alt: "hamburger"
+  },
+  {
+    title: 'Pizzas',
+    image: 'https://img.icons8.com/3d-fluency/64/salami-pizza.png',
+    alt: "pizza"
+  },
+  {
+    title: 'Noodles',
+    image: "https://img.icons8.com/3d-fluency/64/chinese-noodle.png",
+    alt: "chinese-noodle"
+  },
+  {
+    title: 'Cakes',
+    image: "https://img.icons8.com/3d-fluency/64/cherry-cheesecake.png",
+    alt: "cherry-cheesecake"
+  },
+  {
+    title: 'Cocktails',
+    image: "https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-cocktail-digital-nomading-relocation-flaticons-flat-flat-icons.png",
+    alt: "cocktails"
+  }
+
+
+] %>
+
+<% dishes = [
+  {
+    title: 'Chicken Biryani',
+    image: 'food.png',
+    alt: "chicken-biryani",
+    rating: 4.5,
+    views: 100
+  },
+  {
+    title: 'Chicken Wings',
+    image: 'food-3.png',
+    alt: "honey-chicken-wings",
+    rating: 5.0,
+    views: 150
+  }
+] %>
+
+
+<div class="flex flex-col gap-4 mt-6  sm:px-32 px-20">
+  <div class="flex items-center">
+    <input type="text" class="sm:w-3/4 bg-transparent border border-gray-500 rounded-full focus:outline-none focus:border-gray-300 px-2 py-1 text-xs" placeholder="Search">
+    <button class="bg-gray-500 text-white font-semibold rounded-full px-4 py-1 transition duration-500 sm:-ml-10 -ml-10">
+    <i class="fa-solid fa-search"></i>
+    </button>
+  </div>
+
+  <div class="flex flex-col gap-3 mt-2">
+    <h4 class="text-gray-100 font-semibold sm:text-sm text-xs">Categories</h4>
+    <div class="flex sm:gap-3 gap-1 ">
+     <% categories.each do |category| %>
+      <div class="flex flex-col gap-2 justify-center items-center">
+        <div class="flex justify-center sm:h-10 sm:w-10 h-8 w-8 items-center glass rounded-full">
+          <%= image_tag(category[:image], alt: category[:alt], class: "sm:h-5 h-4 sm:w-5 w-4 object-cover hover:animate-spin") %>
+        </div>
+        <p class="text-gray-100 sm:text-xs text-[8px] font-semibold capitalize"><%= category[:title] %></p>
+      </div>
+
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-2 mt-2">
+    <h4 class="text-gray-100 font-semibold sm:text-sm text-xs">Most viewed this week</h4>
+    <p class="text-xs">
+      <span class="font-bold text-primary">
+        <i class="fa-solid fa-chart-line mr-2"></i>
+        100+
+      </span>
+      new visits
+    </p>
+    <div class="flex sm:gap-3 gap-4 sm:mt-2">
+      <% dishes.each_with_index do |dish,index| %>
+        <div class="flex flex-col items-center <%= index == 1 ? 'scale-105': '' %>">
+          <%= image_tag(dish[:image], alt: dish[:alt], class: "sm:h-16 h-16 sm:w-16 w-16 object-cover z-10") %>
+          <div class="flex flex-col gap-2 justify-center items-center glass p-2 rounded-lg sm:-mt-6 -mt-8 sm:w-40 w-28 <%= index == 1 ? 'border border-gray-400': '' %>">
+            <div class="flex flex-col gap-1 mt-6">
+              <p class="text-gray-100 text-xs font-semibold capitalize"><%= dish[:title] %></p>
+            </div>
+            <div class="flex gap-10">
+              <p class="sm:text-xs text-[8px] text-gray-100 text-center font-bold">
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <%= dish[:rating] %>
+              </p>
+              <p class="sm:text-xs text-[8px] text-gray-100 text-center font-bold ">
+                <i class="fa-solid fa-eye"></i>
+                <%= dish[:views] %>
+              </p>
+          </div>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

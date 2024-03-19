@@ -1,11 +1,7 @@
-<div class="flex flex-col gap-3 text-xs text-white">
-  <div class="bg-black h-96 rounded">
-    <div class="flex flex-col items-center justify-start h-96 w-28 rounded glass px-2 py-5">
-      <%= image_tag('logo-white.png', alt: "logo", class: "h-8 w-8 object-cover") %>
-      <p class='text-white text-xs font-semibold mt-1'>Menufy</p>
-
-       <%= render 'demo_sidebar' %>
-
-    </div>
+<div class="flex flex-col gap-3 text-xs text-white relative sm:overflow-visible overflow-hidden">
+  <div class="bg-black h-96 rounded-lg">
+    <%= render 'demo_left_sidebar' %>
+    <%= render 'demo_content' %>
+    <%= render 'demo_right_sidebar' %>
   </div>
 </div>
