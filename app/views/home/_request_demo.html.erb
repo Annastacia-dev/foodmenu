@@ -1,0 +1,65 @@
+<% steps = [
+  "First, we'll schedule a quick call to learn more about your restaurant",
+  "We'll discuss your menu and how we can help digitize it.",
+  "Next, we'll walk you through the platform ",
+  "Finally, you select the best plan for your business and we'll get you started."
+] %>
+
+
+<div id="demo" class="flex flex-col px-6 py-6 mt-12">
+  <div class="flex gap-2  items-center">
+    <hr class='w-1/6 border-t-2 border-gray-900'>
+    <a href="#demo" class="sm:text-4xl text-2xl font-bold text-right hover:underline">
+     schedule a demo.
+    </a>
+  </div>
+
+  <div class="grid sm:grid-cols-2 grid-cols-1 gap-8 mt-12">
+
+    <div class="flex flex-col gap-8 border-r">
+      <% steps.each_with_index do |step, index| %>
+        <div class="flex gap-6 items-center">
+          <div class="w-12 h-12 bg-black rounded-full flex justify-center items-center">
+            <p class="text-white font-semibold">
+              <%= index + 1 %>
+            </p>
+          </div>
+          <p class="text-gray-900 font-semibold">
+            <%= step %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form_with url: '#', method: :post, class: "grid sm:grid-cols-2 grid-cols-1 gap-4" do |f| %>
+      <div class="flex flex-col gap-4">
+        <%= f.label :name, class: "text-gray-900 text-sm" %>
+        <%= f.text_field :name, class: "border-t-0 border-l-0 border-r-0 border-b-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4" %>
+      </div>
+      <div class="flex flex-col gap-4">
+        <%= f.label :email, class: "text-gray-900 text-sm" %>
+        <%= f.email_field :email, class: "border-t-0 border-l-0 border-r-0 border-b-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4" %>
+      </div>
+      <div class="flex flex-col gap-4">
+        <%= f.label :phone, class: "text-gray-900 text-sm" %>
+        <%= f.text_field :phone, class: "border-t-0 border-l-0 border-r-0 border-b-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4" %>
+      </div>
+      <div class="flex flex-col gap-4">
+        <%= f.label :restaurant, class: "text-gray-900 text-sm" %>
+        <%= f.text_field :restaurant, class: "border-t-0 border-l-0 border-r-0 border-b-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4" %>
+      </div>
+      <div class="flex flex-col gap-4">
+        <%= f.label :date, class: "text-gray-900 text-sm" %>
+        <%= f.datetime_field :date, class: "border-t-0 border-l-0 border-r-0 border-b-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4" %>
+      </div>
+      <div class="flex flex-col gap-4">
+        <%= f.label :message, class: "text-gray-900 text-sm" %>
+        <%= f.text_area :message, class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4" %>
+      </div>
+      <div class="flex flex-col gap-4">
+        <%= f.submit "Request Demo", class: "bg-gray-900 text-white font-semibold p-2 rounded hover:scale-105 transition duration-500" %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
