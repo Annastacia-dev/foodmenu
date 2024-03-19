@@ -17,7 +17,13 @@
    <% @layouts.each do |layout| %>
     <div class='flex flex-col items-center p-4 border-b border-gray-200 bg-white rounded shadow gap-5 hover:scale-105 transition duration-500 cursor-pointer'>
       <div class='flex flex-col items-center gap-4'>
-        <%= image_tag(layout.image, alt: "layout", class: "h-64 w-96 object-cover") %>
+        <% if layout.image.attached? %>
+          <%= image_tag(layout.image, alt: "layout", class: "h-64 w-96 object-cover") %>
+        <% else %>
+         <div class='h-64 w-96 bg-gray-200 flex justify-center items-center'>
+            <i class="fa-solid fa-image text-6xl text-gray-400"></i>
+          </div>
+        <% end %>
         <h3 class='font-semibold text-gray-900 uppercase'><%= layout.name %></h3>
       </div>
       <% if current_user&.super_admin? %>
