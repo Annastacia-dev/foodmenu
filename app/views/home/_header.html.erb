@@ -14,10 +14,14 @@
       <%= render "home/demo_dashboard" %>
 
       <div class='flex flex-col gap-4 mt-6'>
-        <h1 class="sm:text-5xl text-3xl capitalize font-bold"> Simplifying menu management</h1>
+        <div class="flex gap-2  items-center">
+          <a href="#solutions" class="sm:text-4xl text-2xl font-bold text-right hover:underline">simplifying menu management.</a>
+          <hr class='w-1/6 border-t-2 border-gray-900'>
+        </div>
 
-        <p class="sm:text-base text-sm leading-7">
-          Menufy is the solution to all your menu management problems. Easily manage your restaurant's menu from one place.
+        <p class="sm:text-sm leading-7 w-110/12">
+           Easily manage your restaurant's menu from one place with our simple and intuitive menu management system. Update your menu items, prices, and descriptions in real-time. Let your customers know what's new and what's hot.
+           Let strangers know what's good.
         </p>
 
         <%= link_to "Get Started ->", new_restaurant_path, class: "text-gray-900 font-semibold underline uppercase hover:scale-105" %>
@@ -36,11 +40,15 @@
             <div class='flex flex-col items-center gap-4'>
               <%= image_tag(layout.image, alt: "layout", class: "h-40 w-full object-cover") %>
               <h3 class='font-semibold text-gray-900 uppercase'><%= layout.name %></h3>
-              <p class='text-gray-500 text-sm'><%= layout.description.truncate(50) %>...</p>
+              <p class='text-gray-500 text-sm capitalize'><%= layout.description.truncate(50) %>...</p>
             </div>
           <% end %>
         <% end %>
       </div>
+      <div class="flex gap-3 justify-end items-center">
+        <a href="/layouts" class="sm:text-base text-sm font-semibold text-right underline">view more.</a>
+      </div>
+
     </div>
 
   </div>

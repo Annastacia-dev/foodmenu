@@ -1,5 +1,11 @@
 <div class='bg-black text-white py-5 px-10 mb-4 mt-6'>
-  <ul class='flex justify-around font-bold'>
+  <ul class='flex sm:justify-around justify-center gap-4 sm:text-base text-xs font-bold'>
+    <li>
+      <a href='#solutions' class='hover:underline'>
+        our solutions
+      </a>
+    </li>
+    <span>•</span>
     <li>
      <a href='#pricing' class='hover:underline'>
        pricing
@@ -11,20 +17,18 @@
        request demo
      </a>
     </li>
-    <span>•</span>
-    <li>
+    <span class="sm:block hidden">•</span>
+    <li class="sm:block hidden">
      <%= link_to layouts_path, class: "hover:underline" do %>
        themes
      <% end %>
     </li>
-    <span>•</span>
-    <li>
-      <a href='#pricing' class='hover:underline'>
+    <span class="sm:block hidden">•</span>
+    <li class="sm:block hidden">
+      <a href='#contacts' class='hover:underline'>
         contact
       </a>
     </li>
-
-    
   </ul>
 
 </div>

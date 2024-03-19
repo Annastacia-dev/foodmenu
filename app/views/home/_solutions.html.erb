@@ -1,0 +1,89 @@
+<div id="solutions" class="flex flex-col px-6 py-6">
+  <div class="flex gap-2  items-center">
+    <hr class='w-1/6 border-t-2 border-gray-900'>
+    <a href="#solutions" class="sm:text-4xl text-2xl font-bold text-right hover:underline">
+     how ?
+    </a>
+  </div>
+  <div class="grid sm:grid-cols-3 grid-cols-1 gap-8 mt-8 mb-4">
+    <div class="bg-gray-100 flex flex-col p-4 mt-5  items-center relative h-full">
+      <button class="bg-gray-200 font-semibold p-2 rounded hover:scale-105 hover:bg-gray-900 hover:text-white transition duration-500 w-3/4">
+          Create Menu
+      </button>
+      <%= image_tag("cursor.png", alt: "create menu", class: "w-10 h-10 object-cover absolute right-12 top-8") %>
+      <h3 class="text-gray-900 font-semibold text-lg mt-8">
+        Menu Creation and Customization
+      </h3>
+      <p class="text-gray-700 text-sm mt-2 sm:text-center text-left">
+        Create digital menus from scratch or customize pre-designed templates to match their brand identity. This includes adding menu items, descriptions, prices, and images.
+      </p>
+    </div>
+
+    <div class="bg-gray-100 flex flex-col p-4 mt-5 justify-center items-center relative h-full relative">
+      <div class="w-24  -mt-28">
+        <%= pie_chart [["Burrito", 1], ["Taco", 3], ["Quesadilla", 2]], donut: true, legend: "false", colors: ["#CCCCCC", "#999999", "#666666", "#333333"] %>
+      </div>
+      <h3 class="text-gray-900 font-semibold text-lg -mt-20">
+        Menu Analytics
+      </h3>
+      <p class="text-gray-700 text-sm mt-2 sm:text-center text-left">
+        Gain insights into menu performance, popular items, and customer preferences to help make informed decisions about menu optimization.
+      </p>
+    </div>
+
+    <div class="bg-gray-100 flex flex-col p-4 mt-5 justify-center items-center relative h-full gap-3">
+      <div class="bg-gray-200 w-72 p-2 rounded flex items-center gap-3 relative">
+       <%= image_tag("food.png", alt: "update menu", class: "w-10 h-10 rounded-full object-cover") %>
+       <p class="text-gray-900 font-semibold text-sm">Biryani</p>
+       -----
+       <p class="text-gray-700 text-sm font-bold">$150
+       </p>
+       <div class="h-5 w-1 bg-blue-500"></div>
+       <div class="bg-white w-8 h-8 rounded-full flex justify-center items-center  right-0 top-0">
+        <i class="fas fa-pen text-gray-900 text-sm"></i>
+       </div>
+
+      </div>
+      <h3 class="text-gray-900 font-semibold text-lg">
+        Menu Updates
+      </h3>
+      <p class="text-gray-700 text-sm mt-2 sm:text-center text-left">
+        Easily update menus in real-time to reflect changes in pricing, seasonal offerings, or special promotions. This helps ensure that customers always see the most current information.
+      </p>
+    </div>
+
+    <div class="bg-gray-100 flex flex-col p-4 mt-5 justify-center items-center relative h-full gap-3">
+      <i class="fas fa-users text-2xl"></i>
+      <h3 class="text-gray-900 font-semibold text-lg">
+        Collaborative Editing:
+      </h3>
+      <p class="text-gray-700 text-sm mt-2 sm:text-center text-left">
+        Enable team collaboration on menu creation and updates, allowing multiple users to contribute, review, and approve changes before publication.
+      </p>
+    </div>
+
+    <div class="bg-gray-100 flex flex-col p-4 mt-5 justify-center items-center relative h-full gap-3">
+      <i class="fas fa-mobile-alt text-2xl"></i>
+      <h3 class="text-gray-900 font-semibold text-lg">
+        Mobile-Ready Menus
+      </h3>
+      <p class="text-gray-700 text-sm mt-2 sm:text-center text-left">
+        Create mobile-optimized menus that are easy to view and navigate on any device, including smartphones and tablets.
+      </p>
+    </div>
+
+    <div class="bg-gray-100 flex flex-col p-4 mt-5 justify-center items-center relative h-full gap-3">
+      <i class="fas fa-clipboard-list text-2xl"></i>
+      <h3 class="text-gray-900 font-semibold text-lg">
+        Menu Scheduling
+      </h3>
+      <p class="text-gray-700 text-sm mt-2 sm:text-center text-left">
+        Schedule menu changes to go live at specific times, such as for happy hour or seasonal promotions.
+      </p>
+    </div>
+
+
+    </div>
+
+  </div>
+</div>
