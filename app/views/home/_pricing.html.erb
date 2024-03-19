@@ -1,20 +1,90 @@
-<div id="solutions" class="flex flex-col px-6 py-6">
+<% pricing_plans = [
+  {
+    title: "Free Trial",
+    price: 0,
+    icon: "fa-solid fa-calendar-week",
+    duration: "5 days",
+    features: [
+      "Menu Creation",
+      "Menu Updatings",
+    ]
+  },
+  {
+    title: "Monthly Plan",
+    price: 10,
+    icon: "fa-regular  fa-calendar",
+    duration: "30 days",
+    features: [
+      "Menu Creation",
+      "Menu Analytics",
+      "Menu Updatings",
+      "Collaborative Editing"
+    ]
+  },
+  {
+    title: "Yearly Plan",
+    price: 100,
+    icon: "fa-regular fa-calendar-days",
+    duration: "365 days",
+    features: [
+      "Menu Creation",
+      "Menu Analytics",
+      "Menu Updatings",
+      "Collaborative Editing"
+    ]
+  },
+  {
+    title: "Lifetime Plan",
+    price: 1000,
+    icon: "fa-regular fa-calendar-check",
+    duration: "Unlimited",
+    features: [
+      "Menu Creation",
+      "Menu Analytics",
+      "Menu Updatings",
+      "Collaborative Editing"
+    ]
+  }
+]
+%>
+
+
+<div id="solutions" class="flex flex-col px-6 py-6 mt-12">
   <div class="flex gap-2  items-center">
     <a href="#pricing" class="sm:text-4xl text-2xl font-bold text-right hover:underline">
       pricing.
       </a>
       <hr class='w-1/6 border-t-2 border-gray-900'>
     </div>
-    <div class="grid sm:grid-cols-3 grid-cols-1 gap-8 mt-8 mb-4">
-      <div class="bg-gray-100 flex flex-col p-4 mt-5  items-center relative h-full">
-        <h3 class="text-gray-900 font-semibold text-lg mt-8">
-          Basic Plan
-        </h3>
-        <p class="text-gray-700 text-sm mt-2 sm:text-center text-left">
-          Create and manage your restaurant's menu for free. No credit card required. No commitment.
-        </p>
-      </div>
-      
+    <div class="flex sm:flex-row flex-col justify-center items-center gap-12 mt-8 mb-4">
+      <% pricing_plans.each_with_index do |plan, index| %>
+        <div class="<%= index % 2 == 0 ? 'bg-black text-white' : 'bg-gray-100 text-black' %> flex flex-col p-4 mt-5  items-center gap-6 w-72 shadow-lg rounded hover:scale-105">
+          <h3 class=" font-bold text-lg mt-8 uppercase">
+            <%= plan[:title] %>
+          </h3>
+          <div class="h-16 w-16 flex justify-center items-center rounded-full <%= index % 2 == 0 ? 'bg-white text-black' : 'bg-black text-white' %>">
+            <i class="<%= plan[:icon] %> text-2xl"></i>
+          </div>
+          <p class=" text-sm">
+            <span class="font-bold text-2xl">$ <%= plan[:price] %> </span>
+          </p>
+          <p class=" text-sm">
+            <span class="font-bold"><%= plan[:duration] %> </span>
+          </p>
+          <hr class="w-1/2 border-t-2 <%= index % 2 == 0 ? 'border-white' : 'border-black' %>">
+          <ul class="text-sm">
+           <% plan[:features].each do |feature| %>
+              <li class="flex items-center gap-2 mt-2">
+                <i class="fa-regular fa-check-circle"></i>
+                <%= feature %>
+              </li>
+            <% end %>
+          </ul>
+          <div class="mt-4">
+            <%= link_to "Get Started", new_restaurant_path, class: "#{index % 2 == 0 ? 'bg-white text-black' : 'bg-black text-white'} p-2 rounded hover:scale-105" %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
