@@ -1,6 +1,6 @@
 <div class="grid sm:grid-cols-3 grid-cols-1">
 
-  <div class="col-span-2 px-10 w-3/4">
+  <div class="col-span-2 px-10 sm:w-3/4">
 
     <div class="flex gap-2  items-center mb-5">
       <a href="/users/sign_up/#{@restaurant.slug}" class="sm:text-4xl text-2xl font-bold text-right hover:underline">Set up an admin user.</a>
@@ -53,7 +53,7 @@
     <%= render "devise/shared/links" %>
   </div>
 
-  <div class="col-span-1 -mt-16">
+  <div class="col-span-1 -mt-16 sm:flex hidden">
    <%= image_tag('menu-5.jpg', class: "w-full h-full object-cover") %>
   </div>
 
