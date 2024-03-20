@@ -24,14 +24,14 @@
       </div>
 
       <% if devise_mapping.rememberable? %>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 mt-5">
           <%= f.check_box :remember_me %>
           <%= f.label :remember_me %>
         </div>
       <% end %>
 
       <div class="actions">
-        <%= f.submit "Log in", class: "py-2 mt-4 px-5 bg-black text-center text-white font-medium cursor-pointer w-48" %>
+        <%= f.submit "Log in", class: "py-2 mt-4 px-5 bg-black text-center text-white font-medium cursor-pointer rounded w-48" %>
       </div>
     <% end %>
 
