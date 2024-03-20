@@ -3,11 +3,11 @@
   <div class="col-span-2 px-10 sm:w-3/4">
 
     <div class="flex gap-2  items-center mb-5">
-      <a href="/users/sign_up/#{@restaurant.slug}" class="sm:text-4xl text-2xl font-bold text-right hover:underline">Set up an admin user.</a>
+      <a href="/users/sign_up/#{@restaurant.slug}" class="sm:text-4xl text-2xl font-bold text-right hover:underline">set up an admin user.</a>
       <hr class='w-1/6 border-t-2 border-gray-900'>
     </div>
 
-    <%= form_for(resource, as: resource_name, url: user_registration_path, method: :post, html: { class: "flex flex-col gap-8"  }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: user_registration_path, method: :post, html: { class: "flex flex-col gap-8 "  }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <%= f.hidden_field :email, value: @restaurant.email %>
       <%= f.hidden_field :restaurant_id, value: @restaurant.id %>
