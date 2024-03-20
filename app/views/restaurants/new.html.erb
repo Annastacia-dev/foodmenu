@@ -1,13 +1,13 @@
-<div class="grid sm:grid-cols-3 grid-cols-1 -mt-6">
+<div class="grid sm:grid-cols-3 grid-cols-1 sm:-mt-6">
 
-  <div class="col-span-2">
+  <div class="col-span-2 sm:px-10 px-4">
 
     <div class="flex gap-2  items-center mb-5">
       <hr class='w-1/6 border-t-2 border-gray-900'>
       <a href="/restaurants/new" class="sm:text-4xl text-2xl font-bold text-right hover:underline">create your restaurant account.</a>
     </div>
 
-    <%= form_with(model: @restaurant, class: "flex flex-col gap-4 px-10") do |form| %>
+    <%= form_with(model: @restaurant, class: "flex flex-col gap-4") do |form| %>
       <%= render 'shared/error_messages', object: @restaurant %>
       <div class="my-5 flex flex-col justify-start items-start gap-5">
         <div class='grid sm:grid-cols-2 grid-cols-1 gap-6'>
