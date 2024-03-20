@@ -1,16 +1,33 @@
-<h2>Resend unlock instructions</h2>
+<div class="grid sm:grid-cols-3 grid-cols-1">
 
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="col-span-1 -mt-16">
+   <%= image_tag('menu-4.jpg', class: "w-full h-full object-cover") %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Resend unlock instructions" %>
-  </div>
-<% end %>
+  <div class="col-span-2 px-10 w-3/4">
 
-<%= render "devise/shared/links" %>
+    <div class="flex gap-2  items-center mb-5">
+      <a href="/users/unlocks/new" class="sm:text-4xl text-2xl font-bold text-right hover:underline">resend unlock instructions.</a>
+      <hr class='w-10 border-t-2 border-gray-900'>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: "flex flex-col gap-4 w-3/4" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="flex flex-col gap-4">
+        <%= f.label :email, class: "block font-medium text-gray-900 text-sm" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Resend unlock instructions", class: "py-2 mt-4 px-5 bg-black text-center text-white font-medium cursor-pointer" %>
+      </div>
+    <% end %>
+
+
+
+
+    <%= render "devise/shared/links" %>
+  </div>
+
+</div>

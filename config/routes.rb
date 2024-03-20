@@ -3,13 +3,15 @@ Rails.application.routes.draw do
   require 'sidekiq/cron/web'
   mount Sidekiq::Web => '/sidekiq'
 
+  root to: "home#index"
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
   }
 
   get 'home/index'
   get "up" => "rails/health#show", as: :rails_health_check
-  root to: "home#index"
+  
   resources :restaurants do
     member { get :confirm_email }
     member { get :confirm}
