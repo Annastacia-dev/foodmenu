@@ -28,7 +28,7 @@ class Location < ApplicationRecord
   has_paper_trail
 
   # --concerns--
-  include StatusableModelConcern
+  include Statusable
 
   # --associations--
   belongs_to :locatable, polymorphic: true

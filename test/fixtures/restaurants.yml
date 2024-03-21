@@ -12,7 +12,7 @@
 #  restaurant_type :integer          default("single_restaurant(one restaurant, one location)")
 #  sample          :boolean          default(FALSE)
 #  slug            :string           not null
-#  status          :integer          default("active")
+#  status          :integer          default("inactive")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  layout_id       :uuid

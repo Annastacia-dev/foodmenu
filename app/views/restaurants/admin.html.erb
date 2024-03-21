@@ -1,0 +1,100 @@
+<div class="grid sm:grid-cols-3 grid-cols-1">
+
+  <div class="col-span-2 px-10 sm:w-3/4">
+
+    <div class="flex gap-2  items-center mb-5">
+      <a href="/users/sign_up/#{@restaurant.slug}" class="sm:text-4xl text-2xl font-bold text-right hover:underline">set up an admin user.</a>
+      <hr class='w-1/6 border-t-2 border-gray-900'>
+    </div>
+
+    <%= form_for(@resource, as: :user, url: user_registration_path, method: :post, html: { class: "flex flex-col gap-8 "  }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: @resource %>
+      <%= f.hidden_field :email, value: @restaurant.email %>
+      <%= f.hidden_field :restaurant_id, value: @restaurant.id %>
+      <%= f.hidden_field :role, value: 'admin' %>
+
+      <div class="flex flex-col gap-4 mb-4">
+        <%= f.label :email, class: "block font-medium text-gray-900 text-sm"  %>
+        <%= f.email_field :email, autofocus: true, disabled: true, class: "border-2 border-black bg-black outline-none focus:outline-none py-2 px-4 text-white placeholder:text-gray-900 placeholder:text-xs", value: @restaurant.email %>
+      </div>
+
+      <div class='grid sm:grid-cols-2 grid-cols-1 gap-6'>
+        <div class="flex flex-col gap-4 mb-4">
+          <%= f.label :first_name, class: "block font-medium text-gray-900 text-sm"  %>
+          <%= f.text_field :first_name, autofocus: true, class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs" %>
+        </div>
+
+        <div class="flex flex-col gap-4 mb-4">
+          <%= f.label :last_name, class: "block font-medium text-gray-900 text-sm"  %>
+          <%= f.text_field :last_name, autofocus: true, class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs" %>
+        </div>
+
+        <div class="flex flex-col gap-4 mb-4 relative">
+          <div class="flex gap-2">
+              <%= f.label :password, class: "block font-medium text-gray-900 text-sm"  %>
+              <em class="block font-medium text-gray-900 text-sm">(6 characters minimum)</em>
+          </div>
+          <%= f.password_field :password, autocomplete: "new-password", class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs", id: "password-field" %>
+          <i class="fa fa-eye-slash absolute right-4 sm:top-12 text-gray-900 cursor-pointer" id="show-password"></i>
+          <i class="fa fa-eye absolute right-4 sm:top-12 text-gray-900 cursor-pointer" id="hide-password" style="display: none"
+          ></i>
+        </div>
+
+        <div class="flex flex-col gap-4 mb-4 relative">
+          <%= f.label :password_confirmation, class: "block font-medium text-gray-900 text-sm"  %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs", id: "password-confirmation-field" %>
+          <i class="fa fa-eye-slash absolute right-4 sm:top-12 text-gray-900 cursor-pointer" id="show-password-confirmation"></i>
+          <i class="fa fa-eye absolute right-4 sm:top-12 text-gray-900 cursor-pointer" id="hide-password-confirmation" style="display: none"
+          ></i>
+        </div>
+      </div>
+
+      <div>
+        <%= f.submit "Submit", class: "py-2 mt-4 px-5 bg-black text-center text-white font-medium cursor-pointer rounded w-48" %>
+      </div>
+     <% end %>
+  </div>
+
+  <div class="col-span-1 -mt-16 sm:flex hidden">
+   <%= image_tag('menu-5.jpg', class: "w-full h-full object-cover") %>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener("turbo:load", () => {
+    const passwordField = document.getElementById("password-field");
+    const passwordConfirmationField = document.getElementById("password-confirmation-field");
+
+    const hidePassword = document.getElementById("hide-password");
+    const showPassword = document.getElementById("show-password");
+
+    const hidePasswordConfirmation = document.getElementById("hide-password-confirmation");
+    const showPasswordConfirmation = document.getElementById("show-password-confirmation");
+
+    hidePassword.addEventListener("click", () => {
+      passwordField.type = "password";
+      hidePassword.style.display = "none";
+      showPassword.style.display = "block";
+    });
+
+    showPassword.addEventListener("click", () => {
+      passwordField.type = "text";
+      hidePassword.style.display = "block";
+      showPassword.style.display = "none";
+    });
+
+    hidePasswordConfirmation.addEventListener("click", () => {
+      passwordConfirmationField.type = "password";
+      hidePasswordConfirmation.style.display = "none";
+      showPasswordConfirmation.style.display = "block";
+    });
+
+    showPasswordConfirmation.addEventListener("click", () => {
+      passwordConfirmationField.type = "text";
+      hidePasswordConfirmation.style.display = "block";
+      showPasswordConfirmation.style.display = "none";
+    });
+
+  });
+</script>

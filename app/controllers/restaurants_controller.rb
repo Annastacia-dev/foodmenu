@@ -1,9 +1,17 @@
 class RestaurantsController < ApplicationController
 
-  before_action :authenticate_user!, except: %i[index new create show confirm confirm_email]
-  before_action :find_restaurant, only: %i[show edit update destroy confirm confirm_email settings]
+  before_action :authenticate_user!, except: %i[index new create show confirm confirm_email admin]
+  before_action :find_restaurant, only: %i[show edit update destroy confirm confirm_email settings admin]
   before_action :set_category, only: %i[show]
   before_action :set_main_item, only: %i[show]
+
+  def index
+    if current_user&.super_admin?
+      @restaurants = Restaurant.all
+    else
+      @restaurants = Restaurant.active
+    end
+  end
 
   def new
     @restaurant = Restaurant.new
@@ -51,16 +59,13 @@ class RestaurantsController < ApplicationController
     end
   end
 
-  def confirm
-  end
-
   def confirm_email
     @restaurant.update(confirmed: true, confirmed_at: Time.zone.now, status: :active)
-    redirect_to new_user_registration_path(restaurant: @restaurant.slug)
+    redirect_to restaurant_admin_path(@restaurant)
   end
 
-  def index
-    @restaurants = Restaurant.all
+  def admin
+    @resource = User.new
   end
 
   private

@@ -15,7 +15,7 @@
   </div>
   <div class='mt-6 grid md:grid-cols-4 gap-5'>
    <% @restaurants.order(:name).each do |restaurant| %>
-    <div class='flex flex-col items-start p-4 border-b border-gray-200 bg-white rounded shadow gap-10 hover:scale-105'>
+    <%= link_to restaurant_show_path(restaurant), class:"flex flex-col items-start p-4 border-b border-gray-200 bg-white rounded shadow gap-10 hover:scale-105" do %>
       <div class='flex items-center gap-4 text-sm'>
        <% if restaurant.logo.attached? %>
           <%= image_tag(restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-12 h-12 object-cover") if restaurant.logo.attached? %>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <% if current_user&.super_admin? %>
-        <div class='flex items-center gap-5 text-sm'>
+        < class='flex items-center gap-5 text-sm'>
           <%= link_to restaurant, class: "text-blue-500 hover:underline", title: "View restaurant", target: "_blank" do %>
             <span>View</span>
           <% end %>
@@ -42,7 +42,7 @@
           <% end %>
         </div>
       <% end %>
-    </div>
+    <% end %>
    <% end %>
   </div>
 </div>

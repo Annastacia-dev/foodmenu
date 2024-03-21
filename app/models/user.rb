@@ -97,7 +97,7 @@ class User < ApplicationRecord
   def one_admin_per_restaurant
     if new_record?
       if role == 'admin' && restaurant.has_an_admin?
-        errors.add(:role, 'cannot have more than one admin')
+        errors.add(:base, 'Restaurant cannot have more than one admin')
       end
     end
   end

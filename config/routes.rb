@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get 'home/index'
   get "up" => "rails/health#show", as: :rails_health_check
+  get "restaurant/:id/admin" => "restaurants#admin", as: :restaurant_admin
 
   resources :restaurants do
     member { get :confirm_email }
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
     end
   end
   resources :layouts
+  resources :locations
 
   get '/:id', to: 'restaurants#show', as: :restaurant_show
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Status methods
-module StatusableModelConcern
+module Statusable
   extend ActiveSupport::Concern
 
   included do

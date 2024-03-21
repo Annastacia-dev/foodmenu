@@ -12,7 +12,7 @@
 #  restaurant_type :integer          default("single_restaurant(one restaurant, one location)")
 #  sample          :boolean          default(FALSE)
 #  slug            :string           not null
-#  status          :integer          default("active")
+#  status          :integer          default("inactive")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  layout_id       :uuid
@@ -29,7 +29,7 @@
 class Restaurant < ApplicationRecord
   has_paper_trail
 
-  include StatusableModelConcern
+  include Statusable
   include Sluggable
   friendly_slug_scope to_slug: :name
 
@@ -57,6 +57,14 @@ class Restaurant < ApplicationRecord
     'chain_restaurant(one restaurant, multiple locations)': 1,
     'group_restaurant(multiple restaurants, multiple locations)': 2
   }
+
+  def confirmed?
+    confirmed_at.present?
+  end
+
+  def active?
+    status == 'active'
+  end
 
   def single?
     restaurant_type == 'single_restaurant(one restaurant, one location)'
