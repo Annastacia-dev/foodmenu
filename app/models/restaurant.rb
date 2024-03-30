@@ -41,6 +41,7 @@ class Restaurant < ApplicationRecord
   has_many :sub_restaurants, dependent: :destroy
   has_many :menu_categories, through: :menus, dependent: :destroy
   has_many :menu_items, through: :menu_categories, dependent: :destroy
+  has_many :locations, dependent: :destroy
 
   # --- callbacks ---
   before_save :downcase_email

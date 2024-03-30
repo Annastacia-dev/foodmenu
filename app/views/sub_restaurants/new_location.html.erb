@@ -1,0 +1,10 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Restaurants', path: restaurant_sub_restaurants_path(@restaurant)},
+  { text:  "#{@sub_restaurant.name}", path: restaurant_sub_restaurant_path(@restaurant, @sub_restaurant) },
+  { text: 'New Location'}
+] %>
+
+<div class='px-10 py-5'>
+  <h4 class='font-semibold mb-5 uppercase underline'>Add a location - <%= @sub_restaurant.name %></h4>
+</div>

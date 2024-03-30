@@ -42,3 +42,7 @@
 
 # Ignore byebug command history file.
 .byebug_history
+
+# tomo
+/.tomo
+

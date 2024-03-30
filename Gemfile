@@ -26,6 +26,7 @@ gem 'sidekiq-cron', '~> 1.9.1'
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "tailwindcss-rails", "~> 2.3"
+gem 'tomo', '~> 1.18', '>= 1.18.2'
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "will_paginate"

@@ -1,0 +1,35 @@
+<%= form_with(model: [@restaurant, sub_restaurant], class: "flex flex-col gap-5 sm:w-3/4 text-sm
+text-sm") do |form| %>
+  <%= render 'shared/error_messages', object: sub_restaurant  %>
+  <div class='flex flex-col gap-1'>
+    <%= form.label :name, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+      Name
+    <% end %>
+    <%= form.text_field :name, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", placeholder: "e.g Roast By Carnivore", required: true %>
+  </div>
+  <div class='flex flex-col gap-1'>
+    <%= form.label :email, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+      Email
+    <% end %>
+    <%= form.email_field :email, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", placeholder: "e.g roast@carnivore.ke", required: true %>
+  </div>
+  <div class='flex flex-col gap-1'>
+    <%= form.label :phone_number, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+      Phone Number
+    <% end %>
+    <%= form.text_field :phone_number, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", placeholder: "e.g 0723 423 564", required: true %>
+  </div>
+  <div class='flex flex-col gap-1'>
+    <%= form.label :logo, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+      Logo
+    <% end %>
+    <%= form.file_field :logo, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: true %>
+  </div>
+  <div class='flex flex-col gap-1'>
+    <%= form.label :description, class: "block font-medium text-gray-700" do %>
+      Description
+    <% end %>
+    <%= form.text_area :description, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs", placeholder: "e.g. A casual, dine-out restaurant that offers a deliciously inspiring selection of 'signature' sandwiches. Pulled pork/beef and chicken, meat rich platters, fresh crunchy salads and a selection of sides and bites coupled with great customer experience.", rows: 5, required: true %>
+  </div>
+  <%= form.submit "Submit", class: "bg-gray-800 text-white font-bold py-2 px-4 rounded cursor-pointer sm:w-1/2" %>
+<% end %>

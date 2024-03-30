@@ -8,6 +8,7 @@
 #  name          :string           not null
 #  phone_number  :string
 #  slug          :string           not null
+#  status        :integer          default("active")
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  layout_id     :uuid

@@ -18,9 +18,12 @@
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs" %>
       </div>
 
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 relative">
         <%= f.label :password, class: "block font-medium text-gray-900 text-sm" %>
-        <%= f.password_field :password, autocomplete: "current-password", class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs", id: 'password' %>
+        <i class="fa fa-eye-slash absolute right-4 sm:top-12 text-gray-900 cursor-pointer" id="show-password"></i>
+        <i class="fa fa-eye absolute right-4 sm:top-12 text-gray-900 cursor-pointer" id="hide-password" style="display: none"
+        ></i>
       </div>
 
       <% if devise_mapping.rememberable? %>
@@ -39,4 +42,25 @@
   </div>
 
 </div>
+
+<script>
+  document.addEventListener("turbo:load", () => {
+    const passwordField = document.getElementById("password");
+    const showPassword = document.getElementById("show-password");
+    const hidePassword = document.getElementById("hide-password");
+
+    showPassword.addEventListener("click", () => {
+      passwordField.type = "text";
+      showPassword.style.display = "none";
+      hidePassword.style.display = "block";
+    });
+
+    hidePassword.addEventListener("click", () => {
+      passwordField.type = "password";
+      showPassword.style.display = "block";
+      hidePassword.style.display = "none";
+    });
+
+  })
+</script>
 

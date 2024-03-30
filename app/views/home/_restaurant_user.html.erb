@@ -1,8 +1,8 @@
 <div class="flex flex-col px-6 lg:py-4">
   <div class="flex justify-between items-center">
-    <h5 class="font-semibold">
+    <h5 class="font-semibold capitalize">
       <%= greeting %>, <%= current_user.first_name %> (<%= current_user.role.humanize %>)
     </h5>
-    <%= link_to  'View your restaurant', "/#{current_user.restaurant.slug}", class: "text-blue-500 underline", title: "View your restaurant", target: "_blank" %>
+    <%= link_to  'View your site', "/#{current_user.restaurant.slug}", class: "text-blue-500 underline", title: "View your restaurant", target: "_blank" %>
   </div>
 </div>

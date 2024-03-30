@@ -1,5 +1,5 @@
-<nav class="text-sm px-8 py-2 capitalize" aria-label="Breadcrumb">
-  <ol class="list-none p-0 inline-flex px-5">
+<nav class="text-sm px-2 py-2 mb-5 capitalize" aria-label="Breadcrumb">
+  <ol class="list-none p-0 inline-flex">
     <% breadcrumbs.each_with_index do |breadcrumb, index| %>
       <li class="flex items-center">
         <%= link_to breadcrumb[:text], breadcrumb[:path], class: "flex justify-center items-center gap-2 hover:underline #{index == breadcrumbs.length - 1 ? 'text-gray-500' : 'text-gray-800'}" %>

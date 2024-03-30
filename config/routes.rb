@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   resources :restaurants do
     member { get :confirm_email }
     member { get :confirm}
+    member { get :locations}
     member { get :settings}
+    member { get :new_location}
 
     resources :menus do
       resources :menu_categories do
@@ -25,6 +27,10 @@ Rails.application.routes.draw do
         member {delete :delete_subcategory}
         resources :menu_items
       end
+    end
+
+    resources :sub_restaurants do
+      member { get :new_location }
     end
   end
   resources :layouts
