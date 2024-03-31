@@ -3,6 +3,7 @@
 # Table name: locations
 #
 #  id               :uuid             not null, primary key
+#  area             :string           not null
 #  building_name    :string
 #  city             :string
 #  country          :string           not null

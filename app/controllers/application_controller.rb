@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_params, if: :devise_controller?
   before_action :set_paper_trail_whodunnit
   before_action :set_restaurant
+  before_action :get_user_location
 
   private
 
@@ -16,5 +17,9 @@ class ApplicationController < ActionController::Base
 
   def set_restaurant
     @restaurant = current_user.restaurant if current_user
+  end
+
+  def get_user_location
+    @user_location = request.location
   end
 end

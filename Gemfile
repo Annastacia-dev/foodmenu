@@ -10,6 +10,7 @@ gem 'capistrano', '~> 3.4'
 gem 'chartkick', '~> 5.0', '>= 5.0.6'
 gem 'devise', '~> 4.9', '>= 4.9.3'
 gem 'friendly_id', '~> 5.4'
+gem 'geocoder', '~> 1.8', '>= 1.8.2'
 gem "image_processing", "~> 1.2"
 gem "importmap-rails"
 gem "jbuilder"

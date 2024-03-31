@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
     resources :sub_restaurants do
       member { get :new_location }
+      member { get :locations}
     end
   end
   resources :layouts

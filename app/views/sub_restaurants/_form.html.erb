@@ -23,7 +23,12 @@ text-sm") do |form| %>
     <%= form.label :logo, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
       Logo
     <% end %>
-    <%= form.file_field :logo, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: true %>
+    <div class='flex items-center gap-5'>
+      <%= form.file_field :logo, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: sub_restaurant.logo.blank? %>
+      <% if sub_restaurant.logo.attached? %>
+        <%= image_tag sub_restaurant.logo, class: 'w-16 h-16 object-cover' %>
+      <% end %>
+    </div>
   </div>
   <div class='flex flex-col gap-1'>
     <%= form.label :description, class: "block font-medium text-gray-700" do %>

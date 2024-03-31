@@ -44,7 +44,7 @@ class SubRestaurantsController < ApplicationController
   def update
     respond_to do |format|
       if @sub_restaurant.update(sub_restaurant_params)
-        format.html { redirect_to [@restaurant, @sub_restaurant], notice: 'Sub restaurant was successfully updated.' }
+        format.html { redirect_to restaurant_sub_restaurants_path(@restaurant), notice: 'Sub restaurant was successfully updated.' }
         format.json { render :show, status: :ok, location: @sub_restaurant }
       else
         format.html { render :edit }

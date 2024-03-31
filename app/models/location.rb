@@ -3,6 +3,7 @@
 # Table name: locations
 #
 #  id               :uuid             not null, primary key
+#  area             :string           not null
 #  building_name    :string
 #  city             :string
 #  country          :string           not null
@@ -33,7 +34,28 @@ class Location < ApplicationRecord
   # --associations--
   belongs_to :locatable, polymorphic: true
 
+  # ---callbacks---
+  before_save :geocode_location
+
   # --validations--
   validates :country, presence: true
   validates :nearest_landmark, presence: true
+
+  # --scopes--
+
+  # --class methods--
+
+  # --instance methods--
+
+  private
+
+  def geocode_location
+    return unless country_changed? || city_changed? || area_changed?
+
+    geocode = Geocoder.search("#{country}, #{city}, #{area}").first
+    return unless geocode
+
+    self.latitude = geocode.latitude
+    self.longitude = geocode.longitude
+  end
 end
