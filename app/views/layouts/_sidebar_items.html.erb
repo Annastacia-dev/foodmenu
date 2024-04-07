@@ -3,6 +3,7 @@
   <%= render 'layouts/shared_links' %>
 
   <% if current_user.restaurant_user? %>
+    <%= render 'layouts/shared_restaurant_links' %>
     <% if @restaurant.single? %>
     <%= render 'layouts/single_restaurant_links' %>
     <% end %>

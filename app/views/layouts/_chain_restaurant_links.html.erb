@@ -1,4 +1,4 @@
 <%= render 'components/dropdown', title: 'branches', icon_class: 'fa-solid fa-shop', items: [
   { path: locations_restaurant_path(@restaurant), icon_class: 'fa-solid fa-store', menu_text: 'View locations' },
-  { path: new_location_path, icon_class: 'fa-solid fa-plus', menu_text: 'Add a new branch' }
+  { path: new_location_restaurant_path(@restaurant), icon_class: 'fa-solid fa-plus', menu_text: 'Add a new branch' }
 ] %>

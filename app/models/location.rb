@@ -15,6 +15,7 @@
 #  longitude        :decimal(10, 6)
 #  nearest_landmark :string           not null
 #  postal_code      :string
+#  slug             :string
 #  state            :string
 #  status           :integer          default("active")
 #  created_at       :datetime         not null
@@ -30,6 +31,8 @@ class Location < ApplicationRecord
 
   # --concerns--
   include Statusable
+  include Sluggable
+  friendly_slug_scope to_slug: :location_name
 
   # --associations--
   belongs_to :locatable, polymorphic: true
@@ -46,6 +49,10 @@ class Location < ApplicationRecord
   # --class methods--
 
   # --instance methods--
+
+  def location_name
+    "#{building_name}, #{area}, #{city}"
+  end
 
   private
 

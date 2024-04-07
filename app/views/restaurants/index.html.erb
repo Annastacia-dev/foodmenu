@@ -5,7 +5,7 @@
 
 <div class='p-10'>
   <div class='flex justify-between items-center'>
-    <h1 class='font-semibold uppercase'>Restaurants(<%= @restaurants.count %>) </h1>
+    <h1 class='font-semibold uppercase'>Restaurants(<%= @restaurants.size %>) </h1>
     <% if current_user&.super_admin? %>
       <%= link_to new_restaurant_path, class: "btn btn-primary capitalize" do %>
         <i class="fa-solid fa-plus"></i>
@@ -15,7 +15,7 @@
   </div>
   <div class='mt-6 grid md:grid-cols-4 gap-5'>
    <% @restaurants.order(:name).each do |restaurant| %>
-    <%= link_to restaurant_show_path(restaurant), class:"flex flex-col items-start p-4 border-b border-gray-200 bg-white rounded shadow gap-10 hover:scale-105" do %>
+    <div onclick="window.open('<%= restaurant_path(restaurant) %>')" class="flex flex-col items-start p-4 border-b border-gray-200 bg-white rounded shadow gap-10 hover:scale-105 cursor-pointer">
       <div class='flex items-center gap-4 text-sm'>
        <% if restaurant.logo.attached? %>
           <%= image_tag(restaurant.logo, alt: "Restaurant Logo", class: "rounded-full w-12 h-12 object-cover") if restaurant.logo.attached? %>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <% if current_user&.super_admin? %>
-        < class='flex items-center gap-5 text-sm'>
+        <div class='flex items-center gap-5 text-sm'>
           <%= link_to restaurant, class: "text-blue-500 hover:underline", title: "View restaurant", target: "_blank" do %>
             <span>View</span>
           <% end %>
@@ -37,12 +37,12 @@
             <span>Edit</span>
           <% end %>
           <span class='text-gray-500'>|</span>
-          <%= link_to restaurant, method: :delete, data: { confirm: "Are you sure you want to delete #{restaurant.name}?" }, class: "text-red-500 hover:underline", title: "Delete restaurant" do %>
+          <%= button_to restaurant, method: :delete, data: { confirm: "Are you sure you want to delete #{restaurant.name}?" }, class: "text-red-500 hover:underline", title: "Delete restaurant" do %>
             <span>Delete</span>
           <% end %>
         </div>
       <% end %>
-    <% end %>
+    </div>
    <% end %>
   </div>
 </div>
