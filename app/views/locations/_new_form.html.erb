@@ -26,7 +26,10 @@ text-sm") do |form| %>
     </div>
 
     <div class='flex flex-col gap-1'>
-      <%= form.label :city, class: "block font-medium text-gray-700 flex items-center gap-2" %>
+      <%= form.label :city, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+        City
+        <span class="text-red-500">*</span>
+      <% end %>
       <%= form.text_field :city, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", value: @user_location.city, placeholder: "e.g 'Nairobi'" %>
     </div>
 

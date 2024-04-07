@@ -41,7 +41,8 @@ class Restaurant < ApplicationRecord
   has_many :sub_restaurants, dependent: :destroy
   has_many :menu_categories, through: :menus, dependent: :destroy
   has_many :menu_items, through: :menu_categories, dependent: :destroy
-  has_many :locations, dependent: :destroy
+  has_one :location_single, class_name: 'Location', foreign_key: 'locatable_id', dependent: :destroy
+  has_many :locations_chain, class_name: 'Location', foreign_key: 'locatable_id', dependent: :destroy
 
   # --- callbacks ---
   before_save :downcase_email
@@ -81,6 +82,14 @@ class Restaurant < ApplicationRecord
 
   def has_an_admin?
     users.where(role: :admin).exists?
+  end
+
+  def location
+   ( self.single? || self.group? ) ? location_single : nil
+  end
+
+  def locations
+    chain? ? locations_chain : nil
   end
 
   private

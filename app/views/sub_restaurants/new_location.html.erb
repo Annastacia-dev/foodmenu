@@ -7,5 +7,5 @@
 
 <div class='px-10 py-5'>
   <h4 class='font-semibold mb-5 uppercase underline'>Add a location - <%= @sub_restaurant.name %></h4>
-  <%= render 'locations/form', location: @location, locatable_id: @sub_restaurant.id, locatable_type: 'SubRestaurant', redirect_path: restaurant_sub_restaurant_path(@restaurant, @sub_restaurant) %>
+  <%= render 'locations/new_form', location: @location, locatable_id: @sub_restaurant.id, locatable_type: 'SubRestaurant', redirect_path: restaurant_sub_restaurant_path(@restaurant, @sub_restaurant) %>
 </div>

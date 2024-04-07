@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
+  before_action :find_location, only: %i[edit update destroy]
 
   def index
     @locations = Location.all
@@ -19,6 +20,25 @@ class LocationsController < ApplicationController
       errors = @location.errors.full_messages.join(', ')
       redirect_to redirect_path, alert: "Location was not added. #{errors}"
     end
+  end
+
+  def edit
+  end
+
+  def update
+    redirect_path = params[:location][:redirect_path]
+    
+    if @location.update(location_params)
+      redirect_to redirect_path, notice: 'Location was successfully updated.'
+    else
+      errors = @location.errors.full_messages.join(', ')
+      redirect_to redirect_path, alert: "Location was not updated. #{errors}"
+    end
+  end
+
+  def destroy
+    @location.destroy
+    redirect_to request.referer, notice: 'Location was successfully deleted.'
   end
 
 

@@ -1,12 +1,9 @@
 <% tabs = [
   { id: 'profile', label: 'profile', partial: 'restaurants/settings/profile' },
+  { id: 'contacts', label: 'contacts', partial: 'restaurants/settings/contacts' },
+  { id: 'location', label: "#{@restaurant.chain? ? 'locations' : 'location'}", partial: 'restaurants/settings/location' }
 ]
 %>
-
-<% if @restaurant.single? %>
-  tabs << { id: 'contacts', label: 'contacts', partial: 'restaurants/settings/contacts' }
-  tabs << { id: 'location', label: 'location', partial: 'restaurants/settings/location' }
-<% end %>
 
 <%= render 'components/breadcrumb', breadcrumbs: [
   { text: 'Home', path: root_path},

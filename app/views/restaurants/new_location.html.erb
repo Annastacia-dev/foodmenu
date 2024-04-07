@@ -1,0 +1,11 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Restaurants', path: restaurant_path(@restaurant)},
+  { text:  "#{@restaurant.name}", path: restaurant_path(@restaurant) },
+  { text: 'New Location'}
+] %>
+
+<div class='px-10 py-5'>
+  <h4 class='font-semibold mb-5 uppercase underline'>Add a location - <%= @restaurant.name %></h4>
+  <%= render 'locations/new_form', location: @location, locatable_id: @restaurant.id, locatable_type: 'Restaurant', redirect_path: settings_restaurant_path(@restaurant) %>
+</div>

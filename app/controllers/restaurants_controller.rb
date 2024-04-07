@@ -17,6 +17,10 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new
   end
 
+  def new_location
+    @location = Location.new
+  end
+
   def show
     @layout = @restaurant.layout
     if @layout
@@ -81,7 +85,7 @@ class RestaurantsController < ApplicationController
   end
 
   def find_restaurant
-    @restaurant = Restaurant.friendly.find_by(id: params[:id]) || SubRestaurant.friendly.find(params[:id])
+    @restaurant = Restaurant.friendly.find_by(slug: params[:id]) || SubRestaurant.friendly.find_by(slug: params[:id])
   end
 
   def set_category
