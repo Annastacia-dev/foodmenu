@@ -2,3 +2,10 @@
   { path: restaurant_menus_path(@restaurant), icon_class: 'fa-solid fa-utensils', menu_text: 'View menus' },
   { path: new_restaurant_menu_path(@restaurant), icon_class: 'fa-solid fa-plus', menu_text: 'Add new menu' }
 ] %>
+
+<li data-active-page-target="sidebarItem" data-path="layouts" class="sidebar-item py-2 hover:bg-gray-50 hover:text-gray-600 hover:border-l-4 hover:border-gray-500">
+  <%= link_to layouts_path, class: "px-4 flex items-center gap-2" do %>
+    <i class="fa-solid fa-palette"></i>
+    <span>themes</span>
+  <% end %>
+</li>

@@ -38,7 +38,7 @@
     <script src="https://kit.fontawesome.com/bfa19ffe9b.js" crossorigin="anonymous"></script>
   </head>
 
-  <% skip_navbar = params[:controller] == 'restaurants' && params[:action] == 'show' || params[:controller] == 'sub_restaurants' && params[:action] == 'show' || params[:controller] == 'layouts' && params[:action] == 'show' %>
+  <% skip_navbar = params[:controller] == 'restaurants' && params[:action] == 'show'  || params[:controller] == 'layouts' && params[:action] == 'show' %>
 
   <body class="bg-gray-50">
    <% unless skip_navbar %>

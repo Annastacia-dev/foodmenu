@@ -11,7 +11,7 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(location_params)
-    redirect_path = params[:redirect_path]
+    redirect_path = params[:location][:redirect_path]
 
     if @location.save
       redirect_to redirect_path, notice: 'Location was successfully added.'

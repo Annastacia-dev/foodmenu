@@ -4,7 +4,13 @@
 ] %>
 
 <div class='px-3 py-5 flex flex-col gap-4'>
-  <h4 class='font-semibold mb-5 capitalize my-5'>Restaurants</h4>
+  <div class="flex items-center justify-between gap-5 sm:w-3/4">
+    <h4 class='font-semibold mb-5 capitalize my-5'>Restaurants</h4>
+    <%= link_to new_restaurant_sub_restaurant_path(@restaurant), class:'btn-primary' do %>
+      <i class='fas fa-plus'></i>
+      <span>Add Restaurant</span>
+    <% end %>
+  </div>
 
   <div class='flex flex-col gap-5 sm:w-3/4 text-sm'>
     <% @sub_restaurants.each do |sub_restaurant| %>
@@ -41,7 +47,7 @@
             </p>
           </button>
 
-          <div data-dropdown-target="menu" class="hidden text-xs rounded flex flex-col gap-2 absolute bg-gray-900 text-white top-8 right-0 py-2 w-full">
+          <div data-dropdown-target="menu" class="hidden text-xs rounded flex flex-col gap-2 absolute bg-gray-900 text-white top-8 right-0 py-2 w-full z-10">
             <%= link_to  edit_restaurant_sub_restaurant_path(@restaurant, sub_restaurant), class: 'hover:text-blue-500 px-4 py-2 rounded flex items-center' do %>
               <i class='fas fa-pencil-alt' title="edit"></i>
               <span class='ml-2'>Edit</span>

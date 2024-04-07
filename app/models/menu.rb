@@ -27,24 +27,28 @@
 class Menu < ApplicationRecord
   has_paper_trail
 
-  # --concerns--
+  # --- concerns ---
   include Sluggable
   friendly_slug_scope to_slug: :menu_name
 
-  # --associations--
+  # --- associations ---
   belongs_to :restaurant
   belongs_to :sub_restaurant, optional: true
   has_many :menu_categories, dependent: :destroy
   has_many :menu_items, through: :menu_categories
 
-  # --enums--
+  # --- enums ---
   enum tax_behavior: { inclusive: 0, exclusive: 1 }
 
-  # --validations--
+  # --- validations ---
   validates :name, uniqueness: { scope: %i[restaurant_id sub_restaurant_id] }, if: -> { name.present? }
 
+  # --- instance methods ---
   def menu_name
-    name ||  sub_restaurant&.name || restaurant&.name
+    name.present? ? name : sub_restaurant.present? ? "#{sub_restaurant.name} menu" : "#{restaurant.name} menu"
   end
+
+  # --- private methods
+  private
 
 end

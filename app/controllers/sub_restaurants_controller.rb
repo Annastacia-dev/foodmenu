@@ -32,7 +32,7 @@ class SubRestaurantsController < ApplicationController
 
     respond_to do |format|
       if @sub_restaurant.save
-        format.html { redirect_to new_location_restaurant_sub_restaurant_path(@restaurant, @sub_restaurant), notice: 'Sub restaurant was successfully created.' }
+        format.html { redirect_to new_location_restaurant_sub_restaurant_path(@restaurant, @sub_restaurant), notice: 'Restaurant was successfully created.' }
         format.json { render :show, status: :created, location: @sub_restaurant }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class SubRestaurantsController < ApplicationController
   def update
     respond_to do |format|
       if @sub_restaurant.update(sub_restaurant_params)
-        format.html { redirect_to restaurant_sub_restaurants_path(@restaurant), notice: 'Sub restaurant was successfully updated.' }
+        format.html { redirect_to restaurant_sub_restaurants_path(@restaurant), notice: 'Restaurant was successfully updated.' }
         format.json { render :show, status: :ok, location: @sub_restaurant }
       else
         format.html { render :edit }

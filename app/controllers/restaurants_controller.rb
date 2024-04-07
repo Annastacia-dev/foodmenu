@@ -81,7 +81,7 @@ class RestaurantsController < ApplicationController
   end
 
   def find_restaurant
-    @restaurant = Restaurant.friendly.find(params[:id])
+    @restaurant = Restaurant.friendly.find_by(id: params[:id]) || SubRestaurant.friendly.find(params[:id])
   end
 
   def set_category

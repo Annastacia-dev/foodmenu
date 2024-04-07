@@ -3,6 +3,14 @@
     <h5 class="font-semibold capitalize">
       <%= greeting %>, <%= current_user.first_name %> (<%= current_user.role.humanize %>)
     </h5>
-    <%= link_to  'View your site', "/#{current_user.restaurant.slug}", class: "text-blue-500 underline", title: "View your restaurant", target: "_blank" %>
+    <% if @restaurant.single? %>
+      <%= link_to  "#{@restaurant.name} ->", "/#{current_user.restaurant.slug}", class: "text-blue-500 underline", title: "View your restaurant", target: "_blank" %>
+    <% elsif @restaurant.group? %>
+       <div class="flex flex-col gap-3 text-sm font-semibold">
+          <% @restaurant.sub_restaurants.each do |restaurant| %>
+            <%= link_to  "#{restaurant.name} ->" , "/#{restaurant.slug}", class: "text-blue-500 underline", title: "View your restaurant", target: "_blank" %>
+          <% end %>
+       </div>
+    <% end %>
   </div>
 </div>

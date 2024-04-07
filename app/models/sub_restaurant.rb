@@ -38,6 +38,7 @@ class SubRestaurant < ApplicationRecord
   belongs_to :restaurant
   belongs_to :layout, optional: true
   has_many :menus, dependent: :destroy
+  has_many :menu_categories, through: :menus, dependent: :destroy
   has_many :locations, as: :locatable, dependent: :destroy
 
   # --- validations ---

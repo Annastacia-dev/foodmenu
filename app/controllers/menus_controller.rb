@@ -6,14 +6,15 @@ class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
 
   def index
-    @menus = @restaurant.menus.order(:name).paginate(page: params[:page], per_page: 10)
+    @menus = @sub_restaurant ? @sub_restaurant.menus.order(:name).paginate(page: params[:page], per_page: 10) : @restaurant.menus.order(:name).paginate(page: params[:page], per_page: 10)
 
     respond_to do |format|
       if @menus.present?
         format.html
         format.json { render json: @menus }
       else
-        format.html { redirect_to new_restaurant_menu_path(@restaurant), notice: 'You have no menus yet. Add a new menu.' }
+        redirect_path = @sub_restaurant ? new_restaurant_sub_restaurant_menu_path(@restaurant, @sub_restaurant) : new_restaurant_menu_path(@restaurant)
+        format.html { redirect_to redirect_path, notice: 'You have no menus yet. Add a new menu.' }
         format.json { render json: { message: 'No menus found' }, status: :not_found }
       end
     end
@@ -36,9 +37,13 @@ class MenusController < ApplicationController
   def create
     @menu = @sub_restaurant ? @sub_restaurant.menus.new(menu_params) : @restaurant.menus.new(menu_params)
 
+    if @sub_restaurant
+      @menu.restaurant_id = @restaurant.id
+    end
+
     respond_to do |format|
       if @menu.save
-        redirect_path = request.referrer ? request.referrer : restaurant_menus_path(@restaurant)
+        redirect_path = @sub_restaurant ? restaurant_sub_restaurant_menus_path(@restaurant, @sub_restaurant) : restaurant_menus_path(@restaurant)
         format.html { redirect_to redirect_path, notice: 'Menu was successfully created.' }
         format.json { render :show, status: :created, location: [@restaurant, @menu] }
       else
@@ -54,7 +59,7 @@ class MenusController < ApplicationController
   def update
     respond_to do |format|
       if @menu.update(menu_params)
-        redirect_path = request.referrer ? request.referrer : restaurant_menus_path(@restaurant)
+        redirect_path =  restaurant_menus_path(@restaurant)
         format.html { redirect_to redirect_path, notice: 'Menu was successfully updated.' }
         format.json { render :show, status: :ok, location: [@restaurant, @menu] }
       else
@@ -87,6 +92,6 @@ class MenusController < ApplicationController
     end
 
     def menu_params
-      params.require(:menu).permit(:name, :description, :restaurant_id)
+      params.require(:menu).permit(:name, :description, :show_calories, :tax_behavior, :restaurant_id, :sub_restaurant_id)
     end
 end

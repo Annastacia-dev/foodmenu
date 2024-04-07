@@ -1,8 +1,19 @@
-<%= render 'components/breadcrumb', breadcrumbs: [
+<% breadcrumbs = [
   { text: 'Home', path: root_path},
-  { text: 'Menus', path: restaurant_menus_path(@restaurant)},
-  { text: 'New Menu', path: new_restaurant_menu_path(@restaurant) }
+ 
 ] %>
+
+
+<% if @restaurant.single? %>
+  <% breadcrumbs.insert(1, { text: 'Menus', path: restaurant_menus_path(@restaurant)}) %>
+  <% breadcrumbs <<  { text: 'New Menu', path: new_restaurant_menu_path(@restaurant) } %>
+<% elsif @restaurant.group? %>
+  <% breadcrumbs.insert(1, { text: 'Menus', path: restaurant_sub_restaurant_menus_path(@restaurant, @sub_restaurant)}) %>
+  <% breadcrumbs <<  { text: 'New Menu', path: new_restaurant_sub_restaurant_menu_path(@restaurant, @sub_restaurant) } %>
+<% end %>
+
+<%= render 'components/breadcrumb', breadcrumbs: breadcrumbs %>
+
 
 <div class='p-10'>
   <h4 class='font-semibold mb-5 uppercase underline'>Create a new menu</h4>

@@ -1,0 +1,18 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Restaurants', path: restaurant_sub_restaurants_path(@restaurant)},
+  { text: @sub_restaurant.name, path: restaurant_sub_restaurant_path(@restaurant, @sub_restaurant)}
+] %>
+
+<div class='p-3 flex flex-col gap-4'>
+  <div class="flex items-center justify-between gap-5 sm:w-3/4">
+    <h4 class='font-semibold mb-5 capitalize my-5'><%= @sub_restaurant.name %></h4>
+    <div data-controller="dropdown" class='relative'>
+      <button data-action="click->dropdown#toggle" class="btn-primary flex items-center gap-2 capitalize">
+          <span class>Actions</span>
+          <i class="fa-solid fa-caret-down"></i>
+      </button>
+      <%= render 'show_dropdown' %>
+    </div>
+  </div>
+</div>
