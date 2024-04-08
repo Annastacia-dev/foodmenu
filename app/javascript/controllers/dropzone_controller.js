@@ -31,7 +31,9 @@ export default class extends Controller {
 
     this.dropZone.on("removedfile", (file) => {
       file.controller && removeElement(file.controller.hiddenInput)
-      document.querySelector(".dz-message").style.display = "block"
+      if (this.dropZone.files.length === 0) {
+        document.querySelector(".dz-message").style.display = "block"
+      }
     })
 
     this.dropZone.on("canceled", (file) => {

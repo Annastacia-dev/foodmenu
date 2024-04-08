@@ -44,12 +44,12 @@
                     <%= render 'menu_categories/form', menu: menu, menu_category: menu.menu_categories.new %>
                    </div>
                   <% end %>
-                  <%= render 'components/drawer', button_text: "Edit", title: "Edit #{menu.name}", button_class: 'text-blue-500 hover:bg-blue-500 hover:text-white p-1', button_icon: 'fas fa-pencil-alt', id:'edit_menu_drawer' do %>
+                  <%= render 'components/drawer', button_text: "Edit", title: "Edit #{menu.menu_name}", button_class: 'text-blue-500 hover:bg-blue-500 hover:text-white p-1', button_icon: 'fas fa-pencil-alt', id:'edit_menu_drawer' do %>
                    <div class='mt-10'>
                     <%= render 'menus/form', menu: menu %>
                    </div>
                   <% end %>
-                  <%= render 'components/popconfirm', button_text: 'Delete', title: "Delete #{menu.name}", button_class: 'text-red-500 hover:bg-red-500 hover:text-white p-1', button_icon: 'fas fa-trash-alt', message: "Are you sure you want to delete #{menu.name}?<br />This action is permanent and cannot be undone.", path: restaurant_menu_path(@restaurant, menu), method: :delete, icon: 'fa-solid fa-circle-question', confirm_button_class: 'bg-red-500 text-white py-2 px-4 mr-2 rounded' %>
+                  <%= render 'components/popconfirm', button_text: 'Delete', title: "Delete #{menu.menu_name}", button_class: 'text-red-500 hover:bg-red-500 hover:text-white p-1', button_icon: 'fas fa-trash-alt', message: "Are you sure you want to delete #{menu.menu_name}?<br />This action is permanent and cannot be undone.", path: restaurant_menu_path(@restaurant, menu), method: :delete, icon: 'fa-solid fa-circle-question', confirm_button_class: 'bg-red-500 text-white py-2 px-4 mr-2 rounded' %>
                 </div>
               </td>
             </tr>
