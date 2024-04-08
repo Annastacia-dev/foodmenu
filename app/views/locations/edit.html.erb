@@ -11,9 +11,7 @@
 
 <%= render 'components/breadcrumb', breadcrumbs: breadcrumbs %>
 
-<% redirect_path = @restaurant.chain? ? locations_restaurant_path(@restaurant) : settings_restaurant_path(@restaurant) %>
-
 <div class='px-10 py-5'>
-  <h4 class='font-semibold mb-5 uppercase underline'>Edit location - <%= @restaurant.name %></h4>
-  
+  <h4 class='font-semibold mb-5 uppercase underline'>Edit location - <%= @location.location_name %></h4>
+  <%= render 'edit_form', location: @location, redirect_path: locations_restaurant_path(@restaurant) %>
 </div>

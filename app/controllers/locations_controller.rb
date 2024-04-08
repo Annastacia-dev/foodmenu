@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :find_location, only: %i[edit update destroy]
-  before_action :find_restaurant, only: %i[new create edit update destroy]
+  before_action :find_restaurant, only: %i[edit update destroy]
 
   def index
     @locations = Location.all
@@ -46,7 +46,7 @@ class LocationsController < ApplicationController
   private
 
   def find_location
-    @location = Location.find(params[:id])
+    @location = Location.friendly.find(params[:id])
   end
 
   def find_restaurant

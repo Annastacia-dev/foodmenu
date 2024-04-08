@@ -2,3 +2,9 @@
   { path: locations_restaurant_path(@restaurant), icon_class: 'fa-solid fa-store', menu_text: 'View locations' },
   { path: new_location_restaurant_path(@restaurant), icon_class: 'fa-solid fa-plus', menu_text: 'Add a new branch' }
 ] %>
+
+<%= render 'components/dropdown', title: 'menus', icon_class: 'fa-solid fa-utensils', items: [
+  { path: restaurant_menus_path(@restaurant), icon_class: 'fa-solid fa-utensils', menu_text: 'View menus' },
+  { path: new_restaurant_menu_path(@restaurant), icon_class: 'fa-solid fa-plus', menu_text: 'Add new menu' }
+] %>
+

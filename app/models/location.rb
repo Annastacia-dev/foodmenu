@@ -39,6 +39,7 @@ class Location < ApplicationRecord
 
   # ---callbacks---
   before_save :geocode_location
+  before_update :update_slug
 
   # --validations--
   validates :country, presence: true
@@ -51,7 +52,7 @@ class Location < ApplicationRecord
   # --instance methods--
 
   def location_name
-    "#{building_name}, #{area}, #{city}"
+    "#{locatable.name} #{building_name}, #{area}, #{city}"
   end
 
   private
@@ -64,5 +65,12 @@ class Location < ApplicationRecord
 
     self.latitude = geocode.latitude
     self.longitude = geocode.longitude
+  end
+
+  def update_slug
+   if slug.blank? || area_changed? || building_name_changed? || city_changed?
+      self.slug = nil
+      self.slug = generate_slug
+    end
   end
 end
