@@ -39,7 +39,7 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items center gap-10">
-                  <%= render 'components/drawer', button_text: 'Add Category', title: "Add Category to #{menu.name}", button_class: 'hover:bg-gray-900 hover:text-white p-1', button_icon: 'fas fa-plus', id:'new_category_drawer' do %>
+                  <%= render 'components/drawer', button_text: 'Add Category', title: "Add Category to #{menu.menu_name}", button_class: 'hover:bg-gray-900 hover:text-white p-1', button_icon: 'fas fa-plus', id:'new_category_drawer' do %>
                    <div class='mt-10'>
                     <%= render 'menu_categories/form', menu: menu, menu_category: menu.menu_categories.new %>
                    </div>

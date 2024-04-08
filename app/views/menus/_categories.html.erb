@@ -1,5 +1,5 @@
 <div class='sm:px-10 px-2 flex justify-end w-full'>
-  <%= render 'components/drawer', button_text: 'Add Category', title: "Add Category to #{@menu.name}", button_class: 'bg-gray-900 text-white px-4 py-2 text-sm rounded', button_icon: 'fas fa-plus', id:'new_category_drawer' do %>
+  <%= render 'components/drawer', button_text: 'Add Category', title: "Add Category to #{@menu.menu_name}", button_class: 'bg-gray-900 text-white px-4 py-2 text-sm rounded', button_icon: 'fas fa-plus', id:'new_category_drawer' do %>
     <div class='mt-10'>
       <%= render 'menu_categories/form', menu: @menu, menu_category: @menu.menu_categories.new %>
     </div>

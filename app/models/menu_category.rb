@@ -24,14 +24,17 @@ class MenuCategory < ApplicationRecord
   has_paper_trail
   acts_as_tree order: 'name'
 
-  # --concerns--
+  # --- concerns ---
   include Sluggable
   friendly_slug_scope to_slug: :name
 
-  # --associations--
+  # --- active storage ---
+  has_one_attached :image
+
+  # --- associations ---
   has_many :menu_items, dependent: :destroy
 
-  # --validations--
+  # --- validations ---
   validates :menu_id, presence: true, if: :is_parent?
   validates :name, presence: true
 

@@ -68,6 +68,42 @@ input[type="checkbox"]:focus {
   outline: 2px solid #000;
 }
 
+.dropzone {
+  display: flex;
+  gap: 5px;
+}
+
+.dropzone .dz-preview .dz-remove {
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  color: #fff;
+  margin-top: 8px;
+  background: #e74c3c;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+.dz-success-mark {
+  display: none;
+}
+
+.dz-error-mark {
+  display: none;
+}
+
+.dz-filename{
+  display: none;
+}
+
+.dz-error-message {
+  color: #e74c3c;
+  font-weight: 700;
+  font-size: 10px;
+}
+
 @layer components {
   .sidebar-item.active {
     @apply border-l-4 border-gray-100 bg-gray-700;
@@ -103,6 +139,12 @@ input[type="checkbox"]:focus {
 
   .btn-primary {
     @apply bg-gray-800 text-white py-2 px-4 rounded text-sm;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .dropzone {
+    flex-direction: column;
   }
 }
 

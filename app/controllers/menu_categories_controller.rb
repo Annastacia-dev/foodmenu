@@ -105,7 +105,7 @@ class MenuCategoriesController < ApplicationController
   end
 
   def menu_category_params
-    params.require(:menu_category).permit(:name, :description)
+    params.require(:menu_category).permit(:name, :description, :image)
   end
 
   def children_params

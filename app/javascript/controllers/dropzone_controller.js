@@ -26,10 +26,12 @@ export default class extends Controller {
       setTimeout(() => { file.accepted && createDirectUploadController(this, file).start() }, 500)
       document.querySelector(".dz-message").style.display = "none"
       this.submitButton.disabled = true
+      this.submitButton.style.backgroundColor = '#333'
     })
 
     this.dropZone.on("removedfile", (file) => {
       file.controller && removeElement(file.controller.hiddenInput)
+      document.querySelector(".dz-message").style.display = "block"
     })
 
     this.dropZone.on("canceled", (file) => {
@@ -42,6 +44,7 @@ export default class extends Controller {
 
     this.dropZone.on("queuecomplete", (file) => {
       this.submitButton.disabled = false
+      this.submitButton.style.backgroundColor = '#1F2937'
     })
   }
 
