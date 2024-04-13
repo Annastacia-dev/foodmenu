@@ -14,7 +14,14 @@
       Add Location
     <% end %>
   <% else %>
-    Show Locations
-    Add Location
+   <div class="flex justify-end mb-4 sm:w-3/4">
+      <%= link_to new_location_restaurant_path(@restaurant), class:'btn-primary' do %>
+        <i class="fas fa-plus"></i>
+        Add Location
+      <% end %>
+    </div>
+    <div>
+      <%= render 'restaurants/locations' %>
+    </div>
   <% end %>
 <% end %>
