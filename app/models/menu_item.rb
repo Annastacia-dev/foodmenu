@@ -50,6 +50,34 @@ class MenuItem < ApplicationRecord
   validates :description, presence: true
   validates :images, presence: true
 
+  # steps
+
+  def current_step
+    @current_step || steps.first
+  end
+
+  def steps
+    %[details media nutrition]
+  end
+
+  def next_step
+    return if last_step?
+    self.current_step = steps[steps.index(current_step) + 1]
+  end
+
+  def previous_step
+    return if first_step?
+    self.current_step = steps[steps.index(current_step) - 1]
+  end
+
+  def first_step?
+    current_step == steps.first
+  end
+
+  def last_step?
+    current_step == steps.last
+  end
+
   # --scopes--
 
   # --class methods--
