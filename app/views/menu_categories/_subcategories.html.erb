@@ -1,0 +1,66 @@
+<div class='px-10 py-4 flex justify-between w-11/12 items-center'>
+  <%= form_with url: restaurant_menu_menu_category_path(@restaurant, @menu, @menu_category), method: :get do |f| %>
+    <%= f.text_field :query, class: "p-2 border border-gray-300 rounded text-sm", placeholder: 'Search subcategory' %>
+    <button type="submit" class="bg-gray-800 text-white text-sm px-4 py-2 rounded hover:bg-gray-900">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+    <%= link_to restaurant_menu_menu_category_path(@restaurant, @menu, @menu_category), class: "bg-gray-900 text-white text-sm px-4 py-2 rounded hover:bg-gray-400" do %>
+      <i class="fas fa-sync"></i>
+    <% end %>
+  <% end %>
+  <%= render 'subcategory_form' %>
+</div>
+
+<% unless @subcategories.empty? %>
+  <div class='p-10 overflow-x-auto'>
+    <table class="w-11/12 border-separate border-spacing-x-0 border-spacing-y-2 text-xs">
+      <thead class='bg-gray-800'>
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            #
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            Name
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody class='bg-white divide-y divide-gray-200'>
+        <% @subcategories.each_with_index do |category, index| %>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <%= index + 1 %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <%= link_to category.name, restaurant_menu_menu_category_path(@restaurant, @menu, category), class: "font-semibold hover:underline hover:text-blue-400" %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items center gap-10">
+                <%= link_to new_restaurant_menu_menu_category_menu_item_path(@restaurant, @menu, category), class: "hover:bg-gray-900 hover:text-white p-1" do %>
+                  <i class="fas fa-plus"></i>
+                  <span class="ml-2">Add Item</span>
+                <% end %>
+                <%= link_to edit_restaurant_menu_menu_category_path(@restaurant, @menu, category), class: "text-blue-500 hover:bg-blue-500 hover:text-white p-1" do %>
+                  <i class="fas fa-pencil-alt"></i>
+                  <span class="ml-2">Edit</span>
+                <% end %>
+                <%= button_to restaurant_menu_menu_category_path(@restaurant, @menu, category), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:bg-red-500 hover:text-white p-1" do %>
+                  <i class="fas fa-trash"></i>
+                  <span class="ml-2">Delete</span>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class='flex flex-col items-center justify-center h-96'>
+    <h4 class='font-semibold mb-5'>You have no subcategories yet</h4>
+  </div>
+<% end %>
+
+<%= render 'components/pagination', records: @subcategories %>

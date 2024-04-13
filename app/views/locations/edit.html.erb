@@ -1,0 +1,17 @@
+<% breadcrumbs =  [
+  { text: 'Home', path: root_path},
+  { text: 'Restaurants', path: restaurant_path(@restaurant)},
+  { text:  "#{@restaurant.name}", path: restaurant_path(@restaurant) },
+  { text: 'Edit'}
+] %>
+
+<% if @restaurant.chain? %>
+  <% breadcrumbs.insert(3, { text: 'Branches', path: locations_restaurant_path(@restaurant) }) %>
+<% end %>
+
+<%= render 'components/breadcrumb', breadcrumbs: breadcrumbs %>
+
+<div class='px-10 py-5'>
+  <h4 class='font-semibold mb-5 uppercase underline'>Edit location - <%= @location.location_name %></h4>
+  <%= render 'edit_form', location: @location, redirect_path: locations_restaurant_path(@restaurant) %>
+</div>

@@ -1,0 +1,18 @@
+<%= form.label :images, class: "block font-medium text-gray-700 flex items-center gap-2 mt-4 mb-4" do %>
+  Videos
+<% end %>
+
+<div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-accepted-files="video/*" data-dropzone-max-file-size="100" data-dropzone-max-files="3" data-upload-multiple="true">
+  <%= form.file_field :videos, direct_upload: true, data: { dropzone_target: 'input' }, class: 'hidden' %>
+  <div class="dropzone-msg dz-message needsclick border px-5 mt-2" >
+    <div class="dropzone-msg-title flex flex-col justify-center items-center gap-7">
+      <i class="fa-solid  fa-video text-8xl"></i>
+      <h3 >
+        Drag and drop video files to upload<br />
+        <small class="dropzone-msg-desc">(Allowed file types: mp4, avi, mov, mkv | Max file size: 100MB | Max files: 3)</small>
+      </h3>
+      <p class="text-sm text-gray-500">or</p>
+      <button type="button" class="py-3 px-5 bg-gray-800 text-white inline-block font-medium cursor-pointer uppercase hover:bg-gray-900 text-sm mb-4">Select videos</button
+    </div>
+  </div>
+</div>

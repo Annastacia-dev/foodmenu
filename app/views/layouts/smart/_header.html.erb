@@ -1,0 +1,8 @@
+<div class='flex top-10 gap-4'>
+  <h1 class="font-semibold uppercase rotate-90 absolute -left-4">
+    <%= @category.name %>
+  </h1>
+</div>
+<div class="pt-20 px-8">
+  <%= render 'layouts/smart/category_items', category: @category %>
+</div>

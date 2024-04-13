@@ -1,0 +1,50 @@
+<div data-dropdown-target="menu" class="hidden text-white rounded flex flex-col gap-3 bg-gray-900 py-5 px-4 absolute text-xs mt-1 z-10 right-0 w-60">
+  <%= link_to edit_restaurant_sub_restaurant_path(@restaurant, @sub_restaurant), class: "flex items-center gap-2 hover:text-blue-200" do %>
+    <i class="fa-solid fa-pencil"></i>
+    <span>Edit</span>
+  <% end %>
+  <hr class='border border-gray-700'>
+
+  <% if @sub_restaurant.menus.blank? %>
+    <%= link_to new_restaurant_sub_restaurant_menu_path(@restaurant, @sub_restaurant), class: 'flex items-center gap-2 hover:text-violet-200' do %>
+      <i class="fa-solid fa-utensils" title="add a menu"></i>
+      <span>Add a Menu</span>
+    <% end %>
+    <hr class='border border-gray-700'>
+  <% else %>
+      <%= link_to restaurant_sub_restaurant_menus_path(@restaurant, @sub_restaurant), class: 'flex items-center gap-2 hover:text-violet-200' do %>
+        <i class="fa-solid fa-utensils" title="view menus"></i>
+        <span>View Menus</span>
+      <% end %>
+      <hr class='border border-gray-700'>
+      <%= link_to new_restaurant_sub_restaurant_menu_path(@restaurant, @sub_restaurant), class: 'flex items-center gap-2 hover:text-violet-200' do %>
+        <i class="fa-solid fa-utensils" title="add a menu"></i>
+        <span>Add a Menu</span>
+      <% end %>
+      <hr class='border border-gray-700'>
+  <% end %>
+  
+  <% if @sub_restaurant.locations.blank? %>
+    <%= link_to new_location_restaurant_sub_restaurant_path(@restaurant, @sub_restaurant), class: 'flex items-center gap-2 hover:text-green-200' do %>
+      <i class="fa-solid fa-location-dot" title="add a location"></i>
+      <span>Add Location</span>
+    <% end %>
+  <% else %>
+      <%= link_to locations_restaurant_sub_restaurant_path(@restaurant, @sub_restaurant), class: 'flex items-center gap-2 hover:text-green-200' do %>
+        <i class="fa-solid fa-location-dot" title="view locations"></i>
+        <span>View Locations</span>
+      <% end %>
+      <hr class="border border-gray-700">
+      <%= link_to new_location_restaurant_sub_restaurant_path(@restaurant, @sub_restaurant), class: 'flex items-center gap-2 hover:text-green-200' do %>
+        <i class="fa-solid fa-location-dot" title="view locations"></i>
+        <span>Add a Location</span>
+      <% end %>
+      <hr class="border border-gray-700">
+  <% end %>
+
+  <%= button_to restaurant_sub_restaurant_path(@restaurant, @sub_restaurant), method: :delete, data: { confirm: 'Are you sure you want to delete this restaurant?' }, class: "flex items-center gap-2 hover:text-red-200" do %>
+    <i class="fa-solid fa-trash"></i>
+    <span>Delete</span>
+  <% end %>
+
+</div>

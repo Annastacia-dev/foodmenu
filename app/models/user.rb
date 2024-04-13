@@ -23,7 +23,7 @@
 #  unlock_token           :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  restaurant_id          :uuid             not null
+#  restaurant_id          :uuid
 #
 # Indexes
 #
@@ -44,17 +44,18 @@ class User < ApplicationRecord
          :lockable, :trackable
   has_paper_trail
 
-  include SluggableModelConcern
+  include Sluggable
   friendly_slug_scope to_slug: :name
 
   # --- associations ---
-  belongs_to :restaurant
+  belongs_to :restaurant, optional: true
 
   # --- callbacks ---
   before_save :downcase_email
 
   # --- enums ---
   enum role: {
+    'super_admin': 'super_admin', # 'super_admin' is not a role in the system, it is used to identify the super admin user
     'admin': 'admin',
     'manager': 'manager',
     'staff': 'staff'
@@ -71,11 +72,20 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :role, presence: true
   validates :status, presence: true
+  validates :restaurant, presence: true, if: -> { role != 'super_admin' }
   validate :one_admin_per_restaurant
 
   # --- methods ---
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def super_admin?
+    role == 'super_admin'
+  end
+
+  def restaurant_user?
+    role.in?(%w[admin manager staff])
   end
 
   private
@@ -85,8 +95,10 @@ class User < ApplicationRecord
   end
 
   def one_admin_per_restaurant
-    if role == 'admin' && restaurant.users.where(role: 'admin').count > 0
-      errors.add(:role, 'cannot have more than one admin')
+    if new_record?
+      if role == 'admin' && restaurant.has_an_admin?
+        errors.add(:base, 'Restaurant cannot have more than one admin')
+      end
     end
   end
 end

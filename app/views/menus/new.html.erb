@@ -1,26 +1,23 @@
-<%= render 'breadcrumb' %>
+<% breadcrumbs = [
+  { text: 'Home', path: root_path},
+ 
+] %>
 
-<div class='grid sm:grid-cols-3 gap-4 py-10 px-8 sm:text-sm text-xs'>
-  <div class='flex sm:flex-col flex-row sm:gap-10 gap-5'>
-  <% @menu.steps.each_with_index do |step, index| %>
-    <div class='col-span-1 relative mb-10'>
-      <div class='flex sm:flex-row flex-col items-center gap-3'>
-        <div class="<%= @menu.current_step == step ? 'bg-gray-200 text-gray-800' : 'bg-gray-800 text-white ' %> h-10 w-10 rounded-full flex justify-center items-center">
-          <p class='text-center font-bold'><%= index + 1 %></p>
-        </div>
-        <h2 class='font-bold'><%= step.humanize %></h2>
-      </div>
-      <% unless index == @menu.steps.length - 1 %>
-        <hr class='border-2 border-gray-800 sm:rotate-90 absolute w-16 -left-3 -bottom-10 sm:block hidden'>
-      <% end %>
-    </div>
 
-  <% end %>
-  </div>
-  <div class='col-span-2'>
-    <%= render "#{@menu.current_step}", menu: @menu %>
-  </div>
+<% if @restaurant.single? %>
+  <% breadcrumbs.insert(1, { text: 'Menus', path: restaurant_menus_path(@restaurant)}) %>
+  <% breadcrumbs <<  { text: 'New Menu', path: new_restaurant_menu_path(@restaurant) } %>
+<% elsif @restaurant.group? %>
+  <% breadcrumbs.insert(1, { text: 'Menus', path: restaurant_sub_restaurant_menus_path(@restaurant, @sub_restaurant)}) %>
+  <% breadcrumbs <<  { text: 'New Menu', path: new_restaurant_sub_restaurant_menu_path(@restaurant, @sub_restaurant) } %>
+<% end %>
 
+<%= render 'components/breadcrumb', breadcrumbs: breadcrumbs %>
+
+
+<div class='p-10'>
+  <h4 class='font-semibold mb-5 uppercase underline'>Create a new menu</h4>
+  <%= render 'form', menu: @menu %>
 </div>
 
 

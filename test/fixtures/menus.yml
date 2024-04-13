@@ -5,7 +5,9 @@
 #  id                :uuid             not null, primary key
 #  description       :string
 #  name              :string
-#  tax_behavior      :integer          default(0)
+#  show_calories     :boolean          default(FALSE)
+#  slug              :string
+#  tax_behavior      :integer          default("inclusive")
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  restaurant_id     :uuid             not null
@@ -14,6 +16,7 @@
 # Indexes
 #
 #  index_menus_on_restaurant_id      (restaurant_id)
+#  index_menus_on_slug               (slug) UNIQUE
 #  index_menus_on_sub_restaurant_id  (sub_restaurant_id)
 #
 # Foreign Keys

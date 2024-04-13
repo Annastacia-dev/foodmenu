@@ -1,0 +1,10 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Themes', path: layouts_path},
+  {text: @layout.name, path: layout_path(@layout)},
+  { text: 'Edit'}
+] %>
+
+<div class='p-10'>
+  <%= render 'form', layout: @layout %>
+</div>

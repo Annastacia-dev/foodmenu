@@ -1,0 +1,15 @@
+<div data-controller='tabs' class="px-2 text-gray-900 capitalize">
+  <ul data-tabs-target="tabs" class="flex text-sm">
+    <% tabs.each do |tab| %>
+      <li data-action="click->tabs#activate" data-tabs-target="tab" data-tabs-action="click->tabs#activate" class="p-4 cursor-pointer border-b" data-tab="<%= tab[:id] %>">
+        <%= tab[:label] %>
+      </li>
+    <% end %>
+  </ul>
+
+  <% tabs.each do |tab| %>
+    <div data-tabs-target="panels" class="p-4" data-tab="<%= tab[:id] %>">
+      <%= render partial: tab[:partial] %>
+    </div>
+  <% end %>
+</div>

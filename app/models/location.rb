@@ -3,6 +3,7 @@
 # Table name: locations
 #
 #  id               :uuid             not null, primary key
+#  area             :string           not null
 #  building_name    :string
 #  city             :string
 #  country          :string           not null
@@ -14,6 +15,7 @@
 #  longitude        :decimal(10, 6)
 #  nearest_landmark :string           not null
 #  postal_code      :string
+#  slug             :string
 #  state            :string
 #  status           :integer          default("active")
 #  created_at       :datetime         not null
@@ -28,12 +30,47 @@ class Location < ApplicationRecord
   has_paper_trail
 
   # --concerns--
-  include StatusableModelConcern
+  include Statusable
+  include Sluggable
+  friendly_slug_scope to_slug: :location_name
 
   # --associations--
   belongs_to :locatable, polymorphic: true
 
+  # ---callbacks---
+  before_save :geocode_location
+  before_update :update_slug
+
   # --validations--
   validates :country, presence: true
   validates :nearest_landmark, presence: true
+
+  # --scopes--
+
+  # --class methods--
+
+  # --instance methods--
+
+  def location_name
+    "#{locatable.name} #{building_name}, #{area}, #{city}"
+  end
+
+  private
+
+  def geocode_location
+    return unless country_changed? || city_changed? || area_changed?
+
+    geocode = Geocoder.search("#{country}, #{city}, #{area}").first
+    return unless geocode
+
+    self.latitude = geocode.latitude
+    self.longitude = geocode.longitude
+  end
+
+  def update_slug
+   if slug.blank? || area_changed? || building_name_changed? || city_changed?
+      self.slug = nil
+      self.slug = generate_slug
+    end
+  end
 end

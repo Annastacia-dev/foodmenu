@@ -1,0 +1,20 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:gap-10 md:gap-6 gap-28 text-sm">
+  <% category.menu_items.order(:name).each do |item| %>
+    <div class="bg-gray-800 flex flex-col justify-start items-center relative rounded px-4 py-2 w-72 relative gap-2">
+      <div class='border border-gray-600 w-60 h-60 rounded-full p-3 flex justify-center items-center hover:animate-spin bg-gray-900 -mt-20'>
+        <%= image_tag url_for(item.images.first), class: "w-52 h-52 object-cover rounded-full" %>
+      </div>
+      <h2 class="font-semibold font-playfair capitalize text-xl">
+        <%= item.name %>
+      </h2>
+      <p class="text-gray-400 text-center text-sm capitalize">
+        <%= item.description %>
+      </p>
+      <div class="font-bold bg-cyan-500 px-4 py-2 absolute flex sm:-right-16 -right-6 sm:top-44 top-36 z-10">
+        <%= @restaurant.currency %> <%= item.price %>
+      </div>
+      <div class='bg-gray-800 text-white w-4 h-4 absolute sm:top-[170px] top-[140px] sm:right-6 right-16 rounded-full z-10 border'>
+      </div>
+    </div>
+  <% end %>
+</div>

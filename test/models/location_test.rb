@@ -3,6 +3,7 @@
 # Table name: locations
 #
 #  id               :uuid             not null, primary key
+#  area             :string           not null
 #  building_name    :string
 #  city             :string
 #  country          :string           not null
@@ -14,6 +15,7 @@
 #  longitude        :decimal(10, 6)
 #  nearest_landmark :string           not null
 #  postal_code      :string
+#  slug             :string
 #  state            :string
 #  status           :integer          default("active")
 #  created_at       :datetime         not null

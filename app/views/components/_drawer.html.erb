@@ -1,0 +1,19 @@
+<div data-controller="drawer">
+  <button data-action="click->drawer#toggle" class="<%= button_class %>">
+    <i class="<%= button_icon %>"></i>
+    <%= button_text %>
+  </button>
+
+  <div class="flex flex-col  fixed inset-0 left-3/4 bg-white border border-gray-800 font-normal text-sm z-10 hidden capitalize p-5 overflow-y-scroll w-11/12 max-w-2xl transform -translate-x-1/2" data-drawer-target="drawer" data-id="<%= id %>">
+    <div class='flex gap-10 items-center'>
+      <button data-action="click->drawer#close" class="text-gray-800 text-2xl">
+        &times;
+      </button>
+      <h2 class="text-gray-800 font-semibold uppercase">
+       <%= title %>
+      </h2>
+    </div>
+    <hr class="border border-gray-100">
+    <%= yield %>
+  </div>
+</div>

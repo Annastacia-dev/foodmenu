@@ -1,0 +1,10 @@
+<div class="py-4 px-8">
+  <hr class="border-b-2 border-white rounded w-20 my-2">
+  <h1 class="text-3xl font-bold capitalize <%= @category.children.blank? ? 'pb-24' : 'pb-8' %>">
+    <%= @category.name %>
+  </h1>
+
+  <%= render 'layouts/moderna/category_children', category: @category %>
+  <%= render 'layouts/moderna/category_items', category: @category %>
+
+</div>

@@ -1,0 +1,61 @@
+<div class='sm:px-10 px-2 flex justify-end w-full'>
+  <%= render 'components/drawer', button_text: 'Add Category', title: "Add Category to #{@menu.menu_name}", button_class: 'bg-gray-900 text-white px-4 py-2 text-sm rounded', button_icon: 'fas fa-plus', id:'new_category_drawer' do %>
+    <div class='mt-10'>
+      <%= render 'menu_categories/form', menu: @menu, menu_category: @menu.menu_categories.new %>
+    </div>
+  <% end %>
+</div>
+
+
+
+<% unless @menu_categories.empty? %>
+  <div class='sm:p-5 p-2 overflow-x-auto'>
+    <table class="w-full border-separate border-spacing-x-0 border-spacing-y-2 text-xs">
+      <thead class='bg-gray-800'>
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            #
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            Name
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody class='bg-white divide-y divide-gray-200 relative'>
+        <% @menu_categories.each_with_index do |category, index| %>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <%= index + 1 %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <%= link_to category.name, restaurant_menu_menu_category_path(@restaurant, @menu, category), class: "font-semibold hover:underline hover:text-blue-400" %>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-10">
+                <%= link_to new_restaurant_menu_menu_category_menu_item_path(@restaurant, @menu, category), class: 'text-gray-800 hover:bg-gray-800 hover:text-white p-1' do %>
+                  <i class="fas fa-plus"></i>
+                  <span>Add Item</span>
+                <% end %>
+                <%= render 'components/drawer', button_text: "Edit", title: "Edit #{category.name}", button_class: 'text-blue-500 hover:bg-blue-500 hover:text-white p-1', button_icon: 'fas fa-pencil-alt', id:'edit_category_drawer' do %>
+                  <div class='mt-10'>
+                    <%= render 'menu_categories/form', menu: @menu, menu_category: category %>
+                  </div>
+                <% end %>
+                <%= render 'components/popconfirm', button_text: 'Delete', title: "Delete #{category.name}", button_class: 'text-red-500 hover:bg-red-500 hover:text-white p-1', button_icon: 'fas fa-trash-alt', message: "Are you sure you want to delete #{category.name}?<br />This action is permanent and cannot be undone.", path: restaurant_menu_menu_category_path(@restaurant, @menu, category), method: :delete, icon: 'fa-solid fa-circle-question', confirm_button_class: 'bg-red-500 text-white py-2 px-4 mr-2 rounded' %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class='flex flex-col items-center justify-center h-96'>
+    <h4 class='text-2xl font-bold mb-5'>You have no menu categories yet</h4>
+  </div>
+<% end %>
+
+<%= render 'components/pagination', records: @menu_categories %>

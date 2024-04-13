@@ -1,0 +1,4 @@
+<%= render 'components/dropdown', title: 'restaurants', icon_class: 'fa-solid fa-store', items: [
+  { path: restaurant_sub_restaurants_path(@restaurant), icon_class: 'fa-solid fa-shop', menu_text: 'View restaurants' },
+  { path: new_restaurant_sub_restaurant_path(@restaurant), icon_class: 'fa-solid fa-plus', menu_text: 'Add a new restaurant' }
+] %>

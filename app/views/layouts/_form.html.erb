@@ -1,0 +1,44 @@
+<%= form_with(model: layout, class: 'py-5 sm:w-3/4 flex flex-col gap-4') do |form| %>
+
+  <%= render 'shared/error_messages', object: layout %>
+
+  <div class='flex flex-col gap-2'>
+    <%= form.label :name, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+      Name
+      <span class="text-xs text-red-500">*</span>
+    <% end %>
+    <%= form.text_field :name, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: true, placeholder: "e.g modern" %>
+  </div>
+
+  <div class='flex flex-col gap-2'>
+    <%= form.label :description, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+      Description
+      <span class="text-xs text-red-500">*</span>
+    <% end %>
+    <%= form.text_area :description, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs ", required: true, placeholder: "e.g modern theme", rows: 5 %>
+  </div>
+
+  <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-accepted-files="image/*" data-dropzone-max-file-size="50" data-dropzone-max-files="1" data-upload-multiple="true">
+    <%= form.label :image, class: "block font-medium text-gray-700 flex items-center gap-2 mt-4" do %>
+      Image
+      <span class="text-xs text-red-500">*</span>
+    <% end %>
+    <%= form.file_field :image, direct_upload: true, data: { dropzone_target: 'input' }, class: 'hidden', required: true %>
+    <div class="dropzone-msg dz-message needsclick border p-5 mt-2" >
+      <div class="dropzone-msg-title flex flex-col justify-center items-center gap-7">
+        <i class="fa-regular fa-image text-8xl"></i>
+        <h3 >
+          Drag and drop image files to upload<br />
+          <small class="dropzone-msg-desc">(Allowed file types: png, jpg, jpeg | Max file size: 50MB | Max files: 1)</small>
+        </h3>
+        <p class="text-sm text-gray-500">or</p>
+        <button type="button" class="py-3 px-5 bg-gray-800 text-white inline-block font-medium cursor-pointer uppercase hover:bg-gray-900 text-sm mb-4">Select images</button
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <%= form.submit  'Submit', class: "bg-gray-800 text-white font-semibold py-2 px-4 rounded cursor-pointer mt-7 sm:w-3/4 text-center" %>
+<% end %>

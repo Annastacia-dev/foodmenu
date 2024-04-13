@@ -1,0 +1,14 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Menus', path: restaurant_menus_path(@restaurant)},
+  { text: @menu.menu_name, path: restaurant_menu_path(@restaurant, @menu)}
+] %>
+
+
+
+<div class='p-10'>
+  <%= render 'components/tabs', tabs: [
+    { id: 'items', label: 'items', partial: 'menus/items' },
+    { id: 'categories', label: 'categories', partial: 'menus/categories' }
+  ] %>
+</div>

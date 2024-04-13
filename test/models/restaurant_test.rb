@@ -5,14 +5,25 @@
 #  id              :uuid             not null, primary key
 #  confirmed       :boolean          default(FALSE)
 #  confirmed_at    :datetime
+#  currency        :string           default("KES")
 #  email           :string           not null
 #  name            :string           not null
 #  phone           :string           not null
 #  restaurant_type :integer          default("single_restaurant(one restaurant, one location)")
+#  sample          :boolean          default(FALSE)
 #  slug            :string           not null
-#  status          :integer          default("active")
+#  status          :integer          default("inactive")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  layout_id       :uuid
+#
+# Indexes
+#
+#  index_restaurants_on_layout_id  (layout_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (layout_id => layouts.id)
 #
 require "test_helper"
 

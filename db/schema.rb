@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_07_184539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -54,6 +54,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "layouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_layouts_on_slug", unique: true
+  end
+
   create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "city"
     t.string "county"
@@ -71,34 +80,40 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
     t.uuid "locatable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "area", null: false
+    t.string "slug"
     t.index ["locatable_type", "locatable_id"], name: "index_locations_on_locatable"
   end
 
   create_table "menu_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.uuid "menu_id", null: false
+    t.uuid "menu_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.uuid "parent_id"
     t.index ["menu_id"], name: "index_menu_categories_on_menu_id"
+    t.index ["slug"], name: "index_menu_categories_on_slug", unique: true
   end
 
   create_table "menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.jsonb "ingredients", default: []
     t.string "description"
     t.float "price"
-    t.integer "item_type", default: 0
     t.boolean "vegan", default: false
     t.boolean "gluten_free", default: false
-    t.boolean "has_nuts", default: false
-    t.boolean "lactose_intolerant", default: false
+    t.boolean "contains_nuts", default: false
+    t.boolean "lactose_free", default: false
     t.boolean "halal", default: false
     t.uuid "menu_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "alcoholic", default: false
+    t.string "slug"
+    t.text "calories_info"
     t.index ["menu_category_id"], name: "index_menu_items_on_menu_category_id"
+    t.index ["slug"], name: "index_menu_items_on_slug", unique: true
   end
 
   create_table "menus", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -109,7 +124,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
     t.uuid "sub_restaurant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.boolean "show_calories", default: false
     t.index ["restaurant_id"], name: "index_menus_on_restaurant_id"
+    t.index ["slug"], name: "index_menus_on_slug", unique: true
     t.index ["sub_restaurant_id"], name: "index_menus_on_sub_restaurant_id"
   end
 
@@ -119,11 +137,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
     t.string "phone", null: false
     t.string "slug", null: false
     t.boolean "confirmed", default: false
-    t.integer "status", default: 0
+    t.integer "status", default: 1
     t.integer "restaurant_type", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "confirmed_at"
+    t.string "currency", default: "KES"
+    t.uuid "layout_id"
+    t.boolean "sample", default: false
+    t.index ["layout_id"], name: "index_restaurants_on_layout_id"
   end
 
   create_table "sub_restaurants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -135,6 +157,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
     t.uuid "restaurant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "layout_id"
+    t.integer "status", default: 0
+    t.index ["layout_id"], name: "index_sub_restaurants_on_layout_id"
     t.index ["restaurant_id"], name: "index_sub_restaurants_on_restaurant_id"
   end
 
@@ -146,7 +171,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
     t.string "role"
     t.string "slug"
     t.integer "status", default: 0
-    t.uuid "restaurant_id", null: false
+    t.uuid "restaurant_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -182,6 +207,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_165629) do
   add_foreign_key "menu_items", "menu_categories"
   add_foreign_key "menus", "restaurants"
   add_foreign_key "menus", "sub_restaurants"
+  add_foreign_key "restaurants", "layouts"
+  add_foreign_key "sub_restaurants", "layouts"
   add_foreign_key "sub_restaurants", "restaurants"
   add_foreign_key "users", "restaurants"
 end

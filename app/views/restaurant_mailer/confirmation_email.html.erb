@@ -1,22 +1,22 @@
 <div
-style="margin: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px; background-color: #f5f5f5; width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;"
+style="margin: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px; background-color: #fff; width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; font-family: 'Inter', sans-serif;"
 >
   <div
-  style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);"
+  style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px;"
   >
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-      <%= image_tag('https://foodmenuke.s3.eu-central-1.amazonaws.com/menu.png', alt: 'food•menu', style: 'width: 30px;') %>
-      <h1 style="font-family: 'Protest Riot', sans-serif; font-weight: 400; font-size: 16px;color: #9A0610 ">food•menu</h1>
+    <div style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
+      <%= image_tag(asset_url('logo.png'), style: 'width: 40px; height: 40px;') %>
+      <h1 style="font-weight: 700; font-size: 18px;color: #000 ">foodmenu</h1>
     </div>
     <p
-    style="line-height: 2;"
+    style="line-height: 2; font-weight: 600; font-size: 16px;"
     >
       Hi <%= @restaurant.name %>,
     </p>
     <p
     style="line-height: 2;"
     >
-      Thank you for signing up with us.
+      Let's get started! You're almost there.
       <br />
       Please confirm your email address to activate your account.
     </p>
@@ -28,14 +28,7 @@ style="margin: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; font
     <p
     style="line-height: 2;"
     >
-      <%= link_to 'Confirm email', confirm_email_restaurant_url(@restaurant), style: 'background-color: #9A0610; color: white; padding: 10px 30px; border-radius: 5px; text-decoration: none;', target: '_blank', rel: 'noopener' %>
-    </p>
-    <p
-    style="line-height: 2;"
-    >
-      Thanks, The
-      <span style="color: #9A0610; font-weight: 400; font-size: 16px; font-family: 'Protest Riot', serif;">food•menu</span>
-      team
+      <%= link_to 'Confirm email', confirm_email_restaurant_url(@restaurant), style: 'background-color: #000; color: white; padding: 10px 30px; border-radius: 5px; text-decoration: none;', target: '_blank', rel: 'noopener' %>
     </p>
   </div>
 </div>

@@ -1,0 +1,20 @@
+<% if @restaurant.single? || @restaurant.group? %>
+  <% if @restaurant.location.blank? %>
+   <%= link_to new_location_restaurant_path(@restaurant), class:'btn-primary' do %>
+    <i class="fas fa-plus"></i>
+    Add Location
+   <% end %>
+  <% else %>
+    <%= render 'locations/edit_form', location: @restaurant.location,redirect_path: settings_restaurant_path(@restaurant) %>
+  <% end %>
+<% elsif @restaurant.chain? %>
+  <% if @restaurant.locations.blank? %>
+    <%= link_to new_location_restaurant_path(@restaurant), class:'btn-primary' do %>
+      <i class="fas fa-plus"></i>
+      Add Location
+    <% end %>
+  <% else %>
+    Show Locations
+    Add Location
+  <% end %>
+<% end %>

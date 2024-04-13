@@ -5,7 +5,7 @@ module.exports = {
     './public/*.html',
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
-    './app/views/**/*.{erb,haml,html,slim}'
+    './app/views/**/**/*.{erb,haml,html,slim}'
   ],
   theme: {
     extend: {
@@ -13,7 +13,8 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
         playfair: ['Playfair Display', 'serif'],
         primary: ['Protest Riot', 'sans-serif'],
-        amatic: ['Amatic SC', 'sans-serif']
+        amatic: ['Amatic SC', 'sans-serif'],
+        quicksand: ['Quicksand', 'sans-serif'],
       },
       colors: {
         'secondary': '#9C4641',

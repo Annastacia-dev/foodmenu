@@ -1,51 +1,55 @@
 class MenusController < ApplicationController
 
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :set_restaurant
+  before_action :set_sub_restaurant
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
 
   def index
-    @menus = @restaurant.menus
+    @menus = @sub_restaurant ? @sub_restaurant.menus.order(:name).paginate(page: params[:page], per_page: 10) : @restaurant.menus.order(:name).paginate(page: params[:page], per_page: 10)
 
     respond_to do |format|
       if @menus.present?
         format.html
         format.json { render json: @menus }
       else
-        format.html { redirect_to new_restaurant_menu_path(@restaurant), notice: 'You have no menus yet. Add a new menu.' }
+        redirect_path = @sub_restaurant ? new_restaurant_sub_restaurant_menu_path(@restaurant, @sub_restaurant) : new_restaurant_menu_path(@restaurant)
+        format.html { redirect_to redirect_path, notice: 'You have no menus yet. Add a new menu.' }
         format.json { render json: { message: 'No menus found' }, status: :not_found }
       end
     end
   end
 
   def show
+    if params[:search]
+      @menu_categories = @menu.menu_categories.where("name ILIKE ?", "%#{params[:search]}%").order(:name).paginate(page: params[:page], per_page: 10 )
+      @menu_items = @menu.menu_items.where("name ILIKE ?", "%#{params[:search]}%").order(:name).paginate(page: params[:page], per_page: 10 )
+    else
+      @menu_categories = @menu.menu_categories.order(:name).paginate(page: params[:page], per_page: 10 )
+      @menu_items = @menu.menu_items.order(:name).paginate(page: params[:page], per_page: 10 )
+    end
   end
 
   def new
-    session[:menu_params] ||= {}
-    @menu = Menu.new
-    @menu.current_step = session[:menu_step]
+    @menu = @sub_restaurant ? @sub_restaurant.menus.new : @restaurant.menus.new
   end
 
   def create
-    session[:menu_params].deep_merge!(menu_params) if menu_params
-    @menu = Menu.new(session[:menu_params])
-    @menu.current_step = session[:menu_step]
-    if params[:back_button]
-      @menu.previous_step
-    else
-      @menu.next_step if @menu.valid?
-    end
-    session[:menu_step] = @menu.current_step
+    @menu = @sub_restaurant ? @sub_restaurant.menus.new(menu_params) : @restaurant.menus.new(menu_params)
 
-    if @menu.save
-      if @menu.last_step?
-        session[:menu_step] = session[:menu_params] = nil
-        redirect_to [@restaurant, @menu], notice: 'Menu was successfully created.'
+    if @sub_restaurant
+      @menu.restaurant_id = @restaurant.id
+    end
+
+    respond_to do |format|
+      if @menu.save
+        redirect_path = @sub_restaurant ? restaurant_sub_restaurant_menus_path(@restaurant, @sub_restaurant) : restaurant_menus_path(@restaurant)
+        format.html { redirect_to redirect_path, notice: 'Menu was successfully created.' }
+        format.json { render :show, status: :created, location: [@restaurant, @menu] }
       else
-        redirect_to new_restaurant_menu_path(@restaurant)
+        format.html { render :new }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
       end
-    else
-      redirect_to new_restaurant_menu_path(@restaurant)
     end
   end
 
@@ -55,7 +59,8 @@ class MenusController < ApplicationController
   def update
     respond_to do |format|
       if @menu.update(menu_params)
-        format.html { redirect_to [@restaurant, @menu], notice: 'Menu was successfully updated.' }
+        redirect_path =  restaurant_menus_path(@restaurant)
+        format.html { redirect_to redirect_path, notice: 'Menu was successfully updated.' }
         format.json { render :show, status: :ok, location: [@restaurant, @menu] }
       else
         format.html { render :edit }
@@ -67,7 +72,7 @@ class MenusController < ApplicationController
   def destroy
     @menu.destroy
     respond_to do |format|
-      format.html { redirect_to restaurant_menus_url(@restaurant), notice: 'Menu was successfully destroyed.' }
+      format.html { redirect_to restaurant_menus_url(@restaurant), notice: 'Menu was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -78,7 +83,15 @@ class MenusController < ApplicationController
       @restaurant = Restaurant.friendly.find(params[:restaurant_id])
     end
 
+    def set_sub_restaurant
+      @sub_restaurant = @restaurant.sub_restaurants.friendly.find(params[:sub_restaurant_id]) if params[:sub_restaurant_id]
+    end
+
     def set_menu
-      @menu = @restaurant.menus.find(params[:id])
+      @menu = @restaurant.menus.friendly.find(params[:id])
+    end
+
+    def menu_params
+      params.require(:menu).permit(:name, :description, :show_calories, :tax_behavior, :restaurant_id, :sub_restaurant_id)
     end
 end

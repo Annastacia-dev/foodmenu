@@ -1,0 +1,53 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Themes', path: layouts_path},
+] %>
+
+<div class='p-10'>
+  <div class='flex justify-between items-center gap-4'>
+    <h1 class='font-semibold uppercase'>Themes(<%= @layouts.count %>) </h1>
+    <% if current_user&.super_admin? %>
+      <%= link_to new_layout_path, class: "btn btn-primary capitalize" do %>
+        <i class="fa-solid fa-plus"></i>
+        <span>Add new theme</span>
+      <% end %>
+    <% end %>
+  </div>
+  <div class='mt-6 grid md:grid-cols-3 gap-4'>
+   <% @layouts.each do |layout| %>
+    <div class='flex flex-col items-center p-4 border-b border-gray-200 bg-white rounded shadow gap-5 hover:scale-105 transition duration-500 cursor-pointer'>
+      <div class='flex flex-col items-center gap-4'>
+        <% if layout.image.attached? %>
+          <%= image_tag(layout.image, alt: "layout", class: "h-64 w-96 object-cover") %>
+        <% else %>
+         <div class='h-64 w-96 bg-gray-200 flex justify-center items-center'>
+            <i class="fa-solid fa-image text-6xl text-gray-400"></i>
+          </div>
+        <% end %>
+        <h3 class='font-semibold text-gray-900 uppercase'><%= layout.name %></h3>
+      </div>
+      <% if current_user&.super_admin? %>
+        <div class='flex items-center gap-5 text-sm'>
+          <%= link_to layout, class: "text-blue-500 hover:underline", title: "View layout", target: "_blank" do %>
+            <i class="fa-solid fa-globe"></i>
+          <% end %>
+          <span class='text-gray-500'>|</span>
+          <%= link_to edit_layout_path(layout), class: "text-blue hover:underline", title: "Edit layout" do %>
+            <i class="fa-solid fa-edit"></i>
+          <% end %>
+          <span class='text-gray-500'>|</span>
+          <%= link_to layout, method: :delete, data: { confirm: "Are you sure you want to delete #{layout.name}?" }, class: "text-red-500 hover:underline", title: "Delete layout" do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
+        </div>
+      <% else %>
+        <div class='flex items-center gap-5 text-sm'>
+          <%= link_to layout, class: "text-blue-500 underline", title: "View layout", target: "_blank" do %>
+            View ->
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+   <% end %>
+  </div>
+</div>

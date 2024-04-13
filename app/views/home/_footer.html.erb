@@ -1,15 +1,56 @@
-<footer class="flex sm:flex-row flex-col justify-around items-center p-8 text-sm gap-4">
-  <div class="flex flex-col justify-cenetr items-center gap-2">
-    <%=image_tag 'menu.png', alt: 'logo', class: 'w-10 h-10'%>
-    <p class="ml-2 text-primary font-primary text-xl">food•menu</p>
+<footer id="contacts" class="p-8 text-sm bg-black text-white flex flex-col gap-2 mt-12">
+  <div class="flex gap-2  items-center">
+    <a href="#contacts" class="sm:text-4xl text-2xl font-bold text-right hover:underline">
+    contact us.
+    </a>
+    <hr class='w-1/6 border-t-2 border-white'>
   </div>
-  <div class="flex flex-col gap-4 text-center">
-    <a href="/about" class="hover:text-primary capitalize underline">Terms & conditions</a>
-    <a href="/privacy" class="hover:text-primary capitalize underline">Privacy policy</a>
+
+ <div class="flex sm:flex-row flex-col sm:justify-around justify-center items-center sm:gap-4 gap-16 mt-8">
+    <div class="flex flex-col justify-center items-center gap-2">
+      <%=image_tag 'logo-white.png', alt: 'logo', class: 'w-10 h-10'%>
+      <p class="ml-2  text-xl font-bold">foodmenu</p>
+    </div>
+
+    <div class="flex flex-col gap-4 sm:items-start items-center">
+      <p class="uppercase font-bold">Reach Out</p>
+      <p class="flex gap-2">
+       <i class="fas fa-map-marker-alt"></i>
+        <span> 123, Main Street, Nairobi, Kenya</span>
+      </p>
+      <p class="flex gap-2">
+        <i class="fas fa-phone-alt"></i>
+        <span> +254 768 372 439</span>
+      </p>
+      <p class="flex gap-2">
+        <i class="fas fa-envelope"></i>
+        <span>
+          <%= mail_to "noreply@foodmenu.lol" %>
+        </span>
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-4 sm:items-start items-center">
+      <p class="uppercase font-bold">Quick Links</p>
+      <%= link_to "Get Started", new_restaurant_path, class: "hover:underline" %>
+      <%= link_to "Sign In", new_user_session_path, class: "hover:underline" %>
+      <%= link_to "Restaurants", restaurants_path, class: "hover:underline" %>
+      <%= link_to "Themes", layouts_path, class: "hover:underline" %>
+    </div>
+
+    <div class="flex flex-col gap-4 sm:items-start items-center">
+      <p class="uppercase font-bold">Useful Links</p>
+      <a href="#pricing" class="capitalize hover:underline">Pricing</a>
+      <a href="#demo" class="capitalize hover:underline">Schedule a demo</a>
+      <a href="#contacts" class="capitalize hover:underline> Contact us</a>
+      <a href="/about" class="capitalize hover:underline">Terms & conditions</a>
+      <a href="/privacy" class="capitalize hover:underline">Privacy policy</a>
+    </div>
   </div>
+  <hr class="border border-white my-4">
+  <footer class="flex justify-center items-center p-4 text-sm gap-2">
+    <p>© <%= Time.now.year %>  All rights reserved</p> | <p class="hover:underline"> <%= link_to 'food menu', 'https://foodmenu.lol', target: '_blank' %> </p> | <p class="hover:underline"> <%= link_to 'Webcafe Africa', 'https://webcafe.africa', target: '_blank' %> </p>
+  </footer>
 </footer>
-<hr class="border border-primary">
-<footer class="flex justify-center items-center p-4 text-sm">
-  <p>© <%= Time.now.year %>  All rights reserved</p>
-</footer>
+
 

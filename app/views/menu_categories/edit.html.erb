@@ -1,0 +1,12 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Menus', path: restaurant_menus_path(@restaurant)},
+  { text: @menu.menu_name, path: restaurant_menu_path(@restaurant, @menu)},
+  { text: @menu_category.name, path: restaurant_menu_menu_category_path(@restaurant, @menu, @menu_category)},
+  { text: 'Edit', path: edit_restaurant_menu_menu_category_path(@restaurant, @menu, @menu_category) }
+] %>
+
+<div class='p-10'>
+  <h4 class='font-semibold mb-5 uppercase underline'>edit category</h4>
+  <%= render 'form', menu_category: @menu_category %>
+</div>

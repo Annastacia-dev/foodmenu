@@ -1,49 +1,60 @@
-<div class='flex flex-col justify-center items-center mt-10'>
-  <h2 class='text-2xl text-center capitalize font-primary'>Set up an admin user </h2>
+<div class="grid sm:grid-cols-3 grid-cols-1">
 
-   <%= form_for(resource, as: resource_name, url: user_registration_path, method: :post, html: { class: "flex flex-col gap-10 mt-5" }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <%= f.hidden_field :email, value: @restaurant.email %>
-    <%= f.hidden_field :restaurant_id, value: @restaurant.id %>
-    <%= f.hidden_field :role, value: 'admin' %>
+  <div class="col-span-2 px-10 sm:w-3/4">
 
-    <div class="flex flex-col gap-i">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, disabled: true, class: "bg-gray-100", value: @restaurant.email %>
+    <div class="flex gap-2  items-center mb-5">
+      <a href="/users/sign_up/#{@restaurant.slug}" class="sm:text-4xl text-2xl font-bold text-right hover:underline">set up an admin user.</a>
+      <hr class='w-1/6 border-t-2 border-gray-900'>
     </div>
 
-    <div class='grid sm:grid-cols-2 grid-cols-1 gap-6'>
-      <div class="flex flex-col gap-1">
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name, autofocus: true %>
+    <%= form_for(resource, as: resource_name, url: user_registration_path, method: :post, html: { class: "flex flex-col gap-8 "  }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :email, value: @restaurant.email %>
+      <%= f.hidden_field :restaurant_id, value: @restaurant.id %>
+      <%= f.hidden_field :role, value: 'admin' %>
+
+      <div class="flex flex-col gap-4 mb-4">
+        <%= f.label :email, class: "block font-medium text-gray-900 text-sm"  %>
+        <%= f.email_field :email, autofocus: true, disabled: true, class: "border-2 border-black bg-black outline-none focus:outline-none py-2 px-4 text-white placeholder:text-gray-900 placeholder:text-xs", value: @restaurant.email %>
       </div>
 
-      <div class="flex flex-col gap-1">
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name, autofocus: true %>
-      </div>
-
-      <div class="flex flex-col gap-1">
-        <div class="flex gap-1">
-            <%= f.label :password %>
-            <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %>
+      <div class='grid sm:grid-cols-2 grid-cols-1 gap-6'>
+        <div class="flex flex-col gap-4 mb-4">
+          <%= f.label :first_name, class: "block font-medium text-gray-900 text-sm"  %>
+          <%= f.text_field :first_name, autofocus: true, class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs" %>
         </div>
-        <%= f.password_field :password, autocomplete: "new-password" %>
+
+        <div class="flex flex-col gap-4 mb-4">
+          <%= f.label :last_name, class: "block font-medium text-gray-900 text-sm"  %>
+          <%= f.text_field :last_name, autofocus: true, class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs" %>
+        </div>
+
+        <div class="flex flex-col gap-4 mb-4">
+          <div class="flex gap-2">
+              <%= f.label :password, class: "block font-medium text-gray-900 text-sm"  %>
+              <% if @minimum_password_length %>
+              <em class="block font-medium text-gray-900 text-sm">(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
+          </div>
+          <%= f.password_field :password, autocomplete: "new-password", class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs" %>
+        </div>
+
+        <div class="flex flex-col gap-4 mb-4">
+          <%= f.label :password_confirmation, class: "block font-medium text-gray-900 text-sm"  %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "border-2 border-black bg-transparent outline-none focus:outline-none py-2 px-4 text-black placeholder:text-gray-900 placeholder:text-xs" %>
+        </div>
       </div>
 
-      <div class="flex flex-col gap-1">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <div>
+        <%= f.submit "Submit", class: "py-2 mt-4 px-5 bg-black text-center text-white font-medium cursor-pointer rounded w-48" %>
       </div>
-    </div>
+     <% end %>
 
-    <div class="flex justify-center items-center">
-      <%= f.submit "Submit", class: "bg-primary text-white py-2 px-4 cursor-pointer font-medium" %>
-    </div>
-    <% end %>
+    <%= render "devise/shared/links" %>
+  </div>
 
-  <%= render "devise/shared/links" %>
+  <div class="col-span-1 -mt-16 sm:flex hidden">
+   <%= image_tag('menu-5.jpg', class: "w-full h-full object-cover") %>
+  </div>
 
 </div>

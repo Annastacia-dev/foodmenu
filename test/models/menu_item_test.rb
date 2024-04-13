@@ -2,25 +2,26 @@
 #
 # Table name: menu_items
 #
-#  id                 :uuid             not null, primary key
-#  alcoholic          :boolean          default(FALSE)
-#  description        :string
-#  gluten_free        :boolean          default(FALSE)
-#  halal              :boolean          default(FALSE)
-#  has_nuts           :boolean          default(FALSE)
-#  ingredients        :jsonb
-#  item_type          :integer          default(NULL)
-#  lactose_intolerant :boolean          default(FALSE)
-#  name               :string
-#  price              :float
-#  vegan              :boolean          default(FALSE)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  menu_category_id   :uuid             not null
+#  id               :uuid             not null, primary key
+#  alcoholic        :boolean          default(FALSE)
+#  calories_info    :text
+#  contains_nuts    :boolean          default(FALSE)
+#  description      :string
+#  gluten_free      :boolean          default(FALSE)
+#  halal            :boolean          default(FALSE)
+#  lactose_free     :boolean          default(FALSE)
+#  name             :string
+#  price            :float
+#  slug             :string
+#  vegan            :boolean          default(FALSE)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  menu_category_id :uuid             not null
 #
 # Indexes
 #
 #  index_menu_items_on_menu_category_id  (menu_category_id)
+#  index_menu_items_on_slug              (slug) UNIQUE
 #
 # Foreign Keys
 #

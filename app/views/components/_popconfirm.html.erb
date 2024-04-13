@@ -1,0 +1,19 @@
+<div data-controller="confirmation-modal">
+  <button data-action="click->confirmation-modal#open" class="<%= button_class %>">
+    <i class="<%= button_icon %>"></i>
+    <span class='ml-2'><%= button_text %></span>
+  </button>
+
+  <div class="hidden absolute right-0 top-0 bg-white border border-gray-300 p-4 rounded shadow-md z-10 overflow-y-auto" data-confirmation-modal-target="modal">
+    <p class="flex items-center gap-3 mb-4">
+      <i class="<%= icon %>"></i>
+      <span class='font-semibold'><%= title %></span>
+    </p>
+    <p class='mb-6'><%= message.html_safe %></p>
+    <div class="flex gap-3 justify-end">
+      <button class="border border-gray-800 text-gray-900 py-2 px-4 rounded" data-action="click->confirmation-modal#close"
+      >Cancel</button>
+      <%= button_to button_text, path, method: method, class: confirm_button_class %>
+    </div>
+  </div>
+</div>

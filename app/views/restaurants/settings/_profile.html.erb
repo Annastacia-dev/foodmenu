@@ -1,0 +1,19 @@
+<%= form_with(model: @restaurant, class: 'py-5 sm:w-3/4 flex flex-col gap-4') do |form| %>
+  <%= render 'shared/error_messages', object: @restaurant %>
+
+  <div class='flex flex-col gap-2'>
+    <%= form.label :name, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+      Name
+      <span class="text-xs text-red-500">*</span>
+    <% end %>
+    <%= form.text_field :name, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: true %>
+  </div>
+
+  <div class='flex flex-col gap-2'>
+    <%= form.label :email, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+      Email
+      <span class="text-xs text-red-500">*</span>
+    <% end %>
+    <%= form.email_field :email, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: true %>
+  </div>
+<% end %>

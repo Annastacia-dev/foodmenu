@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "foodmenu <info@webcafe.africa>"
+  default from: "<noreply@foodmenu.lol>"
   layout 'mailer'
 end

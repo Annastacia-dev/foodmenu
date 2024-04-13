@@ -1,0 +1,10 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Themes', path: layouts_path},
+  { text: 'New'}
+] %>
+
+<div class='p-10'>
+  <h4 class='font-semibold mb-5 uppercase underline'>Create a new theme</h4>
+  <%= render 'form', layout: @layout %>
+</div>

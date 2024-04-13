@@ -1,0 +1,75 @@
+<%= form_with(model: location, class: "flex flex-col gap-5 sm:w-3/4 text-sm
+text-sm") do |form| %>
+  <%= render 'shared/error_messages', object: location %>
+
+  <%= form.hidden_field :locatable_id, value: locatable_id %>
+  <%= form.hidden_field :locatable_type, value: locatable_type %>
+  <%= form.hidden_field :redirect_path, value: redirect_path %>
+
+  <div class="grid sm:grid-cols-2 grid-cols-1 gap-5">
+    <div class='flex flex-col gap-1'>
+      <%= form.label :country, class: "block font-medium text-gray-700 flex items-center" do %>
+        Country
+        <span class="text-red-500">*</span>
+      <% end %>
+      <%= form.text_field :country, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: true , value: @user_location.country, placeholder: "e.g 'Kenya'" %>
+    </div>
+
+    <div class='flex flex-col gap-1'>
+      <%= form.label :county, class: "block font-medium text-gray-700 flex items-center gap-2"%>
+      <%= form.text_field :city, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", value: @user_location.region, placeholder: "e.g 'Nairobi'" %>
+    </div>
+
+    <div class='flex flex-col gap-1'>
+      <%= form.label :state, class: "block font-medium text-gray-700 flex items-center gap-2"%>
+      <%= form.text_field :state, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", value: @user_location.state %>
+    </div>
+
+    <div class='flex flex-col gap-1'>
+      <%= form.label :city, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+        City
+        <span class="text-red-500">*</span>
+      <% end %>
+      <%= form.text_field :city, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", value: @user_location.city, placeholder: "e.g 'Nairobi'" %>
+    </div>
+
+    <div class='flex flex-col gap-1'>
+      <%= form.label :area, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+        Area
+        <span class="text-red-500">*</span>
+      <% end %>
+      <%= form.text_field :area, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", value: @user_location.city, placeholder: "e.g 'Karen'", required: true %>
+    </div>
+
+    <div class='flex flex-col gap-1'>
+      <%= form.label :building_name, class: "block font-medium text-gray-700 flex items-center gap-2" %>
+      <%= form.text_field :building_name, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12" %>
+    </div>
+
+    <div class='flex flex-col gap-1'>
+      <%= form.label :floor_number, class: "block font-medium text-gray-700 flex items-center gap-2"  %>
+      <%= form.text_field :floor_number, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12" %>
+    </div>
+
+    <div class='flex flex-col gap-1'>
+      <%= form.label :nearest_landmark, class: "block font-medium text-gray-700 flex items-center gap-2" do %>
+        Nearest Landmark
+        <span class="text-red-500">*</span>
+      <% end %>
+      <%= form.text_field :nearest_landmark, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12", required: true %>
+    </div>
+
+    <div class='flex flex-col gap-1'>
+      <%= form.label :postal_code, class: "block font-medium text-gray-700 flex items-center gap-2"%>
+      <%= form.text_field :postal_code, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12" %>
+    </div>
+
+    <div class='flex flex-col gap-1'>
+      <%= form.label :extra_directions, class: "block font-medium text-gray-700 flex items-center gap-2"%>
+      <%= form.text_field :extra_directions, class: "shadow border border-gray-200 outline-none px-3 py-2 mt-2 w-full text-xs h-12" %>
+    </div>
+  </div>
+
+  <%= form.submit 'Submit', class: "bg-gray-900 text-white px-5 py-2 rounded sm:w-40 cursor-pointer" %>
+
+<% end %>

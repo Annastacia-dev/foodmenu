@@ -1,0 +1,7 @@
+<%= form_with url: new_restaurant_menu_path(@restaurant, @restaurant.menus.new), class: 'flex flex-col gap-4 mt-10 sm:w-3/4', method: :post do |f| %>
+  <%= f.label :name do %>
+    <span>Name</span>
+  <% end %>
+  <%= f.text_field :name, class: "p-2 border border-gray-300 rounded text-sm", placeholder: 'Menu Name' %>
+  <%= f.submit "Add Menu", class: "bg-gray-800 text-white text-sm px-4 py-2 rounded hover:bg-gray-900 cursor-pointer" %>
+<% end %>

@@ -1,0 +1,11 @@
+<%= render 'components/breadcrumb', breadcrumbs: [
+  { text: 'Home', path: root_path},
+  { text: 'Restaurants', path: restaurant_sub_restaurants_path(@restaurant)},
+  { text: 'New Restaurant', path: new_restaurant_sub_restaurant_path(@restaurant) }
+] %>
+
+<div class='px-10 py-5'>
+  <h4 class='font-semibold mb-5 uppercase underline'>Add a new restaurant</h4>
+  <%= render 'form', sub_restaurant: @sub_restaurant %>
+</div>
+
