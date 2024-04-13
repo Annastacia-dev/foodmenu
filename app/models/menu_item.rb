@@ -57,7 +57,7 @@ class MenuItem < ApplicationRecord
   end
 
   def steps
-    %[details media nutrition]
+    %w[details media nutrition]
   end
 
   def next_step

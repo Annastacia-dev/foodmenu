@@ -2,22 +2,31 @@
 
   <%= render 'shared/error_messages', object: menu_item %>
 
-  <div>
-    <div class='grid md:grid-cols-2 gap-10'>
-      <%= render 'details', form: form %>
-      <%= render 'nutrition', form: form %>
+  <div class="sm:grid sm:grid-cols-4 gap-4 flex flex-col">
+    <div class="sm:col-span-1 flex sm:flex-col flex-row sm:gap-12">
+      <% menu_item.steps.each_with_index do |step, index| %>
+        <div class="flex flex-col gap-3">
+          <div class="h-10 w-10 rounded-full flex items-center justify-center <%= step == menu_item.current_step ? 'bg-gray-900 text-white' : 'bg-white text-gray-900' %> ">
+            <%= index + 1 %>
+          </div>
+          <span class="text-xs text-gray-700 uppercase font-semibold">
+            <%= step %>
+          </span>
+        </div>
+        <% if index < menu_item.steps.length - 1 %>
+          <div class="h-1 w-20 bg-gray-900 rotate-90 -ml-5"></div>
+        <% end %>
+      <% end %>
     </div>
-    <div class="flex flex-col">
+    <div class="sm:col-span-3">
+      <%= render "#{menu_item.current_step}", form: form %>
       <div>
-        <%= render 'images', form: form %>
-      </div>
-      <div>
-        <%= render 'videos', form: form %>
+        <%= form.submit  'Submit', class: "bg-gray-800 text-white font-semibold py-2 px-4 rounded cursor-pointer mt-7 sm:w-40 text-center" %>
       </div>
     </div>
   </div>
 
 
 
-  <%= form.submit  'Submit', class: "bg-gray-800 text-white font-semibold py-2 px-4 rounded cursor-pointer mt-7 sm:w-40 text-center" %>
+  
 <% end %>

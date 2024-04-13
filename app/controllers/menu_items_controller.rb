@@ -25,17 +25,32 @@ class MenuItemsController < ApplicationController
   end
 
   def new
+    session[:menu_item_params] ||= {}
     @menu_item = @menu_category.menu_items.new
+    @menu_item.current_step = session[:menu_item_step]
   end
 
   def create
-    @menu_item = @menu_category.menu_items.new(menu_item_params)
+    session[:menu_item_params].deep_merge!(params[:menu_item]) if params[:menu_item]
+    @menu_item = @menu_category.menu_items.new(session[:menu_item_params])
+    @menu_item.current_step = session[:menu_item_step]
+
+    if params[:back_button]
+      @menu_item.previous_step
+    else
+      @menu_item.next_step if @menu_item.valid?
+    end
+
+    session[:menu_item_step] = @menu_item.current_step
 
     respond_to do |format|
       if @menu_item.save
-        redirect_path = restaurant_menu_path(@restaurant, @menu, tab: 'items')
-        format.html { redirect_to redirect_path, notice: 'Menu item was successfully created.' }
-        format.json { render :show, status: :created, location: [@restaurant, @menu, @menu_category, @menu_item] }
+        if @menu_item.current_step == @menu_item.steps.last
+          session[:menu_item_step] = session[:menu_item_params] = nil
+          redirect_path = restaurant_menu_path(@restaurant, @menu, tab: 'items')
+          format.html { redirect_to redirect_path, notice: 'Menu item was successfully created.' }
+          format.json { render :show, status: :created, location: [@restaurant, @menu, @menu_category, @menu_item] }
+        end
       else
         errors= @menu_item.errors.full_messages.join(', ')
         format.html { render :new }
