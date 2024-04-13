@@ -2,11 +2,11 @@
 
   <%= render 'shared/error_messages', object: menu_item %>
 
-  <div class="sm:grid sm:grid-cols-4 gap-4 flex flex-col">
-    <div class="sm:col-span-1 flex sm:flex-col flex-row sm:gap-12">
+  <div class="sm:grid sm:grid-cols-4 gap-4 flex flex-col px-5">
+    <div class="sm:col-span-1 flex sm:flex-col flex-row sm:gap-8">
       <% menu_item.steps.each_with_index do |step, index| %>
         <div class="flex flex-col gap-3">
-          <div class="h-10 w-10 rounded-full flex items-center justify-center <%= step == menu_item.current_step ? 'bg-gray-900 text-white' : 'bg-white text-gray-900' %> ">
+          <div class="h-10 w-10 rounded-full flex items-center justify-center <%= step == menu_item.current_step ? 'bg-gray-900 text-white' : 'bg-gray-300 text-gray-900' %> ">
             <%= index + 1 %>
           </div>
           <span class="text-xs text-gray-700 uppercase font-semibold">
@@ -14,19 +14,18 @@
           </span>
         </div>
         <% if index < menu_item.steps.length - 1 %>
-          <div class="h-1 w-20 bg-gray-900 rotate-90 -ml-5"></div>
+          <div class="h-1 w-10 bg-gray-900 rotate-90"></div>
         <% end %>
       <% end %>
     </div>
     <div class="sm:col-span-3">
       <%= render "#{menu_item.current_step}", form: form %>
-      <div>
-        <%= form.submit  'Submit', class: "bg-gray-800 text-white font-semibold py-2 px-4 rounded cursor-pointer mt-7 sm:w-40 text-center" %>
+      <div class="flex gap-4">
+        <% unless menu_item.first_step? %>
+          <%= form.button 'Previous', type: 'submit', name: 'back_button', class: "bg-gray-200 text-gray-900 font-semibold py-2 px-4 rounded cursor-pointer mt-7 sm:w-40 text-center" %>
+        <% end %>
+        <%= form.submit  menu_item.last_step? ? 'Create Item' : 'Next', class: "bg-gray-800 text-white font-semibold py-2 px-4 rounded cursor-pointer mt-7 sm:w-40 text-center" %>
       </div>
     </div>
   </div>
-
-
-
-  
 <% end %>

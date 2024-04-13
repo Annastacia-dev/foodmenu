@@ -1,21 +1,22 @@
 
+<div class="flex flex-col gap-4">
+  <%= form.label :images, class: "block font-medium text-gray-700 flex items-center gap-2 mt-4 mb-4" do %>
+    Images
+    <span class="text-xs text-red-500">*</span>
+  <% end %>
 
-<%= form.label :images, class: "block font-medium text-gray-700 flex items-center gap-2 mt-4 mb-4" do %>
-  Images
-  <span class="text-xs text-red-500">*</span>
-<% end %>
-
-<div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-accepted-files="image/*" data-dropzone-max-file-size="50" data-dropzone-max-files="5" data-upload-multiple="true" class='sm:w-3/4'>
-  <%= form.file_field :images, direct_upload: true, data: { dropzone_target: 'input' }, class: 'hidden', required: true %>
-  <div class="dropzone-msg dz-message needsclick border px-5 mt-1" >
-    <div class="dropzone-msg-title flex flex-col justify-center items-center gap-7">
-      <i class="fa-regular fa-image text-8xl"></i>
-      <h3 >
-        Drag and drop image files to upload<br />
-        <small class="dropzone-msg-desc">(Allowed file types: png, jpg, jpeg | Max file size: 50MB | Max files: 5)</small>
-      </h3>
-      <p class="text-sm text-gray-500">or</p>
-      <button type="button" class="py-3 px-5 bg-gray-800 text-white inline-block font-medium cursor-pointer uppercase hover:bg-gray-900 text-sm mb-4">Select images</button
+  <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-accepted-files="image/*" data-dropzone-max-file-size="50" data-dropzone-max-files="5" data-upload-multiple="true" class='sm:w-3/4'>
+    <%= form.file_field :images, direct_upload: true, data: { dropzone_target: 'input' }, class: 'hidden', required: true %>
+    <div class="dropzone-msg dz-message needsclick border px-5 mt-1" >
+      <div class="dropzone-msg-title flex flex-col justify-center items-center gap-7">
+        <i class="fa-regular fa-image text-8xl"></i>
+        <h3 >
+          Drag and drop image files to upload<br />
+          <small class="dropzone-msg-desc">(Allowed file types: png, jpg, jpeg | Max file size: 50MB | Max files: 5)</small>
+        </h3>
+        <p class="text-sm text-gray-500">or</p>
+        <button type="button" class="py-3 px-5 bg-gray-800 text-white inline-block font-medium cursor-pointer uppercase hover:bg-gray-900 text-sm mb-4">Select images</button
+      </div>
     </div>
   </div>
 </div>

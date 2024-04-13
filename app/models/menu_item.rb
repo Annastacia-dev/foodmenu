@@ -45,10 +45,10 @@ class MenuItem < ApplicationRecord
   has_many_attached :videos
 
   # --validations--
-  validates :name, presence: true
-  validates :price, presence: true, numericality: { greater_than: 0 }
-  validates :description, presence: true
-  validates :images, presence: true
+  validates :name, presence: true, if: -> { first_step? }
+  validates :price, presence: true, numericality: { greater_than: 0 }, if: -> { first_step? }
+  validates :description, presence: true, if: -> { first_step? }
+  validates :images, presence: true, if: -> { current_step == 'media' }
 
   # steps
 
@@ -57,7 +57,7 @@ class MenuItem < ApplicationRecord
   end
 
   def steps
-    %w[details media nutrition]
+    %w[details images videos nutrition]
   end
 
   def next_step

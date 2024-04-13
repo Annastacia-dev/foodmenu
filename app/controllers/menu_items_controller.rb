@@ -31,7 +31,7 @@ class MenuItemsController < ApplicationController
   end
 
   def create
-    session[:menu_item_params].deep_merge!(params[:menu_item]) if params[:menu_item]
+    session[:menu_item_params].deep_merge!(menu_item_params) if menu_item_params
     @menu_item = @menu_category.menu_items.new(session[:menu_item_params])
     @menu_item.current_step = session[:menu_item_step]
 
