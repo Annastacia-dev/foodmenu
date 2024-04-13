@@ -45,10 +45,38 @@ class MenuItem < ApplicationRecord
   has_many_attached :videos
 
   # --validations--
-  validates :name, presence: true
-  validates :price, presence: true, numericality: { greater_than: 0 }
-  validates :description, presence: true
-  validates :images, presence: true
+  validates :name, presence: true, if: -> { first_step? }
+  validates :price, presence: true, numericality: { greater_than: 0 }, if: -> { first_step? }
+  validates :description, presence: true, if: -> { first_step? }
+  validates :images, presence: true, if: -> { current_step == 'media' }
+
+  # steps
+
+  def current_step
+    @current_step || steps.first
+  end
+
+  def steps
+    %w[details images videos nutrition]
+  end
+
+  def next_step
+    return if last_step?
+    self.current_step = steps[steps.index(current_step) + 1]
+  end
+
+  def previous_step
+    return if first_step?
+    self.current_step = steps[steps.index(current_step) - 1]
+  end
+
+  def first_step?
+    current_step == steps.first
+  end
+
+  def last_step?
+    current_step == steps.last
+  end
 
   # --scopes--
 
